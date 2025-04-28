@@ -21,10 +21,8 @@
 // }
 
 // The return values of the buttons will later be entered into an array of command history.
-function placeholderFunction(placeholderArg) {
-  // THIS IS A PLACEHOLDER TO BE DELETED.
-  console.log('Button was clicked, placeholder called.', placeholderArg) // TEST LOG
-}
+
+import { clickButton } from './click-button.js'
 
 export const buttonList = {
   // Numbers
@@ -34,7 +32,7 @@ export const buttonList = {
     buttonTextContent: '0',
     buttonInverseTextContent: '0',
     buttonToggledOn: undefined,
-    buttonReturnFunction: (placeholderArg) => placeholderFunction('0'),
+    buttonReturnFunction: (placeholderArg) => clickButton('0'),
   },
   1: {
     buttonId: 'button-1',
@@ -42,7 +40,7 @@ export const buttonList = {
     buttonTextContent: '1',
     ButtonInverseTextContent: '1',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   2: {
     buttonId: 'button-2',
@@ -50,7 +48,7 @@ export const buttonList = {
     buttonTextContent: '2',
     ButtonInverseTextContent: '2',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   3: {
     buttonId: 'button-3',
@@ -58,7 +56,7 @@ export const buttonList = {
     buttonTextContent: '3',
     ButtonInverseTextContent: '3',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   4: {
     buttonId: 'button-4',
@@ -66,7 +64,7 @@ export const buttonList = {
     buttonTextContent: '4',
     ButtonInverseTextContent: '4',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   5: {
     buttonId: 'button-5',
@@ -74,7 +72,7 @@ export const buttonList = {
     buttonTextContent: '5',
     ButtonInverseTextContent: '5',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   6: {
     buttonId: 'button-6',
@@ -82,7 +80,7 @@ export const buttonList = {
     buttonTextContent: '6',
     ButtonInverseTextContent: '6',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   7: {
     buttonId: 'button-7',
@@ -90,7 +88,7 @@ export const buttonList = {
     buttonTextContent: '7',
     ButtonInverseTextContent: '7',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   8: {
     buttonId: 'button-8',
@@ -98,7 +96,7 @@ export const buttonList = {
     buttonTextContent: '8',
     ButtonInverseTextContent: '8',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   9: {
     buttonId: 'button-9',
@@ -106,7 +104,7 @@ export const buttonList = {
     buttonTextContent: '9',
     ButtonInverseTextContent: '9',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   // Decimal Point
   10: {
@@ -115,7 +113,7 @@ export const buttonList = {
     buttonTextContent: '.',
     ButtonInverseTextContent: '.',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   // Basic Operators
   11: {
@@ -124,7 +122,7 @@ export const buttonList = {
     buttonTextContent: '+',
     ButtonInverseTextContent: '+',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   12: {
     buttonId: 'button-minus',
@@ -132,7 +130,7 @@ export const buttonList = {
     buttonTextContent: '-',
     ButtonInverseTextContent: '-',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   13: {
     buttonId: 'button-times',
@@ -140,7 +138,7 @@ export const buttonList = {
     buttonTextContent: '×',
     ButtonInverseTextContent: '×',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   14: {
     buttonId: 'button-divide',
@@ -148,7 +146,7 @@ export const buttonList = {
     buttonTextContent: '÷',
     ButtonInverseTextContent: '÷',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   // Brackets
   15: {
@@ -157,7 +155,7 @@ export const buttonList = {
     buttonTextContent: '(',
     ButtonInverseTextContent: '(',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   16: {
     buttonId: 'button-rightbracket',
@@ -165,7 +163,7 @@ export const buttonList = {
     buttonTextContent: ')',
     ButtonInverseTextContent: ')',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   // Other Operators
   //   Percent of
@@ -175,7 +173,7 @@ export const buttonList = {
     buttonTextContent: '%',
     ButtonInverseTextContent: '%',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   //   Trigonometry
   18: {
@@ -184,7 +182,7 @@ export const buttonList = {
     buttonTextContent: 'sin',
     ButtonInverseTextContent: 'sin⁻¹',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   19: {
     buttonId: 'button-cos',
@@ -192,7 +190,7 @@ export const buttonList = {
     buttonTextContent: 'cos',
     ButtonInverseTextContent: 'cos⁻¹',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   20: {
     buttonId: 'button-tan',
@@ -200,7 +198,7 @@ export const buttonList = {
     buttonTextContent: 'tan',
     ButtonInverseTextContent: 'tan⁻¹',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   //  Logarithms
   21: {
@@ -209,7 +207,7 @@ export const buttonList = {
     buttonTextContent: 'log',
     ButtonInverseTextContent: '×10ᵡ',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   22: {
     buttonId: 'button-ln',
@@ -217,7 +215,7 @@ export const buttonList = {
     buttonTextContent: 'ln',
     ButtonInverseTextContent: 'eᵡ',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   23: {
     buttonId: 'button-exp',
@@ -225,7 +223,7 @@ export const buttonList = {
     buttonTextContent: '×10ᵡ',
     ButtonInverseTextContent: 'log',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   //  Exponents
   24: {
@@ -234,7 +232,7 @@ export const buttonList = {
     buttonTextContent: '𝑥ʸ',
     ButtonInverseTextContent: 'ʸ√𝑥',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   25: {
     buttonId: 'button-sqrt',
@@ -242,7 +240,7 @@ export const buttonList = {
     buttonTextContent: '√',
     ButtonInverseTextContent: '𝑥²',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   //   Factorial
   26: {
@@ -251,7 +249,7 @@ export const buttonList = {
     buttonTextContent: '𝑥!',
     ButtonInverseTextContent: '𝑥!',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   //   Constants
   27: {
@@ -260,7 +258,7 @@ export const buttonList = {
     buttonTextContent: 'e',
     ButtonInverseTextContent: 'e',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   28: {
     buttonId: 'button-pi',
@@ -268,7 +266,7 @@ export const buttonList = {
     buttonTextContent: 'π',
     ButtonInverseTextContent: 'π',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   //   Ans
   29: {
@@ -277,7 +275,7 @@ export const buttonList = {
     buttonTextContent: 'Ans',
     ButtonInverseTextContent: 'Ans',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   // Toggle Buttons
   30: {
@@ -286,7 +284,7 @@ export const buttonList = {
     buttonTextContent: 'deg',
     ButtonInverseTextContent: 'deg',
     buttonToggledOn: true,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   31: {
     buttonId: 'button-rad',
@@ -294,7 +292,7 @@ export const buttonList = {
     buttonTextContent: 'rad',
     ButtonInverseTextContent: 'rad',
     buttonToggledOn: false,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   32: {
     buttonId: 'button-inverse',
@@ -302,7 +300,7 @@ export const buttonList = {
     buttonTextContent: 'inv',
     ButtonInverseTextContent: 'inv',
     buttonToggledOn: false,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   // Calculator Functions
   33: {
@@ -311,7 +309,7 @@ export const buttonList = {
     buttonTextContent: 'AC',
     ButtonInverseTextContent: 'AC',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
   34: {
     buttonId: 'button-equals',
@@ -319,6 +317,6 @@ export const buttonList = {
     buttonTextContent: '=',
     ButtonInverseTextContent: '=',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: () => clickButton(),
   },
 }
