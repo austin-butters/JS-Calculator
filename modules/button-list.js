@@ -21,9 +21,9 @@
 // }
 
 // The return values of the buttons will later be entered into an array of command history.
-function placeholderFunction() {
+function placeholderFunction(placeholderArg) {
   // THIS IS A PLACEHOLDER TO BE DELETED.
-  console.log('Button was clicked, placeholder called.')
+  console.log('Button was clicked, placeholder called.', placeholderArg) // TEST LOG
 }
 
 export const buttonList = {
@@ -34,7 +34,7 @@ export const buttonList = {
     buttonTextContent: '0',
     buttonInverseTextContent: '0',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => placeholderFunction(),
+    buttonReturnFunction: (placeholderArg) => placeholderFunction('0'),
   },
   1: {
     buttonId: 'button-1',
