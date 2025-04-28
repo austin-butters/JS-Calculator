@@ -22,6 +22,7 @@
 // --buttontype-basic-operator-background-color
 // --buttontype-constant-background-color
 // --buttontype-integer-background-color
+// --buttontype-equals-background-color
 
 const styleTemplate = {
   // Change values accordingly when adding new options. currently all values set to undefined.
@@ -42,6 +43,7 @@ const styleTemplate = {
   '--buttontype-basic-operator-background-color': undefined,
   '--buttontype-constant-background-color': undefined,
   '--buttontype-integer-background-color': undefined,
+  '--buttontype-equals-background-color': undefined,
 }
 
 export const style0 = {
@@ -49,17 +51,18 @@ export const style0 = {
   '--calculator-container-background-color': '#d8d7ce',
   '--calculator-display-background-color': '#a7b99c',
   '--calculator-display-border-color': '#000000',
-  '--displayed-text-font-family': 'helvetica',
+  '--displayed-text-font-family': 'helvetica, sans-serif',
   '--displayed-text-font-size': '1rem',
   '--displayed-text-color': '#000000',
-  '--button-background-color': undefined,
-  '--button-font-family': undefined,
-  '--button-font-size': undefined,
-  '--button-color': undefined,
+  '--button-background-color': '#222222',
+  '--button-font-family': 'helvetica, sans-serif',
+  '--button-font-size': '1rem',
+  '--button-color': '#ffffff',
   '--buttontype-value-background-color': undefined,
   '--buttontype-setting-background-color': undefined,
   '--buttontype-operator-background-color': undefined,
   '--buttontype-basic-operator-background-color': undefined,
   '--buttontype-constant-background-color': undefined,
   '--buttontype-integer-background-color': undefined,
+  '--buttontype-equals-background-color': undefined,
 }

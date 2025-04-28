@@ -86,3 +86,13 @@ button {
     )
   );
 }
+
+.equals {
+  background-color: var(
+    --buttontype-equals-background-color,
+    var(
+      --buttontype-value-background-color,
+      var(--button-background-color, #ffffff)
+    )
+  );
+}
