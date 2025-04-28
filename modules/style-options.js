@@ -14,6 +14,7 @@
 // --displayed-text-color
 // --button-background-color
 // --button-font-size
+// --button-color
 // --buttontype-value-background-color
 // --buttontype-setting-background-color
 // --buttontype-operator-background-color
@@ -21,6 +22,41 @@
 // --buttontype-constant-background-color
 // --buttontype-integer-background-color
 
+const styleTemplate = {
+  // Change values accordingly when adding new options. currently all values set to undefined.
+  '--body-background-color': undefined,
+  '--calculator-container-background-color': undefined,
+  '--calculator-display-background-color': undefined,
+  '--calculator-display-border-color': undefined,
+  '--displayed-text-font-family': undefined,
+  '--displayed-text-font-size': undefined,
+  '--displayed-text-color': undefined,
+  '--button-background-color': undefined,
+  '--button-font-size': undefined,
+  '--button-color': undefined,
+  '--buttontype-value-background-color': undefined,
+  '--buttontype-setting-background-color': undefined,
+  '--buttontype-operator-background-color': undefined,
+  '--buttontype-basic-operator-background-color': undefined,
+  '--buttontype-constant-background-color': undefined,
+  '--buttontype-integer-background-color': undefined,
+}
+
 export const style0 = {
-  '--body-background-color': 'green',
+  '--body-background-color': '#ffffff',
+  '--calculator-container-background-color': '#d8d7ce',
+  '--calculator-display-background-color': '#a7b99c',
+  '--calculator-display-border-color': '#000000',
+  '--displayed-text-font-family': 'helvetica',
+  '--displayed-text-font-size': '1rem',
+  '--displayed-text-color': '#000000',
+  '--button-background-color': undefined,
+  '--button-font-size': undefined,
+  '--button-color': undefined,
+  '--buttontype-value-background-color': undefined,
+  '--buttontype-setting-background-color': undefined,
+  '--buttontype-operator-background-color': undefined,
+  '--buttontype-basic-operator-background-color': undefined,
+  '--buttontype-constant-background-color': undefined,
+  '--buttontype-integer-background-color': undefined,
 }

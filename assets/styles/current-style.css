@@ -23,6 +23,7 @@ body {
 button {
   background-color: var(--button-background-color);
   font-size: var(--button-font-size);
+  color: var(--button-color);
 }
 
 .value {
