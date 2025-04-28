@@ -7,7 +7,7 @@
 // Add it's display text
 // Bind an onclick function to it, using the buttonReturnFunction() property.
 
-export function generateButtons(buttonList) {
+export function generateButtons(buttonOrder, buttonList) {
   console.log(
     'generate-buttons:',
     'Function generateButtons() called. The buttonList is',
