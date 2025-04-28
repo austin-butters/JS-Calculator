@@ -22,6 +22,8 @@
 // --buttontype-basic-operator-background-color
 // --buttontype-constant-background-color
 // --buttontype-integer-background-color
+// --buttontype-ans-background-color
+// --buttontype-clear-background-color
 // --buttontype-equals-background-color
 
 const styleTemplate = {
@@ -43,6 +45,8 @@ const styleTemplate = {
   '--buttontype-basic-operator-background-color': undefined,
   '--buttontype-constant-background-color': undefined,
   '--buttontype-integer-background-color': undefined,
+  '--buttontype-ans-background-color': undefined,
+  '--buttontype-clear-background-color': undefined,
   '--buttontype-equals-background-color': undefined,
 }
 
@@ -64,5 +68,7 @@ export const style0 = {
   '--buttontype-basic-operator-background-color': '#169976',
   '--buttontype-constant-background-color': '#222222',
   '--buttontype-integer-background-color': '#222222',
+  '--buttontype-ans-background-color': '#000000',
+  '--buttontype-clear-background-color': '#1DCD9F',
   '--buttontype-equals-background-color': '#1DCD9F',
 }

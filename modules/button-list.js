@@ -271,7 +271,7 @@ export const buttonList = {
   //   Ans
   29: {
     buttonId: 'button-ans',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'ans'],
     buttonTextContent: 'Ans',
     ButtonInverseTextContent: 'Ans',
     buttonToggledOn: undefined,
@@ -305,7 +305,7 @@ export const buttonList = {
   // Calculator Functions
   33: {
     buttonId: 'button-clear', // Add functionality for clear and all clear
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'clear'],
     buttonTextContent: 'AC',
     ButtonInverseTextContent: 'AC',
     buttonToggledOn: undefined,

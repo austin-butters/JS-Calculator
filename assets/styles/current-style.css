@@ -87,6 +87,26 @@ button {
   );
 }
 
+.ans {
+  background-color: var(
+    --buttontype-ans-background-color,
+    var(
+      --buttontype-value-background-color,
+      var(--button-background-color, #ffffff)
+    )
+  );
+}
+
+.clear {
+  background-color: var(
+    --buttontype-clear-background-color,
+    var(
+      --buttontype-value-background-color,
+      var(--button-background-color, #ffffff)
+    )
+  );
+}
+
 .equals {
   background-color: var(
     --buttontype-equals-background-color,
