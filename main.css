@@ -193,3 +193,7 @@ main {
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
+
+button {
+  font-size: 1.25rem;
+}
