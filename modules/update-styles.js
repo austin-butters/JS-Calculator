@@ -21,7 +21,7 @@ export function updateStyles(whichStyle) {
   newStyleSheet.rel = 'stylesheet'
   newStyleSheet.href = '../assets/styles/current-style.css'
   document.getElementsByTagName('head')[0].appendChild(newStyleSheet)
-  for (const style of whichStyle['applicationOrder']) {
+  for (const style in whichStyle) {
     console.log('update-styles: Will add style:', style) // TEST LOG
     document.documentElement.style.setProperty(style, whichStyle[style])
   }
