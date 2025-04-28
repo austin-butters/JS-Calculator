@@ -198,4 +198,5 @@ main {
 button {
   font-size: 1.25rem;
   border-radius: 2px;
+  border-radius: 20px;
 }
