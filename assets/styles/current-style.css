@@ -4,3 +4,47 @@
 body {
   background-color: var(--body-background-color);
 }
+
+#calculator-container {
+  background-color: var(--calculator-container-background-color);
+}
+
+#calculator-display {
+  background-color: var(--calculator-display-background-color);
+  border-color: var(--calculator-display-border-color);
+}
+
+#displayed-text {
+  font-family: var(--displayed-text-font-family);
+  font-size: var(--displayed-text-font-size);
+  color: var(--displayed-text-color);
+}
+
+button {
+  background-color: var(--button-background-color);
+  font-size: var(--button-font-size);
+}
+
+.value {
+  background-color: var(--buttontype-value-background-color);
+}
+
+.setting {
+  background-color: var(--buttontype-setting-background-color);
+}
+
+.operator {
+  background-color: var(--buttontype-operator-background-color);
+}
+
+.basic-operator {
+  background-color: var(--buttontype-basic-operator-background-color);
+}
+
+.constant {
+  background-color: var(--buttontype-constant-background-color);
+}
+
+.integer {
+  background-color: var(--buttontype-integer-background-color);
+}
