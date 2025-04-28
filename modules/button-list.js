@@ -304,7 +304,7 @@ export const buttonList = {
   },
   // Calculator Functions
   33: {
-    buttonId: 'button-clearall',
+    buttonId: 'button-clear', // Add functionality for clear and all clear
     buttonClasses: ['value'],
     buttonTextContent: 'AC',
     ButtonInverseTextContent: 'AC',
