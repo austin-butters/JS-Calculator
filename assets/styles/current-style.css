@@ -17,10 +17,16 @@ body {
 #calculator-display {
   background-color: var(--calculator-display-background-color, #a7b99c);
   border-color: var(--calculator-display-border-color, #000000);
+  align-items: right;
 }
 
 #displayed-text {
-  font-family: var(--displayed-text-font-family, helvetica, sans-serif);
+  font-family: var(
+    --displayed-text-font-family,
+    'white-rabbit',
+    helvetica,
+    sans-serif
+  );
   font-size: var(--displayed-text-font-size, 1.5rem);
   color: var(--displayed-text-color, #000000);
 }

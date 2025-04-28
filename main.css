@@ -189,6 +189,14 @@ main {
   border-width: 2px;
   border-color: black;
   font-family: 'white-rabbit', helvetica, sans-serif; /* In future, go through everything and make sure all font-families are capitalised when applicable, e.g. helvetica but not sans-serif*/
+  display: flex;
+  align-items: center;
+}
+
+#displayed-text {
+  width: 100%;
+  text-align: right;
+  padding: 5px;
 }
 
 #button-container {
