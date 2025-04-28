@@ -1,0 +1,6 @@
+/* Assign variable values to styles, which will be defined in style-options.js */
+/* If browser does not support CSS variables, I believe this will simply revert to default styles in main.css */
+
+body {
+  background-color: var(--body-background-color);
+}

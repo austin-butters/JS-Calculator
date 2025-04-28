@@ -28,7 +28,7 @@ export const buttonList = {
   // Numbers
   0: {
     buttonId: 'button-0',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '0',
     buttonInverseTextContent: '0',
     buttonToggledOn: undefined,
@@ -36,7 +36,7 @@ export const buttonList = {
   },
   1: {
     buttonId: 'button-1',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '1',
     ButtonInverseTextContent: '1',
     buttonToggledOn: undefined,
@@ -44,7 +44,7 @@ export const buttonList = {
   },
   2: {
     buttonId: 'button-2',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '2',
     ButtonInverseTextContent: '2',
     buttonToggledOn: undefined,
@@ -52,7 +52,7 @@ export const buttonList = {
   },
   3: {
     buttonId: 'button-3',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '3',
     ButtonInverseTextContent: '3',
     buttonToggledOn: undefined,
@@ -60,7 +60,7 @@ export const buttonList = {
   },
   4: {
     buttonId: 'button-4',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '4',
     ButtonInverseTextContent: '4',
     buttonToggledOn: undefined,
@@ -68,7 +68,7 @@ export const buttonList = {
   },
   5: {
     buttonId: 'button-5',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '5',
     ButtonInverseTextContent: '5',
     buttonToggledOn: undefined,
@@ -76,7 +76,7 @@ export const buttonList = {
   },
   6: {
     buttonId: 'button-6',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '6',
     ButtonInverseTextContent: '6',
     buttonToggledOn: undefined,
@@ -84,7 +84,7 @@ export const buttonList = {
   },
   7: {
     buttonId: 'button-7',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '7',
     ButtonInverseTextContent: '7',
     buttonToggledOn: undefined,
@@ -92,7 +92,7 @@ export const buttonList = {
   },
   8: {
     buttonId: 'button-8',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '8',
     ButtonInverseTextContent: '8',
     buttonToggledOn: undefined,
@@ -100,7 +100,7 @@ export const buttonList = {
   },
   9: {
     buttonId: 'button-9',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'],
     buttonTextContent: '9',
     ButtonInverseTextContent: '9',
     buttonToggledOn: undefined,
@@ -109,7 +109,7 @@ export const buttonList = {
   // Decimal Point
   10: {
     buttonId: 'button-point',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant', 'integer'], // Effective constant and integer, even if not mathematically accurate.
     buttonTextContent: '.',
     ButtonInverseTextContent: '.',
     buttonToggledOn: undefined,
@@ -254,7 +254,7 @@ export const buttonList = {
   //   Constants
   27: {
     buttonId: 'button-e',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant'],
     buttonTextContent: 'e',
     ButtonInverseTextContent: 'e',
     buttonToggledOn: undefined,
@@ -262,7 +262,7 @@ export const buttonList = {
   },
   28: {
     buttonId: 'button-pi',
-    buttonClasses: ['value'],
+    buttonClasses: ['value', 'constant'],
     buttonTextContent: 'π',
     ButtonInverseTextContent: 'π',
     buttonToggledOn: undefined,
