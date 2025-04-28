@@ -72,3 +72,5 @@ export const style0 = {
   '--buttontype-clear-background-color': '#1DCD9F',
   '--buttontype-equals-background-color': '#1DCD9F',
 }
+
+// Eventually, these values should be replaced with variables like dark1, etc, which will be declared somewhere.
