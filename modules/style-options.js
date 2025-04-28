@@ -13,6 +13,7 @@
 // --displayed-text-font-size
 // --displayed-text-color
 // --button-background-color
+// --button-font-family
 // --button-font-size
 // --button-color
 // --buttontype-value-background-color
@@ -32,6 +33,7 @@ const styleTemplate = {
   '--displayed-text-font-size': undefined,
   '--displayed-text-color': undefined,
   '--button-background-color': undefined,
+  '--button-font-family': undefined,
   '--button-font-size': undefined,
   '--button-color': undefined,
   '--buttontype-value-background-color': undefined,
@@ -51,6 +53,7 @@ export const style0 = {
   '--displayed-text-font-size': '1rem',
   '--displayed-text-color': '#000000',
   '--button-background-color': undefined,
+  '--button-font-family': undefined,
   '--button-font-size': undefined,
   '--button-color': undefined,
   '--buttontype-value-background-color': undefined,

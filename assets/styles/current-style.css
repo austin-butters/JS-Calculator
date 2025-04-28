@@ -2,50 +2,87 @@
 /* If browser does not support CSS variables, I believe this will simply revert to default styles in main.css */
 
 body {
-  background-color: var(--body-background-color);
+  background-color: var(--body-background-color, #ffffff);
 }
 
 #calculator-container {
-  background-color: var(--calculator-container-background-color);
+  background-color: var(--calculator-container-background-color, #d8d7ce);
 }
 
 #calculator-display {
-  background-color: var(--calculator-display-background-color);
-  border-color: var(--calculator-display-border-color);
+  background-color: var(--calculator-display-background-color, #a7b99c);
+  border-color: var(--calculator-display-border-color, #000000);
 }
 
 #displayed-text {
-  font-family: var(--displayed-text-font-family);
-  font-size: var(--displayed-text-font-size);
-  color: var(--displayed-text-color);
+  font-family: var(--displayed-text-font-family, helvetica, sans-serif);
+  font-size: var(--displayed-text-font-size, 1.5rem);
+  color: var(--displayed-text-color, #000000);
 }
 
 button {
-  background-color: var(--button-background-color);
-  font-size: var(--button-font-size);
-  color: var(--button-color);
+  background-color: var(--button-background-color, #ffffff);
+  font-family: var(--button-font-family, helvetica, sans-serif);
+  font-size: var(--button-font-size, 1.25rem);
+  color: var(--button-color, #000000);
 }
 
 .value {
-  background-color: var(--buttontype-value-background-color);
+  background-color: var(
+    --buttontype-value-background-color,
+    var(--button-background-color, #ffffff)
+  );
 }
 
 .setting {
-  background-color: var(--buttontype-setting-background-color);
+  background-color: var(
+    --buttontype-setting-background-color,
+    var(--button-background-color, #ffffff)
+  );
 }
 
 .operator {
-  background-color: var(--buttontype-operator-background-color);
+  background-color: var(
+    --buttontype-operator-background-color,
+    var(
+      --buttontype-value-background-color,
+      var(--button-background-color, #ffffff)
+    )
+  );
 }
 
 .basic-operator {
-  background-color: var(--buttontype-basic-operator-background-color);
+  background-color: var(
+    --buttontype-basic-operator-background-color,
+    var(
+      --buttontype-operator-background-color,
+      var(
+        --buttontype-value-background-color,
+        var(--button-background-color, #ffffff)
+      )
+    )
+  );
 }
 
 .constant {
-  background-color: var(--buttontype-constant-background-color);
+  background-color: var(
+    --buttontype-constant-background-color,
+    var(
+      --buttontype-value-background-color,
+      var(--button-background-color, #ffffff)
+    )
+  );
 }
 
 .integer {
-  background-color: var(--buttontype-integer-background-color);
+  background-color: var(
+    --buttontype-integer-background-color,
+    var(
+      --buttontype-constant-background-color,
+      var(
+        --buttontype-value-background-color,
+        var(--button-background-color, #ffffff)
+      )
+    )
+  );
 }
