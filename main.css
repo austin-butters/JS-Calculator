@@ -169,7 +169,8 @@ main {
 #calculator-container {
   width: 1000px;
   height: 500px;
-  padding: 5px;
+  padding: 2rem;
+  border-radius: 1rem;
   background-color: #d8d7ce;
   box-shadow: 10px 12px 56px -8px rgba(0, 0, 0, 0.67);
 }
@@ -188,7 +189,7 @@ main {
   width: 100%;
   height: calc(100% - var(--calculator-display-height));
   border-radius: 0.25rem;
-  padding-top: 5px;
+  padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
@@ -196,4 +197,5 @@ main {
 
 button {
   font-size: 1.25rem;
+  border-radius: 2px;
 }
