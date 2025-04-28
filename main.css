@@ -132,7 +132,12 @@ table {
 
 /* END CSS RESET */
 
-/* DECLARE VARIABLES */
+/* DECLARE VALUES */
+
+@font-face {
+  font-family: 'white-rabbit';
+  src: url('./assets/fonts/whitrabt.ttf');
+}
 
 :root {
   --calculator-display-height: 3rem;
@@ -183,6 +188,7 @@ main {
   border-radius: 0.25rem;
   border-width: 2px;
   border-color: black;
+  font-family: 'white-rabbit', helvetica, sans-serif; /* In future, go through everything and make sure all font-families are capitalised when applicable, e.g. helvetica but not sans-serif*/
 }
 
 #button-container {
