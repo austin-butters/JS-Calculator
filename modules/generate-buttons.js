@@ -9,6 +9,7 @@
 // Bind an onclick function to it, using the buttonReturnFunction() property.
 // Update Pseudocode: As buttons must be regenerated when certain updates are made (like clicking the inverse button), the generateButtons() function must first clear all existing buttons. I'll do this by clearing all of the innerHTML from the div.
 // Update Pseudocode: Button text must generate based on whether inverse is on or off.
+// Update Pseudocode: Clear button needs a double click function to clear all.
 
 import { buttonList } from './button-list.js'
 import { buttonOrder } from './button-order.js'
@@ -43,5 +44,8 @@ export function generateButtons() {
       }
     }
     document.getElementById('button-container').appendChild(buttonToAdd)
+  }
+  document.getElementById('button-clear').ondblclick = (event) => {
+    buttonList['33'].buttonDoubleClickReturnFunction()
   }
 }

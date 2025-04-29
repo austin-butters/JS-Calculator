@@ -337,13 +337,14 @@ export const buttonList = {
   },
   // Calculator Functions
   33: {
-    buttonId: 'button-clear', // Add functionality for clear and all clear
+    buttonId: 'button-clear', // Add functionality for clear and all clear - double click for AC
     buttonClasses: ['value', 'clear'],
-    buttonTextContent: 'AC',
-    buttonInverseTextContent: 'AC',
+    buttonTextContent: 'C/AC',
+    buttonInverseTextContent: 'C/AC',
     buttonToggledOn: undefined,
     buttonReturnFunction: () => clickButton('functionClear'),
     buttonInverseReturnFunction: () => clickButton('functionClear'),
+    buttonDoubleClickReturnFunction: () => clickButton('functionClearAll'),
   },
   34: {
     buttonId: 'button-equals',
