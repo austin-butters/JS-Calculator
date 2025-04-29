@@ -8,6 +8,7 @@
 // Add it's display text
 // Bind an onclick function to it, using the buttonReturnFunction() property.
 // Update Pseudocode: As buttons must be regenerated when certain updates are made (like clicking the inverse button), the generateButtons() function must first clear all existing buttons. I'll do this by clearing all of the innerHTML from the div.
+// Update Pseudocode: Button text must generate based on whether inverse is on or off.
 
 import { buttonList } from './button-list.js'
 import { buttonOrder } from './button-order.js'
@@ -31,7 +32,9 @@ export function generateButtons() {
     for (const classToAdd of currentButton.buttonClasses) {
       buttonToAdd.classList.add(classToAdd)
     }
-    buttonToAdd.textContent = currentButton.buttonTextContent // Eventually this will change to a ternary depending on whether inverse or not, and this function will be reused to regenerate buttons.
+    buttonToAdd.textContent = buttonList.isInverse
+      ? currentButton.buttonInverseTextContent
+      : currentButton.buttonTextContent
     buttonToAdd.onclick = (event) => {
       currentButton.buttonReturnFunction()
     }
