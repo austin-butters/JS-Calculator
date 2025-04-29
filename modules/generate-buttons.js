@@ -36,7 +36,11 @@ export function generateButtons() {
       ? currentButton.buttonInverseTextContent
       : currentButton.buttonTextContent
     buttonToAdd.onclick = (event) => {
-      currentButton.buttonReturnFunction()
+      if (buttonList.isInverse) {
+        currentButton.buttonInverseReturnFunction()
+      } else {
+        currentButton.buttonReturnFunction()
+      }
     }
     document.getElementById('button-container').appendChild(buttonToAdd)
   }
