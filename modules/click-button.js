@@ -1,10 +1,13 @@
-import { buttonList } from './button-list.js'
+// PSEUDOCODE //
+// Declare an empty inputListAll array. This is the true list of ALL inputs (button clicks) from the user, since they started using the calculator.
+// When a button is clicked, it calls the function clickButton() with a whichButton parameter that specifies what button was clicked.
+// In the clickButton function, simply push the argument (e.g. num1, num7, operatorPlus) to the inputList all array.
+// Call a processInputs() function, which is another module to be imported.
+
+const inputListAll = []
 
 export function clickButton(whichButton) {
-  console.log(
-    'click-button: The clickButton() function has been called. isInverse = ',
-    buttonList.isInverse,
-    'whichButton = ',
-    whichButton
-  ) // TEST LOG
+  inputListAll.push(whichButton)
+  console.log('click-button: inputListAll: ', inputListAll)
+  processInputs(inputListAll)
 }
