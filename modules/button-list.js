@@ -320,3 +320,11 @@ export const buttonList = {
     buttonReturnFunction: () => clickButton(),
   },
 }
+
+// Making object dynamic, binding functinos, etc:
+// PSEDUDOCODE //
+// We need two options for buttonTextContent, for inverse and not inverse, and two options for buttonReturnFunction.
+// Because we're generating these buttons based on a buttonOrder array, adding more properties to the buttonList object shouldn't change anything.
+// (According to my current knowledge, ) buttonList is generated in the above state on import and then exists within the generate-buttons module. Once in that module, it can be manipulated.
+// Add a property for isInverse, then
+// Use ternaries for buttonTextContent (removing buttonInverseTextContent), and buttonReturn function.
