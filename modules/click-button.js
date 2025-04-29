@@ -7,6 +7,10 @@ export function clickButton(whichButton) {
     'isInverse = ',
     buttonList.isInverse,
     'whichButton = ',
-    whichButton
-  )
+    whichButton,
+    'return function is ',
+    buttonList.isInverse
+      ? buttonList[whichButton].buttonInverseReturnFunction
+      : buttonList[whichButton].buttonReturnFunction
+  ) // TEST LOG
 }

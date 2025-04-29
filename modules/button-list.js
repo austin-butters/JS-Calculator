@@ -32,8 +32,8 @@ export const buttonList = {
     buttonTextContent: '0',
     buttonInverseTextContent: '0',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton('0'),
-    buttonInverseReturnFunction: () => clickButton('0'),
+    buttonReturnFunction: () => clickButton('num0'),
+    buttonInverseReturnFunction: () => clickButton('num0'),
   },
   1: {
     buttonId: 'button-1',
@@ -41,8 +41,8 @@ export const buttonList = {
     buttonTextContent: '1',
     buttonInverseTextContent: '1',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num1'),
+    buttonInverseReturnFunction: () => clickButton('num1'),
   },
   2: {
     buttonId: 'button-2',
@@ -50,8 +50,8 @@ export const buttonList = {
     buttonTextContent: '2',
     buttonInverseTextContent: '2',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num2'),
+    buttonInverseReturnFunction: () => clickButton('num2'),
   },
   3: {
     buttonId: 'button-3',
@@ -59,8 +59,8 @@ export const buttonList = {
     buttonTextContent: '3',
     buttonInverseTextContent: '3',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num3'),
+    buttonInverseReturnFunction: () => clickButton('num3'),
   },
   4: {
     buttonId: 'button-4',
@@ -68,8 +68,8 @@ export const buttonList = {
     buttonTextContent: '4',
     buttonInverseTextContent: '4',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num4'),
+    buttonInverseReturnFunction: () => clickButton('num4'),
   },
   5: {
     buttonId: 'button-5',
@@ -77,8 +77,8 @@ export const buttonList = {
     buttonTextContent: '5',
     buttonInverseTextContent: '5',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num5'),
+    buttonInverseReturnFunction: () => clickButton('num5'),
   },
   6: {
     buttonId: 'button-6',
@@ -86,8 +86,8 @@ export const buttonList = {
     buttonTextContent: '6',
     buttonInverseTextContent: '6',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num6'),
+    buttonInverseReturnFunction: () => clickButton('num6'),
   },
   7: {
     buttonId: 'button-7',
@@ -95,8 +95,8 @@ export const buttonList = {
     buttonTextContent: '7',
     buttonInverseTextContent: '7',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num7'),
+    buttonInverseReturnFunction: () => clickButton('num7'),
   },
   8: {
     buttonId: 'button-8',
@@ -104,8 +104,8 @@ export const buttonList = {
     buttonTextContent: '8',
     buttonInverseTextContent: '8',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num8'),
+    buttonInverseReturnFunction: () => clickButton('num8'),
   },
   9: {
     buttonId: 'button-9',
@@ -113,8 +113,8 @@ export const buttonList = {
     buttonTextContent: '9',
     buttonInverseTextContent: '9',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('num9'),
+    buttonInverseReturnFunction: () => clickButton('num9'),
   },
   // Decimal Point
   10: {
@@ -123,8 +123,8 @@ export const buttonList = {
     buttonTextContent: '.',
     buttonInverseTextContent: '.',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('point'),
+    buttonInverseReturnFunction: () => clickButton('point'),
   },
   // Basic Operators
   11: {
@@ -133,8 +133,8 @@ export const buttonList = {
     buttonTextContent: '+',
     buttonInverseTextContent: '+',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorPlus'),
+    buttonInverseReturnFunction: () => clickButton('operatorPlus'),
   },
   12: {
     buttonId: 'button-minus',
@@ -142,8 +142,8 @@ export const buttonList = {
     buttonTextContent: '-',
     buttonInverseTextContent: '-',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorMinus'),
+    buttonInverseReturnFunction: () => clickButton('operatorMinus'),
   },
   13: {
     buttonId: 'button-times',
@@ -151,8 +151,8 @@ export const buttonList = {
     buttonTextContent: '×',
     buttonInverseTextContent: '×',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorTimes'),
+    buttonInverseReturnFunction: () => clickButton('operatorTimes'),
   },
   14: {
     buttonId: 'button-divide',
@@ -160,8 +160,8 @@ export const buttonList = {
     buttonTextContent: '÷',
     buttonInverseTextContent: '÷',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorDivide'),
+    buttonInverseReturnFunction: () => clickButton('operatorDivide'),
   },
   // Brackets
   15: {
@@ -170,8 +170,8 @@ export const buttonList = {
     buttonTextContent: '(',
     buttonInverseTextContent: '(',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('bracketLeft'),
+    buttonInverseReturnFunction: () => clickButton('bracketLeft'),
   },
   16: {
     buttonId: 'button-rightbracket',
@@ -179,8 +179,8 @@ export const buttonList = {
     buttonTextContent: ')',
     buttonInverseTextContent: ')',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('bracketRight'),
+    buttonInverseReturnFunction: () => clickButton('bracketRight'),
   },
   // Other Operators
   //   Percent of
@@ -190,8 +190,8 @@ export const buttonList = {
     buttonTextContent: '%',
     buttonInverseTextContent: '%',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorPercentOf'),
+    buttonInverseReturnFunction: () => clickButton('operatorPercentOf'),
   },
   //   Trigonometry
   18: {
@@ -200,8 +200,8 @@ export const buttonList = {
     buttonTextContent: 'sin',
     buttonInverseTextContent: 'sin⁻¹',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorSin'),
+    buttonInverseReturnFunction: () => clickButton('operatorSinInverse'),
   },
   19: {
     buttonId: 'button-cos',
@@ -209,8 +209,8 @@ export const buttonList = {
     buttonTextContent: 'cos',
     buttonInverseTextContent: 'cos⁻¹',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorCos'),
+    buttonInverseReturnFunction: () => clickButton('operatorCosInverse'),
   },
   20: {
     buttonId: 'button-tan',
@@ -218,8 +218,8 @@ export const buttonList = {
     buttonTextContent: 'tan',
     buttonInverseTextContent: 'tan⁻¹',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorTan'),
+    buttonInverseReturnFunction: () => clickButton('operatorTanInverse'),
   },
   //  Logarithms
   21: {
@@ -228,8 +228,8 @@ export const buttonList = {
     buttonTextContent: 'log',
     buttonInverseTextContent: '×10ᵡ',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorLog'),
+    buttonInverseReturnFunction: () => clickButton('operatorTimesTenToThe'),
   },
   22: {
     buttonId: 'button-ln',
@@ -237,8 +237,8 @@ export const buttonList = {
     buttonTextContent: 'ln',
     buttonInverseTextContent: 'eᵡ',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorLogNatural'),
+    buttonInverseReturnFunction: () => clickButton('operatorEToThe'),
   },
   23: {
     buttonId: 'button-exp',
@@ -246,8 +246,8 @@ export const buttonList = {
     buttonTextContent: '×10ᵡ',
     buttonInverseTextContent: 'log',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorTimesTenToThe'),
+    buttonInverseReturnFunction: () => clickButton('operatorLog'),
   },
   //  Exponents
   24: {
@@ -256,8 +256,8 @@ export const buttonList = {
     buttonTextContent: '𝑥ʸ',
     buttonInverseTextContent: 'ʸ√𝑥',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorToThe'),
+    buttonInverseReturnFunction: () => clickButton('operatorThRootOf'),
   },
   25: {
     buttonId: 'button-sqrt',
@@ -265,8 +265,8 @@ export const buttonList = {
     buttonTextContent: '√',
     buttonInverseTextContent: '𝑥²',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorSqrt'),
+    buttonInverseReturnFunction: () => clickButton('operatorSquared'),
   },
   //   Factorial
   26: {
@@ -275,8 +275,8 @@ export const buttonList = {
     buttonTextContent: '𝑥!',
     buttonInverseTextContent: '𝑥!',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('operatorFactorial'),
+    buttonInverseReturnFunction: () => clickButton('operatorFactorial'),
   },
   //   Constants
   27: {
@@ -285,8 +285,8 @@ export const buttonList = {
     buttonTextContent: 'e',
     buttonInverseTextContent: 'e',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('numE'),
+    buttonInverseReturnFunction: () => clickButton('numE'),
   },
   28: {
     buttonId: 'button-pi',
@@ -294,8 +294,8 @@ export const buttonList = {
     buttonTextContent: 'π',
     buttonInverseTextContent: 'π',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('numPi'),
+    buttonInverseReturnFunction: () => clickButton('numPi'),
   },
   //   Ans
   29: {
@@ -304,8 +304,8 @@ export const buttonList = {
     buttonTextContent: 'Ans',
     buttonInverseTextContent: 'Ans',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('valueAns'),
+    buttonInverseReturnFunction: () => clickButton('valueAns'),
   },
   // Toggle Buttons
   30: {
@@ -314,8 +314,8 @@ export const buttonList = {
     buttonTextContent: 'deg',
     buttonInverseTextContent: 'deg',
     buttonToggledOn: true,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('settingDeg'),
+    buttonInverseReturnFunction: () => clickButton('settingDeg'),
   },
   31: {
     buttonId: 'button-rad',
@@ -323,8 +323,8 @@ export const buttonList = {
     buttonTextContent: 'rad',
     buttonInverseTextContent: 'rad',
     buttonToggledOn: false,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('settingRad'),
+    buttonInverseReturnFunction: () => clickButton('settingRad'),
   },
   32: {
     buttonId: 'button-inverse',
@@ -332,8 +332,8 @@ export const buttonList = {
     buttonTextContent: 'inv',
     buttonInverseTextContent: 'inv',
     buttonToggledOn: false,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('settingInv'),
+    buttonInverseReturnFunction: () => clickButton('settingInv'),
   },
   // Calculator Functions
   33: {
@@ -342,8 +342,8 @@ export const buttonList = {
     buttonTextContent: 'AC',
     buttonInverseTextContent: 'AC',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('functionClear'),
+    buttonInverseReturnFunction: () => clickButton('functionClear'),
   },
   34: {
     buttonId: 'button-equals',
@@ -351,8 +351,8 @@ export const buttonList = {
     buttonTextContent: '=',
     buttonInverseTextContent: '=',
     buttonToggledOn: undefined,
-    buttonReturnFunction: () => clickButton(),
-    buttonInverseReturnFunction: () => clickButton(),
+    buttonReturnFunction: () => clickButton('functionEvaluate'),
+    buttonInverseReturnFunction: () => clickButton('functionEvaluate'),
   },
   // NON BUTTON PROPERTIES
   isInverse: false,
