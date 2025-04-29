@@ -4,6 +4,8 @@
 // In the clickButton function, simply push the argument (e.g. num1, num7, operatorPlus) to the inputList all array.
 // Call a processInputs() function, which is another module to be imported.
 
+import { processInputs } from './process-inputs.js'
+
 const inputListAll = []
 
 export function clickButton(whichButton) {
