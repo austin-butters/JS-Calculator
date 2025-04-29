@@ -356,6 +356,7 @@ export const buttonList = {
   },
   // NON BUTTON PROPERTIES
   isInverse: false,
+  isRadians: false,
 }
 
 // Making object dynamic, binding functinos, etc:
