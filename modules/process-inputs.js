@@ -30,7 +30,7 @@
 //      addBracketsForDisplay() accordingly (including brackets after and around certain operators, and closing brackets as needed.)
 //   generateInputForEvaluation() - returns a value for the processedInputs object
 //     This function declares an array of values/operators/brackets, etc, in a valid order that can later be evaluated
-//     Array must start with 0+ so that it's always valid
+//     Array must start with AC, 0, + so that it's always valid
 //     addBracketsForEvaluation() accordingly. (e.g. after and around certain operators, closing brackets as needed, and around multiplied values like 5e, 2pi, etc.)
 // // evaluateExpression() (It's own function, called ONLY if last input was an =. Is called with the input for evaluation as a parameter.) (It's own module.)
 
@@ -52,7 +52,7 @@ export function processInputs(inputListAll) {
   ) {
     processCurrentSettings(valuesAndSettings)
   } else {
-    processInputValues()
+    processInputValues(valuesAndSettings)
   }
 }
 
@@ -82,7 +82,7 @@ function separateValuesAndSettings(inputListAll) {
     }
   }
   const seperatedValuesAndSettings = {
-    value: inputListValuesAll,
+    values: inputListValuesAll,
     settings: inputListSettingsAll,
   }
   return seperatedValuesAndSettings
@@ -115,3 +115,51 @@ function processCurrentSettings(valuesAndSettings) {
   }
   applySettings()
 }
+
+function processInputValues(valuesAndSettings) {
+  // TAKES A valuesAndSettings PARAMETER, CALLED WITH AN ARGUMENT OF THE VALUES AND SETTINGS OBJECT FROM processInputs()
+  console.log(
+    'processInputValues() function called. The valuesAndSettingsObject is ',
+    valuesAndSettings,
+    'The inputs are ',
+    valuesAndSettings.values
+  ) // TEST LOG
+  let mostRecentClearAllIndex
+  for (let i = valuesAndSettings.values.length - 1; i >= 0; i--) {
+    if (valuesAndSettings.values[i] === 'functionClearAll') {
+      mostRecentClearAllIndex = i
+      break
+    }
+    mostRecentClearAllIndex = -1 // Represents being immediately before the start of the array. When used in scanning will start from +1 more (e.g. zero)
+  }
+  console.log('mostRecentClearAllIndex = ', mostRecentClearAllIndex) // TEST LOG
+  const inputListThisEntryAll = []
+  for (
+    let i = mostRecentClearAllIndex + 1;
+    i < valuesAndSettings.values.length;
+    i++
+  ) {
+    inputListThisEntryAll.push(valuesAndSettings.values[i])
+  }
+  console.log('inputListThisEntryAll = ', inputListThisEntryAll) // TEST LOG
+  processThisEntry()
+}
+
+function processThisEntry() {}
+
+// Process this entry (It's own function)
+//   processCompleteExpression(0)
+//     Declare an array completeExpression
+//     Declare inputs to add to the completeExpression array (The value button options, plus an empty space, etc.). These will be in a completeInputsFromUserInputs object with nested arrays.
+//     Scan the InputListThisEntryAll array and add relevant values from the completeInputsFromUserInputs object's arrays.
+//     Return completeExpression array.
+//   Declare processedInputs object for the displayed input's innerHTML (which will include grayed out closing brackets) and an input for evaluation.
+//   This processThisEntry function takes the completeExpression array, and reassigns it until it returns an object with two properties: valid input for evaluation, and an input to display.
+//   scanforClears() and delete accordingly. This function will return a new array to reassign completeExpression to. - IMPORTANT NOTE: sometimes clear needs to delete multiple things before it, like a sqrt and bracket, but NEVER another clear.
+//   generateInputForDisplay() - returns a value for the processedInputs object
+//      addBracketsForDisplay() accordingly (including brackets after and around certain operators, and closing brackets as needed.)
+//   generateInputForEvaluation() - returns a value for the processedInputs object
+//     This function declares an array of values/operators/brackets, etc, in a valid order that can later be evaluated
+//     Array must start with AC, 0, + so that it's always valid
+//     addBracketsForEvaluation() accordingly. (e.g. after and around certain operators, closing brackets as needed, and around multiplied values like 5e, 2pi, etc.)
+// // evaluateExpression() (It's own function, called ONLY if last input was an =. Is called with the input for evaluation as a parameter.) (It's own module.)
