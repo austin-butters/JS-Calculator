@@ -333,7 +333,7 @@ export const buttonList = {
     buttonInverseTextContent: 'inv',
     buttonToggledOn: false,
     buttonReturnFunction: () => clickButton('settingInv'),
-    buttonInverseReturnFunction: () => clickButton('settingInv'),
+    buttonInverseReturnFunction: () => clickButton('settingNotInv'),
   },
   // Calculator Functions
   33: {
