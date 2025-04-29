@@ -79,24 +79,26 @@ export const inputReplacementValues = {
   numPi: ['numPi'],
   valueAns: ['valueAns'],
   functionClear: ['functionClear'], // Since we have input separators, we can use the clear function to clear based on actual user input, without checking if we need to delete multiple values.
+  functionClearAll: ['functionClearAll'],
   functionEvaluate: ['functionEvaluate'],
 }
 
 //
 // A LIST OF ALL CONSTANTS:
 export const allConstants = [
-  num0,
-  num1,
-  num2,
-  num3,
-  num4,
-  num5,
-  num6,
-  num7,
-  num8,
-  num9.numE,
-  numPi,
-  valueAns,
+  inputReplacementValues.num0,
+  inputReplacementValues.num1,
+  inputReplacementValues.num2,
+  inputReplacementValues.num3,
+  inputReplacementValues.num4,
+  inputReplacementValues.num5,
+  inputReplacementValues.num6,
+  inputReplacementValues.num7,
+  inputReplacementValues.num8,
+  inputReplacementValues.num9,
+  inputReplacementValues.numE,
+  inputReplacementValues.numPi,
+  inputReplacementValues.valueAns,
 ]
 
 //
@@ -105,14 +107,14 @@ export const allConstants = [
 // By 'Basic Operators', I mean all operators that take two parameters on either side.
 export const allBasicOperators = [
   // True Basic Operators
-  operatorPlus,
-  operatorMinus,
-  operatorTimes,
-  operatorDivide,
+  inputReplacementValues.operatorPlus,
+  inputReplacementValues.operatorMinus,
+  inputReplacementValues.operatorTimes,
+  inputReplacementValues.operatorDivide,
   // Effective Basic Operators
-  operatorToThe,
-  operatorTimesTenToThe,
-  operatorTimesEToThe,
+  inputReplacementValues.operatorToThe,
+  inputReplacementValues.operatorTimesTenToThe,
+  inputReplacementValues.operatorTimesEToThe,
   // NOTE: It's possible that operatorThRootOf needs to be included here but for now it doesn't seem like it's needed as it puts brackets around itself. This may need to be changed in future.
 ]
 
@@ -120,19 +122,27 @@ export const allBasicOperators = [
 // A LIST OF OPERATORS WITH ONE PARAMETER THAT FOLLOWS IT:
 export const allOperatorsWithFollowingParameter = [
   // Trig
-  operatorSin,
-  operatorSinInverse,
-  operatorCos,
-  operatorCosInverse,
-  operatorTan,
-  operatorTanInverse,
+  inputReplacementValues.operatorSin,
+  inputReplacementValues.operatorSinInverse,
+  inputReplacementValues.operatorCos,
+  inputReplacementValues.operatorCosInverse,
+  inputReplacementValues.operatorTan,
+  inputReplacementValues.operatorTanInverse,
   // Logarithms
 ]
 
 //
 // A LIST OF OPERATORS WITH ONE PARAMETER THAT PRECEDES IT:
 export const allOperatorsWithPrecedingParameter = [
-  operatorPercentOf,
-  operatorSquared,
-  operatorFactorial,
+  inputReplacementValues.operatorPercentOf,
+  inputReplacementValues.operatorSquared,
+  inputReplacementValues.operatorFactorial,
+]
+
+//
+// A LIST OF 'function' BUTTONS:
+export const allButtonFunctions = [
+  inputReplacementValues.functionClear,
+  inputReplacementValues.functionClearAll,
+  inputReplacementValues.functionEvaluate,
 ]

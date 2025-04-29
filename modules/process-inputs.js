@@ -53,6 +53,7 @@ export function processInputs(inputListAll) {
     processCurrentSettings(valuesAndSettings)
   } else {
     processInputValues(valuesAndSettings)
+    // Evaluate it if it ends in an equals.
   }
 }
 

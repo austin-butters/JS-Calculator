@@ -14,8 +14,17 @@
 //     Array must start with AC, 0, + so that it's always valid
 //     addBracketsForEvaluation() accordingly. (e.g. after and around certain operators, closing brackets as needed, and around multiplied values like 5e, 2pi, etc.)
 // // evaluateExpression() (It's own function, called ONLY if last input was an =. Is called with the input for evaluation as a parameter.) (It's own module.)
+// NOTE: MAKE SURE THAT processThisEntry returns an object, as specified in the notes above.
 
 // NOTE: WE HAVE TO ACCOUNT FOR DOUBLE NEGATIVES.
+
+import {
+  inputReplacementValues,
+  allConstants,
+  allBasicOperators,
+  allOperatorsWithFollowingParameter,
+  allOperatorsWithPrecedingParameter,
+} from './full-syntax-insertion.js'
 
 export function processThisEntry(inputListThisEntryAll) {
   // TAKES AN inputListThisEntryAll PARAMETER, CALLED WITH THE inputListThisEntryAll ARRAY IN THE process-inputs MODULE.
@@ -23,8 +32,8 @@ export function processThisEntry(inputListThisEntryAll) {
     'The processThisEntry() function has been called with parameter ',
     inputListThisEntryAll
   ) // TEST LOG
-  processClears()
   processCompleteExpression()
+  processClears()
   generateInputForDisplay()
 }
 
