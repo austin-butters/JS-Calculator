@@ -319,6 +319,8 @@ export const buttonList = {
     buttonToggledOn: undefined,
     buttonReturnFunction: () => clickButton(),
   },
+  // NON BUTTON PROPERTIES
+  isInverse: false,
 }
 
 // Making object dynamic, binding functinos, etc:
@@ -328,3 +330,4 @@ export const buttonList = {
 // (According to my current knowledge, ) buttonList is generated in the above state on import and then exists within the generate-buttons module. Once in that module, it can be manipulated.
 // Add a property for isInverse, then
 // Use ternaries for buttonTextContent (removing buttonInverseTextContent), and buttonReturn function.
+// Update Pseudocode: These ternaries are invalid when the object is first being generated in the generate-buttons module. This means I can't use ternaries within the object, I shoulud instead use them within the generateButtons function, keeping the seperate properties for buttonTextContent and buttonInverseTextContent. Same with the return functions.

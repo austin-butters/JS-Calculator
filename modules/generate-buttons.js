@@ -7,6 +7,7 @@
 // Add all of it's classes (using a for each loop to go through the array)
 // Add it's display text
 // Bind an onclick function to it, using the buttonReturnFunction() property.
+// Update Pseudocode: As buttons must be regenerated when certain updates are made (like clicking the inverse button), the generateButtons() function must first clear all existing buttons. I'll do this by clearing all of the innerHTML from the div.
 
 import { buttonList } from './button-list.js'
 import { buttonOrder } from './button-order.js'
@@ -17,6 +18,7 @@ export function generateButtons() {
     'Function generateButtons() called. The buttonList is',
     buttonList
   ) // TEST LOG
+  document.getElementById('button-container').innerHTML = ''
   for (const buttonNumber of buttonOrder) {
     const currentButton = buttonList[buttonNumber]
     console.log('Adding all buttons. Button: ', currentButton) // TEST LOG
