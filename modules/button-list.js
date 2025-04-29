@@ -238,7 +238,7 @@ export const buttonList = {
     buttonInverseTextContent: 'eᵡ',
     buttonToggledOn: undefined,
     buttonReturnFunction: () => clickButton('operatorLogNatural'),
-    buttonInverseReturnFunction: () => clickButton('operatorEToThe'),
+    buttonInverseReturnFunction: () => clickButton('operatorTimesEToThe'),
   },
   23: {
     buttonId: 'button-exp',
@@ -300,7 +300,7 @@ export const buttonList = {
   //   Ans
   29: {
     buttonId: 'button-ans',
-    buttonClasses: ['value', 'ans'],
+    buttonClasses: ['value', 'constant', 'ans'], // This is kind of a constant as it changes value but always holds a set numerical value. For this purpose it is an effective constant.
     buttonTextContent: 'Ans',
     buttonInverseTextContent: 'Ans',
     buttonToggledOn: undefined,
