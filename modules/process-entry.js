@@ -1,8 +1,9 @@
 // Process this entry (It's own function)
 //   This processThisEntry function takes the completeExpression array, and reassigns it until it returns an object with two properties: valid input for evaluation, and an input to display.
 //   processCompleteExpression()
+//     Takes an inputListThisEntryAll parameter, called with an argument of the same name.
 //     Declare an array completeExpression
-//     Declare inputs to add to the completeExpression array (The value button options, plus an empty space, etc.). These will be in a completeInputsFromUserInputs object with nested arrays.
+//     Declare inputs to add to the completeExpression array (The value button options, plus an empty space, etc.). These will be in a completeInputsFromUserInputs object with nested arrays. CHANGED to imported values from full-syntax.js
 //     Scan the InputListThisEntryAll array and add relevant values from the completeInputsFromUserInputs object's arrays.
 //     Return completeExpression array.
 //   scanforClears() and delete accordingly. This function will return a new array to reassign completeExpression to. - IMPORTANT NOTE: sometimes clear needs to delete multiple things before it, like a sqrt and bracket, but NEVER another clear.
@@ -25,7 +26,7 @@ import {
   allOperatorsWithFollowingParameter,
   allOperatorsWithPrecedingParameter,
   allButtonFunctions,
-} from './full-syntax-insertion.js'
+} from './full-syntax.js'
 
 export function processThisEntry(inputListThisEntryAll) {
   // TAKES AN inputListThisEntryAll PARAMETER, CALLED WITH THE inputListThisEntryAll ARRAY IN THE process-inputs MODULE.
@@ -33,15 +34,33 @@ export function processThisEntry(inputListThisEntryAll) {
     'The processThisEntry() function has been called with parameter ',
     inputListThisEntryAll
   ) // TEST LOG
-  processCompleteExpression()
+  processCompleteExpression(inputListThisEntryAll)
   processClears()
   generateInputForDisplay()
 }
 
-function processCompleteExpression() {
-  const completeExpression = []
+function processCompleteExpression(inputListThisEntryAll) {
+  const completeExpression = [inputReplacementValues.startSectionInsertion]
+  console.log(
+    'the processCompleteExpression() function has been called. Before processing, completeExpression = ',
+    completeExpression
+  ) // TEST LOG
+  for (let i = 0; i < inputListThisEntryAll.length; i++) {
+    // Add relevant input
+    // Add relevant separator
+    completeExpression.push(inputReplacementValues[inputListThisEntryAll[i]])
+    console.log(
+      'Currently pushing input # ',
+      i + 1,
+      ' of ',
+      inputListThisEntryAll.length,
+      '. The current state of completeExpression is',
+      completeExpression
+    ) // TEST LOG
+  }
 }
 //   processCompleteExpression()
+//     Takes an inputListThisEntryAll parameter, called with an argument of the same name.
 //     Declare an array completeExpression
 //     Declare inputs to add to the completeExpression array (The value button options, plus an empty space, etc.). These will be in a completeInputsFromUserInputs object with nested arrays. CHANGED to imported values from full-syntax.js
 //     Scan the InputListThisEntryAll array and add relevant values from the completeInputsFromUserInputs object's arrays.

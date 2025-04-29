@@ -1,4 +1,4 @@
-// full-syntax-insertion.js
+// full-syntax.js
 //NOTE: [0, +, 1, [], 4, ] opening and closing nested arrays with brackets is likely a more efficient method that what I'm currently coding. Come back to this if I have time.
 
 // When processing the user's inputs, often extra syntax needs to be included.
@@ -26,15 +26,15 @@ export const inputReplacementValues = {
   typedInputSeparatorTimes: 'inputSeparatorTimes', // Used instead of the standard separator when two values are next to eachother with no basic operator, e.g. 5e, 5log4. The only exception is for factorials which come directly after with a normal separator.
   startSectionInsertion: startSectionInsertionValue,
   num0: ['num0'],
-  num1: ['num0'],
-  num2: ['num0'],
-  num3: ['num0'],
-  num4: ['num0'],
-  num5: ['num0'],
-  num6: ['num0'],
-  num7: ['num0'],
-  num8: ['num0'],
-  num9: ['num0'],
+  num1: ['num1'],
+  num2: ['num2'],
+  num3: ['num3'],
+  num4: ['num4'],
+  num5: ['num5'],
+  num6: ['num6'],
+  num7: ['num7'],
+  num8: ['num8'],
+  num9: ['num9'],
   point: ['point'],
   operatorPlus: ['operatorPlus'],
   operatorMinus: ['operatorMinus'],
