@@ -55,7 +55,7 @@ export const style0 = {
   '--calculator-container-background-color': '#d8d7ce',
   '--calculator-display-background-color': '#a7b99c',
   '--calculator-display-border-color': '#000000',
-  '--displayed-text-font-family': '"white-rabbit", helvetica, sans-serif',
+  '--displayed-text-font-family': '"white-rabbit", helvetica, sans-serif', // FIX
   '--displayed-text-font-size': '1.25rem',
   '--displayed-text-color': '#000000',
   '--button-background-color': '#333333',
