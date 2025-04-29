@@ -8,7 +8,7 @@
 //   Scans the full inputListAll array and pushes each item to inputListValues or inputListSettings accordingly
 //   Returns an object containing these arrays as properties.
 // Process current settings: (It's own function, called ONLY if the most recent input was a setting option)
-//   Declare and array for currentSettings
+//   Declare and object for currentSettings, with initial values in case anything goes wrong.
 //   Scan the full inputListSettings array, starting from the end and moving backwards. (scanning from the end ensures that it finds the most recent settings.)
 //   Keep scanning until all settings are found (if user has not clicked settings the default ones will already be included at the start of the array.)
 //   // applySettings() - This will be it's own module.
@@ -38,6 +38,10 @@ export function processInputs(inputListAll) {
   console.log('process-inputs: the processInputs() function has been called.') // TEST LOG
   // SEPARATE VALUES AND SETTINGS
   const valuesAndSettings = separateValuesAndSettings(inputListAll)
+  console.log(
+    'process-inputs: separatedValuesAndSettings = ',
+    valuesAndSettings
+  ) // TEST LOG
   // PROCESS CURRENT SETTINGS OR VALUES
   if (
     inputListAll[inputListAll.length - 1] === 'settingDeg' ||
@@ -46,10 +50,7 @@ export function processInputs(inputListAll) {
     inputListAll[inputListAll.length - 1] === 'settingNotInv'
     // This is an example of something to refactor rather than hardcoding.
   ) {
-    console.log(
-      'You clicked a setting. The processCurrentSettings() function will be called.'
-    ) // TEST LOG
-    processCurrentSettings()
+    processCurrentSettings(valuesAndSettings)
   } else {
     processInputValues()
   }
@@ -85,4 +86,32 @@ function separateValuesAndSettings(inputListAll) {
     settings: inputListSettingsAll,
   }
   return seperatedValuesAndSettings
+}
+
+import { applySettings } from './apply-settings.js'
+
+function processCurrentSettings(valuesAndSettings) {
+  // TAKES THE VALUES AND SETTINGS PARAMETER FROM processInputs()
+  console.log(
+    'process-inputs: The processCurrentSettings() function has been called.'
+  ) // TEST LOG
+  const currentSettings = {
+    invertedState: undefined,
+    angleUnits: undefined,
+  }
+  for (
+    let i = valuesAndSettings.settings.length - 1;
+    i >= 0 || (currentSettings.invertedState && currentSettings.angleUnits);
+    i-- // Scans the full array from the end backwards, until both setting types are filled
+  ) {
+    if (
+      valuesAndSettings.settings[i] === 'settingInv' ||
+      valuesAndSettings.settings[i] === 'settingNotInv'
+    ) {
+      currentSettings.invertedState = valuesAndSettings.settings[i]
+    } else {
+      currentSettings.angleUnits = valuesAndSettings.settings[i]
+    }
+  }
+  applySettings()
 }
