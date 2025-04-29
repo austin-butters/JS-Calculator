@@ -24,6 +24,7 @@ import {
   allBasicOperators,
   allOperatorsWithFollowingParameter,
   allOperatorsWithPrecedingParameter,
+  allButtonFunctions,
 } from './full-syntax-insertion.js'
 
 export function processThisEntry(inputListThisEntryAll) {
@@ -37,6 +38,23 @@ export function processThisEntry(inputListThisEntryAll) {
   generateInputForDisplay()
 }
 
+function processCompleteExpression() {
+  const completeExpression = []
+}
+//   processCompleteExpression()
+//     Declare an array completeExpression
+//     Declare inputs to add to the completeExpression array (The value button options, plus an empty space, etc.). These will be in a completeInputsFromUserInputs object with nested arrays. CHANGED to imported values from full-syntax.js
+//     Scan the InputListThisEntryAll array and add relevant values from the completeInputsFromUserInputs object's arrays.
+//     Return completeExpression array.
+
+//
+//
+//
+//
+//
+//
+//
+//
 function processClears(inputListThisEntryAll) {
   //   scanforClears() and delete accordingly. This function will return a new array to reassign completeExpression to. - IMPORTANT NOTE: sometimes clear needs to delete multiple things before it, like a sqrt and bracket, but NEVER another clear.
   // TAKES AN inputListThisEntryAll PARAMETER, CALLED WITH THE inputListThisEntryAll ARRAY.
