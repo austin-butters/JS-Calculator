@@ -2,15 +2,9 @@ import { buttonList } from './button-list.js'
 
 export function clickButton(whichButton) {
   console.log(
-    'click-button: The clickButton() function has been called',
-    whichButton,
-    'isInverse = ',
+    'click-button: The clickButton() function has been called. isInverse = ',
     buttonList.isInverse,
     'whichButton = ',
-    whichButton,
-    'return function is ',
-    buttonList.isInverse
-      ? buttonList[whichButton].buttonInverseReturnFunction
-      : buttonList[whichButton].buttonReturnFunction
+    whichButton
   ) // TEST LOG
 }
