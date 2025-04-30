@@ -15,13 +15,18 @@
 
 import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING PURPOSES
 
+// DEFINITION IMPORTS
 import { allSettings } from './definitions.js'
 
+// FUNCTION IMPORTS
+import { applySetting } from './apply-settings.js'
+
+// CLICK BUTTON FUNCTION
 let expressionInputList = []
 export function clickButton(whichButton) {
   if (allSettings.includes(whichButton)) {
     console.log('Setting will be applied') // TEST LOG
-    applySettings(whichButton) // MODULE TO BE ADDED
+    applySetting(whichButton) // MODULE TO BE ADDED
   } else if (whichButton === 'functionClearAll') {
     console.log('will clear all') // TEST LOG
     expressionInputList = []

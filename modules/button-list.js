@@ -339,12 +339,11 @@ export const buttonList = {
   33: {
     buttonId: 'button-clear', // Add functionality for clear and all clear - double click for AC
     buttonClasses: ['value', 'clear'],
-    buttonTextContent: 'C/AC',
-    buttonInverseTextContent: 'C/AC',
+    buttonTextContent: 'C',
+    buttonInverseTextContent: 'AC',
     buttonToggledOn: undefined,
     buttonReturnFunction: () => clickButton('functionClear'),
-    buttonInverseReturnFunction: () => clickButton('functionClear'),
-    buttonDoubleClickReturnFunction: () => clickButton('functionClearAll'),
+    buttonInverseReturnFunction: () => clickButton('functionClearAll'),
   },
   34: {
     buttonId: 'button-equals',
