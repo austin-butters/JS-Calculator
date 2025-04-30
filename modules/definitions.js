@@ -2,7 +2,7 @@
 
 // -- HARDCODED CONSTANT DEFINITIONS -- //
 
-// A LIST OF ALL BUTTONS AND THEIR MAIN PROPERTIES // NOTE -- Need to add a seperate buttonEnabled object so that buttons don't get pushed when syntactically invalid. (e.g. starting with a factorial or divide, but a minus would be fine. These will change over time depending on the last input.)
+// A LIST OF ALL BUTTONS AND THEIR MAIN PROPERTIES // NOTE -- Need to add a seperate buttonEnabled object so that buttons don't get pushed when syntactically invalid. (e.g. too many right brackets, starting with a factorial or divide, but a minus would be fine. These will change over time depending on the last input.)
 import { clickButton } from './click-button.js'
 
 export const buttonList = {
@@ -219,7 +219,7 @@ export const buttonList = {
     buttonInverseTextContent: 'eᵡ',
     buttonToggledOn: undefined,
     buttonReturnFunction: () => clickButton('operatorLogNatural'),
-    buttonInverseReturnFunction: () => clickButton('operatorTimesEToThe'),
+    buttonInverseReturnFunction: () => clickButton('operatorTimesEToThe'), // THIS IS WRONG! IT SHOULD BE eToThe, WHICH IS THE ACTUAL INVERSE OF A NATURAL LOG. CHANGE THIS NAME LATER (AS IT'S CURRENTLY HARDCODED), BUT FOR NOW IT WILL FUNCTIONALLY BE E TO THE.
   },
   23: {
     buttonId: 'button-exp',
@@ -380,7 +380,7 @@ export const inputDisplayValues = {
   operatorLog: ' log',
   operatorTimesTenToThe: '×10^',
   operatorLogNatural: ' ln',
-  operatorTimesEToThe: ' × e^',
+  operatorTimesEToThe: 'e^', // CHANGED TO eToThe, BUT NAME WILL BE CHANGED LATER.
   operatorToThe: '^',
   operatorThRootOf: '√',
   operatorSqrt: '√',
@@ -418,4 +418,30 @@ export const allInfixOperators = [
   'operatorTimesEToThe',
   'operatorThRootOf',
   // NOTE: It's possible that operatorThRootOf shouldn't be included here but for now it doesn't seem like it's needed as it puts brackets around itself. This may need to be changed in future.
+]
+
+// A LIST OF VALUES TO DISPLAY A MULTIPLICATION SYMBOL AFTER, ONLY WHEN FOLLOWED BY A DIGIT CONSTANT (OR ANS).
+export const displaytTimesAfterWhenBeforeDigit = [
+  // Note: This is only particularly useful for the displayed expression, not evaluation.
+  'numE',
+  'numPi',
+  'operatorPercentOf',
+  'operatorFactorial',
+  'valueAns',
+]
+
+// A LIST OF VALUES TO DISPLAY A MULTIPLICATION SYMBOL BEFORE IF FOLLOWING A VALUE FROM displayTimesAfterWhenBeforeDigit:
+export const displayTimesBeforeIfNeeded = [
+  'num0',
+  'num1',
+  'num2',
+  'num3',
+  'num4',
+  'num5',
+  'num6',
+  'num7',
+  'num8',
+  'num9',
+  'point', // This is a constant for this purpose
+  'valueAns',
 ]

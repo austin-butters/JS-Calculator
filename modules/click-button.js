@@ -25,7 +25,7 @@ import { allSettingOptions } from './definitions.js'
 import { applySetting, currentSettings } from './apply-setting.js'
 import { validateExpression } from './validate-expression.js'
 import { evaluateExpression } from './evaluate-expression.js'
-import { generateDisplatedInput } from './generate-displayed-text.js'
+import { generateDisplayedInput } from './generate-displayed-text.js'
 
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
@@ -57,8 +57,8 @@ export function clickButton(whichButton) {
     // else, it must now be a value to add to the expression.
     expressionInputList.push(whichButton)
   }
-  document.getElementById('displayed-text').textContent =
-    generateDisplatedInput(expressionInputList)
+  document.getElementById('displayed-text').innerHTML =
+    generateDisplayedInput(expressionInputList)
   //
   //
   displayUserInputInfo(expressionInputList) // FOR TESTING PURPOSES
