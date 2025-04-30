@@ -390,3 +390,17 @@ export const inputDisplayValues = {
   numPi: 'π',
   valueAns: 'Ans',
 }
+
+// A LIST OF OPERATORS THAT NEED TO BE FOLLOWED BY A LEFT BRACKET //
+export const bracketOpeners = [
+  'operatorSin',
+  'operatorSinInverse',
+  'operatorCos',
+  'operatorCosInverse',
+  'operatorTan',
+  'operatorTanInverse',
+  'operatorLog',
+  'operatorLogNatural',
+  'operatorThRootOf',
+  'operatorSqrt',
+]
