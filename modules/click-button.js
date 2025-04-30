@@ -22,7 +22,7 @@ import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING
 import { allSettingOptions } from './definitions.js'
 
 // FUNCTION IMPORTS
-import { applySetting } from './apply-settings.js'
+import { applySetting } from './apply-setting.js'
 import { validateExpression } from './validate-expression.js'
 import { evaluateExpression } from './evaluate-expression.js'
 import { generateDisplatedInput } from './generate-displayed-text.js'

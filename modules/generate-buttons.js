@@ -13,7 +13,7 @@
 
 import { buttonList } from './button-list.js'
 import { buttonOrder } from './button-order.js'
-import { currentSettings } from './apply-settings.js'
+import { currentSettings } from './apply-setting.js'
 
 export function generateButtons() {
   console.log(

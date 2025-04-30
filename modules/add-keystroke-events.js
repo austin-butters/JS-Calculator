@@ -1,4 +1,4 @@
-import { applySetting } from './apply-settings.js'
+import { applySetting } from './apply-setting.js'
 
 export function addKeystrokeEvents() {
   document.addEventListener('keydown', (event) => {
