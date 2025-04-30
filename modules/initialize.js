@@ -6,12 +6,12 @@
 
 import { updateStyles } from './update-styles.js'
 import { generateButtons } from './generate-buttons.js'
-import { addKeyDownEvents } from './add-keydown-events.js'
+import { addKeystrokeEvents } from './add-keystroke-events.js'
 
 export function initialize() {
   console.log('initialize:', 'Function initialize() called.') // TEST LOG
   updateStyles()
   generateButtons()
-  addKeyDownEvents()
+  addKeystrokeEvents()
   document.getElementById('page-blocker').remove()
 }

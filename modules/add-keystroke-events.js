@@ -1,6 +1,6 @@
 import { applySetting } from './apply-settings.js'
 
-export function addKeyDownEvents() {
+export function addKeystrokeEvents() {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Shift') {
       applySetting('settingInv')
