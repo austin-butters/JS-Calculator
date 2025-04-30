@@ -22,8 +22,9 @@ const bracketLeftReplacementValues = [
 ].flat()
 
 export const inputReplacementValues = {
-  typedInputSeparatorDefault: 'inputSeparator', // This is very important to avoid creating syntax errors and will be inserted between each of the following replacement values. For example we need yrootx to be processed as y * root(x), so we can replace operatorThRootOf with *(_root x), which could cause errors if someone previously typed a plus. We'll use separators for this, and later remove all multiplication operators directly following another operator. (This is, as far as I can tell right now, the only error that this will cause. BUT! we have to make sure we use the separators so that we don't remove intentionally typed negative numbers. This shouldn't be to hard as constants don't have a times inserted before them, and with negative si)
-  typedInputSeparatorTimes: 'inputSeparatorTimes', // Used instead of the standard separator when two values are next to eachother with no basic operator, e.g. 5e, 5log4. The only exception is for factorials which come directly after with a normal separator.
+  inputSeparatorUndefined: 'inputSeparatorUndefined',
+  inputSeparatorDefault: 'inputSeparatorDefault', // This is very important to avoid creating syntax errors and will be inserted between each of the following replacement values. For example we need yrootx to be processed as y * root(x), so we can replace operatorThRootOf with *(_root x), which could cause errors if someone previously typed a plus. We'll use separators for this, and later remove all multiplication operators directly following another operator. (This is, as far as I can tell right now, the only error that this will cause. BUT! we have to make sure we use the separators so that we don't remove intentionally typed negative numbers. This shouldn't be to hard as constants don't have a times inserted before them, and with negative si)
+  inputSeparatorTimes: 'inputSeparatorTimes', // Used instead of the standard separator when two values are next to eachother with no basic operator, e.g. 5e, 5log4. The only exception is for factorials which come directly after with a normal separator.
   startSectionInsertion: startSectionInsertionValue,
   num0: ['num0'],
   num1: ['num1'],
@@ -99,6 +100,7 @@ export const allConstants = [
   inputReplacementValues.numE,
   inputReplacementValues.numPi,
   inputReplacementValues.valueAns,
+  inputReplacementValues.point, // This is a constant for this purpose.
 ]
 
 //
@@ -145,4 +147,11 @@ export const allButtonFunctions = [
   inputReplacementValues.functionClear,
   inputReplacementValues.functionClearAll,
   inputReplacementValues.functionEvaluate,
+]
+
+// A LIST OF ALL SEPARATOR VALUES:
+export const allSeparatorValues = [
+  inputReplacementValues.inputSeparatorUndefined,
+  inputReplacementValues.inputSeparatorDefault,
+  inputReplacementValues.inputSeparatorTimes,
 ]
