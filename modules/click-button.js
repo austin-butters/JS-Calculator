@@ -15,9 +15,12 @@
 
 import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING PURPOSES
 
-const inputList = []
+let inputList = []
 
 export function clickButton(whichButton) {
+  if (whichButton === 'functionClearAll') {
+    inputList = []
+  }
   inputList.push(whichButton)
 
   //
