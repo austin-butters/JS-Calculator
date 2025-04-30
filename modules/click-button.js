@@ -30,7 +30,10 @@ import { generateDisplatedInput } from './generate-displayed-text.js'
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
 export function clickButton(whichButton) {
-  if (currentSettings.isInverse === true) {
+  if (
+    currentSettings.isInverse === true &&
+    !allSettingOptions.includes(whichButton)
+  ) {
     applySetting('settingNotInv')
   } //  - Changed. Won't be called on every button click as it wastes processing power. The extra thought in a conditional here is less than generating buttons every time.
   if (allSettingOptions.includes(whichButton)) {
