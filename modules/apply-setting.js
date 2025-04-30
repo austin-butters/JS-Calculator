@@ -1,6 +1,7 @@
 // This still needs to be written.
 
-import { generateButtons } from './generate-buttons'
+import { generateButtons } from './generate-buttons.js'
+import { displayCurrentSettings } from './placeholder-functions.js'
 
 export const currentSettings = {
   isInverse: false,
@@ -13,10 +14,13 @@ export function applySetting(setting) {
   ) // TEST LOG
   if (setting === 'settingInv') {
     currentSettings.isInverse = true
-    generateButtons()
-  }
-  if (setting === 'settingNotInv') {
+  } else if (setting === 'settingNotInv') {
     currentSettings.isInverse = false
-    generateButtons()
+  } else if (setting === 'settingDeg') {
+    currentSettings.isRadians = false
+  } else if (setting === 'settingRad') {
+    currentSettings.isRadians = true
   }
+  generateButtons()
+  displayCurrentSettings(currentSettings) // FOR TESTING PURPOSES
 }
