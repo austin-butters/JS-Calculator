@@ -18,6 +18,7 @@
 // --button-color
 // --buttontype-value-background-color
 // --buttontype-setting-background-color
+// --buttontype-setting-toggled-on-background-color
 // --buttontype-operator-background-color
 // --buttontype-basic-operator-background-color
 // --buttontype-constant-background-color
@@ -41,6 +42,7 @@ const styleTemplate = {
   '--button-color': undefined,
   '--buttontype-value-background-color': undefined,
   '--buttontype-setting-background-color': undefined,
+  '--buttontype-setting-toggled-on-background-color': undefined,
   '--buttontype-operator-background-color': undefined,
   '--buttontype-basic-operator-background-color': undefined,
   '--buttontype-constant-background-color': undefined,
@@ -64,6 +66,7 @@ export const style0 = {
   '--button-color': '#ffffff',
   '--buttontype-value-background-color': '#333333',
   '--buttontype-setting-background-color': '#1677B3',
+  '--buttontype-setting-toggled-on-background-color': '#0B3F5C',
   '--buttontype-operator-background-color': '#444444',
   '--buttontype-basic-operator-background-color': '#169976',
   '--buttontype-constant-background-color': '#222222',

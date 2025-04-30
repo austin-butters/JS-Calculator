@@ -10,6 +10,7 @@
 // Update Pseudocode: As buttons must be regenerated when certain updates are made (like clicking the inverse button), the generateButtons() function must first clear all existing buttons. I'll do this by clearing all of the innerHTML from the div.
 // Update Pseudocode: Button text must generate based on whether inverse is on or off.
 // Update Pseudocode: Clear button needs a double click function to clear all - This has been changed to a shift key event listener, in a different module.
+// Update Pseudocode: Add styling rules for setting buttons which are toggled on. This will be done by adding a toggled-on class to them.
 
 import { buttonList, buttonOrder } from './definitions.js'
 import { currentSettings } from './apply-setting.js'
@@ -45,4 +46,16 @@ export function generateButtons() {
     }
     document.getElementById('button-container').appendChild(buttonToAdd)
   }
+  // Add toggled-on class to setting buttons if current settings are on.
+  if (currentSettings.isInverse) {
+    document
+      .getElementById('button-inverse')
+      .classList.add('setting-toggled-on')
+  }
+  if (currentSettings.isRadians) {
+    document.getElementById('button-rad').classList.add('setting-toggled-on')
+  } else {
+    document.getElementById('button-deg').classList.add('setting-toggled-on')
+  }
+  //
 }

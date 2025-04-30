@@ -52,6 +52,16 @@ button {
   );
 }
 
+.setting-toggled-on {
+  background-color: var(
+    --buttontype-setting-toggled-on-background-color,
+    var(
+      --buttontype-setting-background-color,
+      var(--button-background-color, #ffffff)
+    )
+  );
+}
+
 .operator {
   background-color: var(
     --buttontype-operator-background-color,
