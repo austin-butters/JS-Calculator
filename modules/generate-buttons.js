@@ -11,8 +11,7 @@
 // Update Pseudocode: Button text must generate based on whether inverse is on or off.
 // Update Pseudocode: Clear button needs a double click function to clear all - This has been changed to a shift key event listener, in a different module.
 
-import { buttonList } from './button-list.js'
-import { buttonOrder } from './definitions.js'
+import { buttonList, buttonOrder } from './definitions.js'
 import { currentSettings } from './apply-setting.js'
 
 export function generateButtons() {
