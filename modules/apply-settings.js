@@ -1,6 +1,5 @@
 // This still needs to be written.
 
-import { buttonList } from './button-list.js' // FOR TESTING PURPOSES, TO BE CHANGED
 import { generateButtons } from './generate-buttons'
 
 export const currentSettings = {
