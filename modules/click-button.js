@@ -20,20 +20,20 @@ import { allSettings } from './definitions.js'
 
 // FUNCTION IMPORTS
 import { applySetting } from './apply-settings.js'
+import { evaluateExpression } from './evaluate-expression.js'
 
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
 export function clickButton(whichButton) {
   if (allSettings.includes(whichButton)) {
     console.log('Setting will be applied') // TEST LOG
-    applySetting(whichButton) // MODULE TO BE ADDED
+    applySetting(whichButton)
   } else if (whichButton === 'functionClearAll') {
-    console.log('will clear all') // TEST LOG
     expressionInputList = []
   } else if (whichButton === 'functionClear') {
     expressionInputList.pop()
   } else if (whichButton === 'functionEvaluate') {
-    evaluateExpression() // MODULE TO BE ADDED
+    evaluateExpression(expressionInputList) // MODULE TO BE ADDED
   } else if (whichButton === 'operatorThRootOf') {
     alert(
       'This function is currently unavailable. Functionality will be added later'
