@@ -12,6 +12,7 @@
 // else if operatorThRootOf, do nothing but alert that functionality will be added.
 // else if equals, evaluate the expression.
 // else it must be an input to add to the current expression
+// Update Pseudocode - We want the inverse functions to only apply for one click, so every button click when inverse should revert settings to not inverse. This can actually be applied to every button click, and if the button clicked was the inverse button it will later reupdate the inverse state accordingly.
 
 import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING PURPOSES
 
@@ -25,6 +26,7 @@ import { evaluateExpression } from './evaluate-expression.js'
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
 export function clickButton(whichButton) {
+  applySetting('settingNotInv')
   if (allSettings.includes(whichButton)) {
     console.log('Setting will be applied') // TEST LOG
     applySetting(whichButton)
