@@ -2,7 +2,7 @@
 
 // -- HARDCODED CONSTANT DEFINITIONS -- //
 
-// A LIST OF ALL BUTTONS AND THEIR MAIN PROPERTIES //
+// A LIST OF ALL BUTTONS AND THEIR MAIN PROPERTIES // NOTE -- Need to add a seperate buttonEnabled object so that buttons don't get pushed when syntactically invalid. (e.g. starting with a factorial or divide, but a minus would be fine. These will change over time depending on the last input.)
 import { clickButton } from './click-button.js'
 
 export const buttonList = {
@@ -385,7 +385,7 @@ export const inputDisplayValues = {
   operatorThRootOf: '√',
   operatorSqrt: '√',
   operatorSquared: '^2 ',
-  operatorFactorial: '𝑥!',
+  operatorFactorial: '!',
   numE: 'e',
   numPi: 'π',
   valueAns: 'Ans',
@@ -403,4 +403,19 @@ export const bracketOpeners = [
   'operatorLogNatural',
   'operatorThRootOf',
   'operatorSqrt',
+]
+
+// A LIST OF ALL INFIX OPERATORS //
+export const allInfixOperators = [
+  // True Basic Operators
+  'operatorPlus',
+  'ioperatorMinus',
+  'operatorTimes',
+  'operatorDivide',
+  // Effective Basic Operators
+  'operatorToThe',
+  'operatorTimesTenToThe',
+  'operatorTimesEToThe',
+  'operatorThRootOf',
+  // NOTE: It's possible that operatorThRootOf shouldn't be included here but for now it doesn't seem like it's needed as it puts brackets around itself. This may need to be changed in future.
 ]
