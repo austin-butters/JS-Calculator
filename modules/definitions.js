@@ -1,5 +1,5 @@
 // A LIST OF ALL SETTINGS (BY THE BUTTON VALUES) //
-export const allSettings = [
+export const allSettingOptions = [
   'settingDeg',
   'settingRad',
   'settingInv',

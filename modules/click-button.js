@@ -19,7 +19,7 @@
 import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING PURPOSES
 
 // DEFINITION IMPORTS
-import { allSettings } from './definitions.js'
+import { allSettingOptions } from './definitions.js'
 
 // FUNCTION IMPORTS
 import { applySetting } from './apply-settings.js'
@@ -31,7 +31,7 @@ import { generateDisplatedInput } from './generate-displayed-text.js'
 let expressionInputList = []
 export function clickButton(whichButton) {
   applySetting('settingNotInv') //  - Changed. Won't be called on every button click as it wastes processing power. The extra thought in a conditional here is less than generating buttons every time.
-  if (allSettings.includes(whichButton)) {
+  if (allSettingOptions.includes(whichButton)) {
     console.log('Setting will be applied') // TEST LOG
     applySetting(whichButton)
   } else if (whichButton === 'functionClearAll') {
