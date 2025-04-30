@@ -1,3 +1,7 @@
+// definitions.js //
+
+// CONSTANT DEFINITIONS
+
 // A LIST OF ALL SETTINGS (BY THE BUTTON VALUES) //
 export const allSettingOptions = [
   'settingDeg',

@@ -3,16 +3,21 @@
 import { buttonList } from './button-list.js' // FOR TESTING PURPOSES, TO BE CHANGED
 import { generateButtons } from './generate-buttons'
 
+export const currentSettings = {
+  isInverse: false,
+  isRadians: false,
+}
+
 export function applySetting(setting) {
   console.log(
     'apply-settings: the applySettings() function has been called. Function not yet written.'
   ) // TEST LOG
   if (setting === 'settingInv') {
-    buttonList.isInverse = true
+    currentSettings.isInverse = true
     generateButtons()
   }
   if (setting === 'settingNotInv') {
-    buttonList.isInverse = false
+    currentSettings.isInverse = false
     generateButtons()
   }
 }

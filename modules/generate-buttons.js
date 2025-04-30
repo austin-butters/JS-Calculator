@@ -13,6 +13,7 @@
 
 import { buttonList } from './button-list.js'
 import { buttonOrder } from './button-order.js'
+import { currentSettings } from './apply-settings.js'
 
 export function generateButtons() {
   console.log(
@@ -33,11 +34,11 @@ export function generateButtons() {
     for (const classToAdd of currentButton.buttonClasses) {
       buttonToAdd.classList.add(classToAdd)
     }
-    buttonToAdd.textContent = buttonList.isInverse
+    buttonToAdd.textContent = currentSettings.isInverse
       ? currentButton.buttonInverseTextContent
       : currentButton.buttonTextContent
     buttonToAdd.onclick = (event) => {
-      if (buttonList.isInverse) {
+      if (currentSettings.isInverse) {
         currentButton.buttonInverseReturnFunction()
       } else {
         currentButton.buttonReturnFunction()
