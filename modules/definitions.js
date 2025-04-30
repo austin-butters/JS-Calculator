@@ -1,6 +1,12 @@
 // definitions.js //
 
-// CONSTANT DEFINITIONS
+// CONSTANT DEFINITIONS //
+
+// BUTTON ORDER (THE LAYOUT OF ALL BUTTONS) //
+export const buttonOrder = [
+  31, 30, 26, 15, 16, 17, 33, 32, 18, 22, 7, 8, 9, 14, 28, 19, 21, 4, 5, 6, 13,
+  27, 20, 25, 1, 2, 3, 12, 29, 23, 24, 0, 10, 34, 11,
+]
 
 // A LIST OF ALL SETTINGS (BY THE BUTTON VALUES) //
 export const allSettingOptions = [
