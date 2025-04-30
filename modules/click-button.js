@@ -21,8 +21,8 @@ import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING
 // DEFINITION IMPORTS
 import { allSettingOptions } from './definitions.js'
 
-// FUNCTION IMPORTS
-import { applySetting } from './apply-setting.js'
+// FUNCTION AND DYNAMIC VALUE IMPORTS
+import { applySetting, currentSettings } from './apply-setting.js'
 import { validateExpression } from './validate-expression.js'
 import { evaluateExpression } from './evaluate-expression.js'
 import { generateDisplatedInput } from './generate-displayed-text.js'
@@ -30,7 +30,9 @@ import { generateDisplatedInput } from './generate-displayed-text.js'
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
 export function clickButton(whichButton) {
-  applySetting('settingNotInv') //  - Changed. Won't be called on every button click as it wastes processing power. The extra thought in a conditional here is less than generating buttons every time.
+  if (currentSettings.isInverse === true) {
+    applySetting('settingNotInv')
+  } //  - Changed. Won't be called on every button click as it wastes processing power. The extra thought in a conditional here is less than generating buttons every time.
   if (allSettingOptions.includes(whichButton)) {
     console.log('Setting will be applied') // TEST LOG
     applySetting(whichButton)
