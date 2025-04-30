@@ -355,7 +355,7 @@ export const buttonList = {
     buttonReturnFunction: () => clickButton('functionEvaluate'),
     buttonInverseReturnFunction: () => clickButton('functionEvaluate'),
   },
-  // NON BUTTON PROPERTIES
+  // NON BUTTON PROPERTIES -- // THESE SETTINGS SHOULD BE MOVED TO A DIFFERENT SETTINGS MODULE.
   isInverse: false,
   isRadians: false,
 }

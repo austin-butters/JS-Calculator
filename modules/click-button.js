@@ -5,7 +5,7 @@
 // Call a processInputs() function, which is another module to be imported.
 
 // UPDATED PSEUDOCODE //
-// Declare an empty array UserInputList
+// Declare an empty array expressionInputList
 // When a button is clicked, if clearAll, clear the inputList array
 // else if a setting, apply that setting.
 // else if clear, clear the last input from unserInputList
@@ -15,15 +15,29 @@
 
 import { displayUserInputInfo } from './placeholder-functions.js' // FOR TESTING PURPOSES
 
-let inputList = []
+import { allSettings } from './definitions.js'
 
+let expressionInputList = []
 export function clickButton(whichButton) {
-  if (whichButton === 'functionClearAll') {
-    inputList = []
+  if (allSettings.includes(whichButton)) {
+    console.log('Setting will be applied') // TEST LOG
+    applySettings(whichButton) // MODULE TO BE ADDED
+  } else if (whichButton === 'functionClearAll') {
+    console.log('will clear all') // TEST LOG
+    expressionInputList = []
+  } else if (whichButton === 'functionClear') {
+    expressionInputList.pop()
+  } else if (whichButton === 'functionEvaluate') {
+    evaluateExpression() // MODULE TO BE ADDED
+  } else if (whichButton === 'operatorThRootOf') {
+    alert(
+      'This function is currently unavailable. Functionality will be added later'
+    ) // FUNCTIONALITY TO BE ADDED
+  } else {
+    // else, it must now be a value to add to the expression.
+    expressionInputList.push(whichButton)
   }
-  inputList.push(whichButton)
-
   //
   //
-  displayUserInputInfo(inputList) // FOR TESTING PURPOSES
+  displayUserInputInfo(expressionInputList) // FOR TESTING PURPOSES
 }
