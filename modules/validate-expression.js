@@ -89,6 +89,54 @@ function insertClosingBrackets(tempWorkingArray) {
 
 function accountForNegatives(tempWorkingArray) {
   console.log('accountForNegatives() called with array ', tempWorkingArray) // TEST LOG
+  // First, we can simply remove all double negatives, so we don't have to waste time working with them.
+  const tempDoubleNegativeRemoval = []
+  let doubleNegativeScanIndex = 0
+  while (doubleNegativeScanIndex < tempWorkingArray.length) {
+    if (tempWorkingArray[doubleNegativeScanIndex] !== 'operatorMinus') {
+      tempDoubleNegativeRemoval.push(tempWorkingArray[doubleNegativeScanIndex])
+      doubleNegativeScanIndex += 1
+    } else if (
+      tempWorkingArray[doubleNegativeScanIndex + 1] !== 'operatorMinus'
+    ) {
+      tempDoubleNegativeRemoval.push(tempWorkingArray[doubleNegativeScanIndex])
+      doubleNegativeScanIndex += 1
+    } else {
+      // We have a double (or triple, quadriple, etc) negative starting at the index 'i'
+      // We need to determine how many we have.
+      let doubleNegativeLength = 0
+      for (let j = doubleNegativeScanIndex; j < tempWorkingArray.length; j++) {
+        if (tempWorkingArray[j] === 'operatorMinus') {
+          doubleNegativeLength++
+        } else {
+          break
+        }
+      }
+      // Push + or - from double negative length
+      if (doubleNegativeLength % 2 === 0) {
+        // Is even, becomes a positive
+        tempDoubleNegativeRemoval.push('operatorPlus')
+      } else {
+        // Is odd, becomes a negative
+        tempDoubleNegativeRemoval.push('operatorMinus')
+      }
+      // Move forward in the working array before continuing scanning.
+      doubleNegativeScanIndex += doubleNegativeLength
+    }
+  }
+  console.log(
+    'Double negatives removed. The new expression is ',
+    tempDoubleNegativeRemoval
+  ) // TEST LOG
+
+  // We now have the length of double negative. With that we can convert into a + or - , and iterate i forwards in the temp working array to scan again.
+  // If even, convert to negative, otherwise convert to plus
+  // Move i forward in the array working array the nessicary amount.
+  // Is even, replace with plus
+  // Is odd, replace with minus
+  // At this point, i is still at the index of the initial minus in the tempWorkingArray. We now have to move i forward to the first non-minus item in the array, before we continue scaning.
+  // We have a doubleNegativeLength variable which is inclusive of the initial negative. We can add this to i, to move forwards to the next non double negative.
+
   const tempAccountForNegatives = []
   for (let i = 0; i < tempWorkingArray.length; i++) {
     // Only perform task if we run into a minus sign that ALSO qualifies as a negative, rather than a regular subtraction.
@@ -149,6 +197,21 @@ function accountForNegatives(tempWorkingArray) {
           j++ // Scans from position immediately following double negatives until the end of the working array.
         ) {}
       }
+    }
+  }
+}
+
+// THIS FUNCTION hasDoubleNegatives() is used in accountForNegatives() to determine whether an expression has a double negative, i.e. any two adjacent minus signs.
+function hasDoubleNegatives(tempWorkingArray) {
+  for (let i = 0; i < tempWorkingArray.length; i++) {
+    if (
+      tempWorkingArray[i] === 'operatorMinus' &&
+      tempWorkingArray[i + 1] === 'operatorMinus'
+    ) {
+      return true
+    }
+    if (i === tempWorkingArray.length - 1) {
+      return false
     }
   }
 }
