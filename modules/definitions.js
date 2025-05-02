@@ -467,4 +467,5 @@ export const expressionEnders = [
   // Postfix operators
   'operatorPercentOf',
   'operatorFactorial',
+  'operatorSquared',
 ]
