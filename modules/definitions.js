@@ -409,7 +409,7 @@ export const bracketOpeners = [
 export const allInfixOperators = [
   // True Basic Operators
   'operatorPlus',
-  'ioperatorMinus',
+  'operatorMinus',
   'operatorTimes',
   'operatorDivide',
   // Effective Basic Operators
