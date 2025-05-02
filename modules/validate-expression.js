@@ -118,7 +118,18 @@ function accountForNegatives(tempWorkingArrayArg) {
       // Push + or - from double negative length
       if (doubleNegativeLength % 2 === 0) {
         // Is even, becomes a positive
-        tempDoubleNegativeRemoval.push('operatorPlus')
+        // Because starting an expression with a negative sign is valid syntax, we don't want to end up accidentally turning (--5) into (0++5) when double negatives are removed, after 0+ insertion. To solve this problem, we'll scan back in the working array from the initial minus. If it's preceded by a (0+ we can be almost certain that the user didn't type that manually, so we'll assume they didn't and we WONT insert the plus, because it's already there.
+        if (
+          !(
+            tempWorkingArray[doubleNegativeScanIndex - 3] === 'bracketLeft' &&
+            tempWorkingArray[doubleNegativeScanIndex - 2] === 'num0' &&
+            tempWorkingArray[doubleNegativeScanIndex - 1] === 'operatorPlus'
+          )
+        ) {
+          // We don't want to create ++ and the + is already there, so we'll ommit it, adding nothing to the array if it's preceded by '(0+'.
+          // Assuming that's NOT the case:
+          tempDoubleNegativeRemoval.push('operatorPlus')
+        }
       } else {
         // Is odd, becomes a negative
         tempDoubleNegativeRemoval.push('operatorMinus')
@@ -131,90 +142,10 @@ function accountForNegatives(tempWorkingArrayArg) {
     'Double negatives removed. The new expression is ',
     tempDoubleNegativeRemoval
   ) // TEST LOG
+  // REASSIGN tempWorkingArray WITH DOUBLE NEGATIVES REMOVED.
+  tempWorkingArray = tempDoubleNegativeRemoval
+
   // At this point, negatives can only really exist if typed after a ^, *, /, +
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  // We now have the length of double negative. With that we can convert into a + or - , and iterate i forwards in the temp working array to scan again.
-  // If even, convert to negative, otherwise convert to plus
-  // Move i forward in the array working array the nessicary amount.
-  // Is even, replace with plus
-  // Is odd, replace with minus
-  // At this point, i is still at the index of the initial minus in the tempWorkingArray. We now have to move i forward to the first non-minus item in the array, before we continue scaning.
-  // We have a doubleNegativeLength variable which is inclusive of the initial negative. We can add this to i, to move forwards to the next non double negative.
-
-  const tempAccountForNegatives = []
-  for (let i = 0; i < tempWorkingArray.length; i++) {
-    // Only perform task if we run into a minus sign that ALSO qualifies as a negative, rather than a regular subtraction.
-    if (
-      tempWorkingArray[i] === 'operatorMinus' &&
-      allInfixOperators.includes(tempWorkingArray[i - 1])
-      // i.e. we run into a minus sign that follows an infix operator (including a minus at the start of an expression, as follows a plus from the 0+ leaders.)
-    ) {
-      // We have run into a negative:
-      console.log(
-        'Ran into a negative in the working array at index position ',
-        i
-      ) // TEST LOG
-      // CHECK FOR DOUBLE NEGATIVES - how many minus signs immediately follow it? (All of these are also qualify as negatives because they follow a -, which is an infix operator.)
-      let followingNegatives = 0
-      for (let j = i + 1; j < tempWorkingArray.length; j++) {
-        // Starting from the position immediately after the initial operatorMinus,
-        if (tempWorkingArray[j] === 'operatorMinus') {
-          followingNegatives++
-        } else {
-          break
-        }
-      }
-      console.log('Following Negative Signs: ', followingNegatives) // TEST LOG
-      // We now have a variable followingNegatives which tells us how many negatives (excluding the initial one) follow the initial negative we ran into.
-
-      // FIND THE NEXT COMPLETE EXPRESSION FOLLOWING THE NEGATIVE
-      // A complete expression is a string of negative signs followed by either:
-      //   Anything contained within brackets, or
-      //   Anything contained within brackets following a prefix operator that is followed by brackets (e.g. log(5 * -7))
-      //   A complete string of numerical (1 -9, ., e, pi) values and postfix operators (%, !)
-      //
-      //
-
-      // Save the position of the minus (negative) sign we're currently operating on.
-      const currentNegativeIndex = i
-      // Declare temp array for sub expression.
-      const tempCompleteSubExpression = []
-      // Declare an openBrackets variable to determine when the expression should end, if contained in brackets
-      // push all double negatives into sub expression AND move forwards in the working array. (NOTE: DONT DO THIS IN THE LOOP, MOVE FORWARDS AFTER THE EXPRESSION HAS BEEN FOUND BY IT'S LENGTH IN THE WORKING ARRAY)
-      for (let j = 0; j <= followingNegatives; j++) {
-        tempCompleteSubExpression.push('operatorMinus')
-      }
-      console.log(
-        'double negatives pushed into tempCompleteSubExpression, which is: ',
-        tempCompleteSubExpression
-      ) // TEST LOG
-      //
-      // Continue scanning forwards until we reach the end of a complete subexpression
-      // We start scanning from the position immediately after the double negatives, using j, e.g. in '--(5+log(3)' we start from the first '('
-      // There are a few types of complete expressions to be looking for. We need to determine which type it is.
-      //   A bracketed expression:
-      if (tempWorkingArray[i + followingNegatives] === 'bracketLeft') {
-        console.log('Negative Bracketed Expression Found.') // TEST LOG
-        for (
-          let j = i + followingNegatives + 1;
-          j < tempWorkingArray.length;
-          j++ // Scans from position immediately following double negatives until the end of the working array.
-        ) {}
-      }
-    }
-  }
 }
 
 //
@@ -280,5 +211,20 @@ function accountForNegatives(tempWorkingArrayArg) {
 //      This happens after the initial 0+ insertions so we can insert just a zero when putting negatives inside brackets, making it 0-.
 //    When inserting negatives, we need to insert everything included in that negative expression and then inclose it in a bracket. This gets complicated, but we can scan until the end of the expression storing it in a temp array, then call the validateExpression function from within itself to return the validated value of that expression, then push it to the array and insert a right bracket, after which we continue from after the point of the end of the expression. Won't be able to test this untill the function is fully written because it contains itself.
 
+//
+//
+// We now have the length of double negative. With that we can convert into a + or - , and iterate i forwards in the temp working array to scan again.
+// If even, convert to negative, otherwise convert to plus
+// Move i forward in the array working array the nessicary amount.
+// Is even, replace with plus
+// Is odd, replace with minus
+// At this point, i is still at the index of the initial minus in the tempWorkingArray. We now have to move i forward to the first non-minus item in the array, before we continue scaning.
+// We have a doubleNegativeLength variable which is inclusive of the initial negative. We can add this to i, to move forwards to the next non double negative.
+//
+//
+//
+//
+//
+//
 //
 //
