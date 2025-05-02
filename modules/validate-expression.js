@@ -98,8 +98,15 @@ function accountForNegatives(tempWorkingArrayArg) {
   // REMOVE DOUBLE NEGATIVES
   tempWorkingArray = removeDoubleNegatives(tempWorkingArray)
   console.log('Removed Double Negatives: ', tempWorkingArray) // TEST LOG
+  // REPLACE +- WITH +
   tempWorkingArray = removePlusMinus(tempWorkingArray)
   console.log('instances of "+-" replaced with "-": ', tempWorkingArray) // TEST LOG
+  // PLACE BRACKETS AROUND NEGATIVE EXPRESSIONS
+  tempWorkingArray = insertBracketsAroundNegativeExpressions(tempWorkingArray)
+  console.log(
+    'Inserted brackets around remaining negative expressions: ',
+    tempWorkingArray
+  )
 }
 
 // SUB FUNCTIONS FOR accountForNegatives() //
@@ -195,6 +202,15 @@ function removePlusMinus(tempWorkingArray) {
     }
   }
   return tempRemovePlusMinus
+}
+
+function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
+  // At this point, we have far fewer negatives. The definition remains unchanged:
+  //    Negatives are anything that follow another operator (e.g. 4 + -5, 5 --5 (which would account for double negatives.))
+  //       It would also be anything at the start of an expression (start or following a '('), but because we're inserting a 0+ this isn't nessicary to account for)
+  //       Anything else (a '-' appearing between expressions) is a subtraction
+  //       Anything else would be a syntax error (e.g. -+4, -*4 ).
+  for (let i = 0; i < tempWorkingArray.length; i++) {}
 }
 
 //
