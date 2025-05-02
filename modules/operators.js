@@ -62,6 +62,10 @@ export function factorialOf(num) {
   }
 }
 
+export function squared(num) {
+  return num ** 2
+}
+
 // PREFIX OPERATORS //
 
 import { currentSettings } from './apply-setting.js'
