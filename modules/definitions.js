@@ -428,6 +428,7 @@ export const displaytTimesAfterWhenBeforeDigit = [
   'operatorPercentOf',
   'operatorFactorial',
   'valueAns',
+  'operatorSquared',
 ]
 
 // A LIST OF VALUES TO DISPLAY A MULTIPLICATION SYMBOL BEFORE IF FOLLOWING A VALUE FROM displayTimesAfterWhenBeforeDigit:
