@@ -87,9 +87,12 @@ function insertClosingBrackets(tempWorkingArray) {
   return tempWorkingArray
 }
 
-function accountForNegatives(tempWorkingArray) {
+function accountForNegatives(tempWorkingArrayArg) {
+  let tempWorkingArray = tempWorkingArrayArg
+  // Temp working array will be reassigned a number of times, but it's best practice not to reassign arguments, so the argument has a different name and is reassigned.
   console.log('accountForNegatives() called with array ', tempWorkingArray) // TEST LOG
   // First, we can simply remove all double negatives, so we don't have to waste time working with them.
+  // REMOVE DOUBLE NEGATIVES
   const tempDoubleNegativeRemoval = []
   let doubleNegativeScanIndex = 0
   while (doubleNegativeScanIndex < tempWorkingArray.length) {
@@ -128,7 +131,20 @@ function accountForNegatives(tempWorkingArray) {
     'Double negatives removed. The new expression is ',
     tempDoubleNegativeRemoval
   ) // TEST LOG
+  // At this point, negatives can only really exist if typed after a ^, *, /, +
 
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   // We now have the length of double negative. With that we can convert into a + or - , and iterate i forwards in the temp working array to scan again.
   // If even, convert to negative, otherwise convert to plus
   // Move i forward in the array working array the nessicary amount.
@@ -197,21 +213,6 @@ function accountForNegatives(tempWorkingArray) {
           j++ // Scans from position immediately following double negatives until the end of the working array.
         ) {}
       }
-    }
-  }
-}
-
-// THIS FUNCTION hasDoubleNegatives() is used in accountForNegatives() to determine whether an expression has a double negative, i.e. any two adjacent minus signs.
-function hasDoubleNegatives(tempWorkingArray) {
-  for (let i = 0; i < tempWorkingArray.length; i++) {
-    if (
-      tempWorkingArray[i] === 'operatorMinus' &&
-      tempWorkingArray[i + 1] === 'operatorMinus'
-    ) {
-      return true
-    }
-    if (i === tempWorkingArray.length - 1) {
-      return false
     }
   }
 }
