@@ -384,7 +384,7 @@ export const inputDisplayValues = {
   operatorToThe: '^',
   operatorThRootOf: '√',
   operatorSqrt: '√',
-  operatorSquared: '^2 ',
+  operatorSquared: '² ',
   operatorFactorial: '!',
   numE: 'e',
   numPi: 'π',
@@ -447,7 +447,8 @@ export const displayTimesBeforeIfNeeded = [
   'valueAns',
 ]
 
-// A LIST OF VALID EXPRESSION ENDERS (WHICH ACT AS A STARTING POINT FOR A NEW EXPRESSION THAT OPERATORS CAN BE APPLIED TO)
+// A LIST OF VALID EXPRESSION ENDERS (WHICH CAN (BUT DONT ALWAYS) ACT AS A STARTING POINT FOR A NEW EXPRESSION THAT OPERATORS CAN BE APPLIED TO)
+// These can only be used when scanning backwards, not forwards.
 export const expressionEnders = [
   // Numerical Constants
   'num0',
@@ -466,6 +467,29 @@ export const expressionEnders = [
   // Separators
   'bracketRight',
   // Postfix operators
+  'operatorPercentOf',
+  'operatorFactorial',
+  'operatorSquared',
+]
+
+export const allConstants = [
+  'num0',
+  'num1',
+  'num2',
+  'num3',
+  'num4',
+  'num5',
+  'num6',
+  'num7',
+  'num8',
+  'num9',
+  'point',
+  'numE',
+  'numPi',
+  'valueAns',
+]
+
+export const allPostfixOperators = [
   'operatorPercentOf',
   'operatorFactorial',
   'operatorSquared',
