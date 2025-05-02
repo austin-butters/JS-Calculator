@@ -18,7 +18,11 @@
 //   It's possible that this isn't the correct order to do it in but I believe it is.
 // Return the validated expression.
 
-import { bracketOpeners, allInfixOperators } from './definitions.js'
+import {
+  bracketOpeners,
+  allInfixOperators,
+  expressionEnders,
+} from './definitions.js'
 
 export function validateExpression(expressionInputList) {
   // DECLARE TEMPORARY WORKING ARRAY
@@ -127,14 +131,16 @@ function removeDoubleNegatives(tempWorkingArray) {
         // Is even, becomes a positive
         // Because starting an expression with a negative sign is valid syntax, we don't want to end up accidentally turning (--5) into (0++5) when double negatives are removed, after 0+ insertion. To solve this problem, we'll scan back in the working array from the initial minus. If it's preceded by a (0+ we can be almost certain that the user didn't type that manually, so we'll assume they didn't and we WONT insert the plus, because it's already there.
         if (
-          !(
-            tempWorkingArray[doubleNegativeScanIndex - 3] === 'bracketLeft' &&
-            tempWorkingArray[doubleNegativeScanIndex - 2] === 'num0' &&
-            tempWorkingArray[doubleNegativeScanIndex - 1] === 'operatorPlus'
+          expressionEnders.includes(
+            tempWorkingArray[doubleNegativeScanIndex - 1]
           )
         ) {
           // We don't want to create ++ and the + is already there, so we'll ommit it, adding nothing to the array if it's preceded by '(0+'.
-          // Assuming that's NOT the case:
+          // When a double negative that resolves to a plus is not after a bracket insertion:
+          //   We also don't want to resolve a double negative into a positive if it's preceded by a plus or any operator, because then we get a syntax error.
+          //   To resolve this, we need to push 'operatorPlus' ONLY if the double negative string is preceded by an expression ender (a numerical value, a right bracket, or a post fix operator.)
+          //   Otherwise, we should push NO value, allowing the number itself to be the start of the new expression, because we don't need to start with a plus sign.
+          // This means we only need to push the plus on one condition, if it follows an expression ender, otherwise we ommit it.
           tempDoubleNegativeRemoval.push('operatorPlus')
         }
       } else {

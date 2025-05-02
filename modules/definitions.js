@@ -445,3 +445,26 @@ export const displayTimesBeforeIfNeeded = [
   'point', // This is a constant for this purpose
   'valueAns',
 ]
+
+// A LIST OF VALID EXPRESSION ENDERS (WHICH ACT AS A STARTING POINT FOR A NEW EXPRESSION THAT OPERATORS CAN BE APPLIED TO)
+export const expressionEnders = [
+  // Numerical Constants
+  'num0',
+  'num2',
+  'num3',
+  'num4',
+  'num5',
+  'num6',
+  'num7',
+  'num8',
+  'num9',
+  'point', // Effective constant, Interpret a number ending in a decimal point as that number with no fractional part.
+  'numE',
+  'numPi',
+  'valueAns',
+  // Separators
+  'bracketRight',
+  // Postfix operators
+  'operatorPercentOf',
+  'operatorFactorial',
+]
