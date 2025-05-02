@@ -88,11 +88,18 @@ function insertClosingBrackets(tempWorkingArray) {
 }
 
 function accountForNegatives(tempWorkingArrayArg) {
+  console.log('accountForNegatives() called with array ', tempWorkingArrayArg) // TEST LOG
   let tempWorkingArray = tempWorkingArrayArg
-  // Temp working array will be reassigned a number of times, but it's best practice not to reassign arguments, so the argument has a different name and is reassigned.
-  console.log('accountForNegatives() called with array ', tempWorkingArray) // TEST LOG
   // First, we can simply remove all double negatives, so we don't have to waste time working with them.
   // REMOVE DOUBLE NEGATIVES
+  tempWorkingArray = removeDoubleNegatives(tempWorkingArray)
+  console.log('Removed Double Negatives: ', tempWorkingArray) // TEST LOG
+  tempWorkingArray = removePlusMinus(tempWorkingArray)
+  console.log('instances of "+-" replaced with "-": ', tempWorkingArray) // TEST LOG
+}
+
+// SUB FUNCTIONS FOR accountForNegatives() //
+function removeDoubleNegatives(tempWorkingArray) {
   const tempDoubleNegativeRemoval = []
   let doubleNegativeScanIndex = 0
   while (doubleNegativeScanIndex < tempWorkingArray.length) {
@@ -142,10 +149,46 @@ function accountForNegatives(tempWorkingArrayArg) {
     'Double negatives removed. The new expression is ',
     tempDoubleNegativeRemoval
   ) // TEST LOG
-  // REASSIGN tempWorkingArray WITH DOUBLE NEGATIVES REMOVED.
-  tempWorkingArray = tempDoubleNegativeRemoval
-
+  return tempDoubleNegativeRemoval
   // At this point, negatives can only really exist if typed after a ^, *, /, +
+}
+
+function removePlusMinus(tempWorkingArray) {
+  // removePlusMinus()
+  // This function isn't entirely nessicary as all infix operators including + preceding a negative will be accounted for,
+  // But dealing with negatives is a complicated recursive function so it's easier to remove some of them by turning +-n into -n,
+  // so that the function can be called less often.
+  // Like other functions, takes a tempWorkingArray parameter and is called with an argument of the same name.
+  // Must scan for any instances of operatorPlus immediately followed by operatorMinus and replace with a single operatorMinus
+  const tempRemovePlusMinus = []
+  for (let i = 0; i < tempWorkingArray.length; i++) {
+    if (
+      tempWorkingArray[i] !== 'operatorPlus' &&
+      tempWorkingArray[i] !== 'operatorMinus'
+    ) {
+      // Is neither a + or -, push value
+      tempRemovePlusMinus.push(tempWorkingArray[i])
+    } else if (
+      tempWorkingArray[i] === 'operatorPlus' &&
+      tempWorkingArray[i + 1] !== 'operatorMinus'
+    ) {
+      // Is a plus that is NOT followed by a minus - push the plus value (if it is followed by a minus it will be skipped and accounted for when the next iteration reaches the minus.)
+      tempRemovePlusMinus.push('operatorPlus')
+    } else if (
+      tempWorkingArray[i] === 'operatorMinus' &&
+      tempWorkingArray[i - 1] !== 'operatorPlus'
+    ) {
+      // Is a minus that is NOT preceded by a plus, - push the minus value.
+      tempRemovePlusMinus.push('operatorMinus')
+    } else if (
+      tempWorkingArray[i] === 'operatorMinus' &&
+      tempWorkingArray[i - 1] === 'operatorPlus'
+    ) {
+      // Is a '+-', push only a '-'
+      tempRemovePlusMinus.push('operatorMinus')
+    }
+  }
+  return tempRemovePlusMinus
 }
 
 //
