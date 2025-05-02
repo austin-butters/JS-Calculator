@@ -1,5 +1,7 @@
 // operators.js
 
+// STILL NEED TO ADD ERROR HANDLING
+
 // BASIC OPERATORS //
 // Add
 // Subtract
@@ -23,7 +25,7 @@ export function divide(num1, num2) {
 }
 
 // OTHER INFIX OPERATORS //
-// Note: *e^ and *10^ will be divided into individual operations so functions for them aren't nessicary
+// Note: *e^ and *10^ could be divided into individual operations so functions for them aren't nessicary, but it's quicker to keep them together.
 
 export function raiseTo(num1, num2) {
   return num1 ** num2
@@ -33,6 +35,13 @@ export function thRootOf(num1, num2) {
   return num2 ** (1 / num1)
 }
 
+export function timesTenToThe(num1, num2) {
+  return num1 * 10 ** num2
+}
+
+export function timesEToThe(num1, num2) {
+  return num1 * Math.E ** num2
+}
 // POSTFIX OPERATORS //
 
 export function convertToPercent(num) {
@@ -54,15 +63,6 @@ export function factorialOf(num) {
 }
 
 // PREFIX OPERATORS //
-// sin
-// cos
-// tan
-// sin-1
-// cos-1
-// tan-1
-// log
-// ln
-// sqrt
 
 import { currentSettings } from './apply-setting.js'
 
