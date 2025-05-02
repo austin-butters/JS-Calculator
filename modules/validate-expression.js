@@ -205,12 +205,23 @@ function removePlusMinus(tempWorkingArray) {
 }
 
 function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
+  const tempNegativeBracketInsertion = []
   // At this point, we have far fewer negatives. The definition remains unchanged:
-  //    Negatives are anything that follow another operator (e.g. 4 + -5, 5 --5 (which would account for double negatives.))
+  //    Negatives are anything that follow another infix operator (e.g. 4 + -5, 5 --5 (which would account for double negatives.))
   //       It would also be anything at the start of an expression (start or following a '('), but because we're inserting a 0+ this isn't nessicary to account for)
   //       Anything else (a '-' appearing between expressions) is a subtraction
   //       Anything else would be a syntax error (e.g. -+4, -*4 ).
-  for (let i = 0; i < tempWorkingArray.length; i++) {}
+  for (let i = 0; i < tempWorkingArray.length; i++) {
+    // Check if it follows an infix operator
+    if (!allInfixOperators.includes(tempWorkingArray[i - 1])) {
+      // Is not an operatorMinus that qualifies as a negative, push the value to the array.
+      tempNegativeBracketInsertion.push(tempWorkingArray[i])
+    } else {
+      // Is an operatorMinus that qualifies as a negative, meaning we need to find the subexpression that follows.
+      const subExpressionStart = i
+      // Find full sub expression
+    }
+  }
 }
 
 //
