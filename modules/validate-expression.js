@@ -25,6 +25,7 @@ import {
   allConstants,
   allPostfixOperators,
   allNonDigitConstants,
+  trueDigitValuesAsStrings,
 } from './definitions.js'
 
 export function validateExpression(expressionInputList) {
@@ -62,6 +63,12 @@ export function validateExpression(expressionInputList) {
   // INSERT IMPLIED MULTIPLICATION
   tempWorkingArray = insertMultiplication(tempWorkingArray)
   console.log('validateExpression: Insert Multiplications = ', tempWorkingArray) // TEST LOG
+  // REPLACE NUMBER INPUTS WITH TRUE NUMBER VALUES
+  tempWorkingArray = turnInputsIntoTrueNumbers(tempWorkingArray)
+  console.log(
+    'validateExpression: turnInputsIntoTrueNumbers = ',
+    tempWorkingArray
+  ) // TEST LOG
   // RETURN TEMPORARY WORKING ARRAY
   return tempWorkingArray
 }
@@ -581,10 +588,32 @@ function insertMultiplication(tempWorkingArray) {
     const isFollowedByExpressionStarter =
       bracketOpeners.includes(nextToken) || nextToken === 'bracketLeft'
     if (isExpressionEnder && isFollowedByExpressionStarter) {
-      tempInsertMultiplication.push(token, 'operatortimes')
+      tempInsertMultiplication.push(token, 'operatorTimes')
     } else {
       tempInsertMultiplication.push(token)
     }
   }
   return tempInsertMultiplication
+}
+
+function turnInputsIntoTrueNumbers(tempWorkingArray) {
+  // Scans the working array and replaces all number inputs in the array with true values.
+  const tempTurnInputsIntoNumbers = []
+  let numberString = ''
+  for (let i = 0; i < tempWorkingArray.length; i++) {
+    const valueToAdd = trueDigitValuesAsStrings[tempWorkingArray[i]]
+    if (valueToAdd) {
+      // We're currently on a true (digit) number.
+      numberString += valueToAdd
+    } else {
+      // We're not on a digit. If numberstring isn't empty (truthy), then we'll push it's value to the temp array.
+      // After that, push the current non digit value to the temp array.
+      if (numberString) {
+        tempTurnInputsIntoNumbers.push(parseFloat(numberString))
+        numberString = ''
+      }
+      tempTurnInputsIntoNumbers.push(tempWorkingArray[i])
+    }
+  }
+  return tempTurnInputsIntoNumbers
 }
