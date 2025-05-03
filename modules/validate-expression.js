@@ -227,61 +227,124 @@ function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
       // Same thing for a prefix operator, which will be followed by brackets.
       // Scan until a closing bracket is reached
       // If no opening bracket or prefix operator follows it, scan until any non numerical value is reached (i.e. any postfix operator, any prefix operator, any basic operator, or a bracket.)
+
+      // Declare required variables
+      console.log('negative operator found at i =', i) // TEST LOG
       const subExpression = []
       const negativeSignIndex = i
-      let isBracketedExpression
       let openBracketCount
       let firstBracketReached
-      let firstScanComplete
-      let firstScanBreakIndex
+      let subExpressionValueBreakIndex
+      // Determine if it's a bracketed expression.
       if (
-        bracketOpeners.includes(
-          tempWorkingArray[i + 1] || tempWorkingArray[i + 1] === 'bracketLeft'
-        )
+        bracketOpeners.includes(tempWorkingArray[i + 1]) ||
+        tempWorkingArray[i + 1] === 'bracketLeft'
       ) {
-        isBracketedExpression = true
+        // Is a bracketed expression
         openBracketCount = 0
-      }
-      for (let j = negativeSignIndex; j < tempWorkingArray.length; j++) {
-        firstScanComplete = true
-        // Start scanning from the position of the negative sign
-        // Scan until the closing bracket is reached,
-        // Pushing values to the array.
-        // Update openBrackedCount only if a bracketed expression and the first bracket has been reached.
-        subExpression.push(tempWorkingArray[j])
-        if (isBracketedExpression) {
+        console.log('The negative is a bracketed expression') // TEST LOG
+        // Find bracketed expression
+        for (let j = negativeSignIndex; j < tempWorkingArray.length; j++) {
+          subExpression.push(tempWorkingArray[j])
           if (tempWorkingArray[j] === 'bracketLeft') {
             openBracketCount++
             firstBracketReached = true
           } else if (tempWorkingArray[j] === 'bracketRight') {
             openBracketCount--
           }
+          if (firstBracketReached && openBracketCount === 0) {
+            subExpressionValueBreakIndex = j // Ends on the last value that IS part of the subExpression.
+            break
+          }
         }
-        // Break when brackets are closed AFTER reaching the first bracket
-        if (
-          isBracketedExpression &&
-          firstBracketReached &&
-          openBracketCount === 0
-        ) {
-          firstScanBreakIndex === j
-          break
-        }
-        // If not a bracketed expression, scan until a non numerical value is reached, we don't need to do anything more as we've already pushed the value to the subExpression array. The above conditionals only occur of it's a bracketed expression so won't affect this.
-        // We have to continue until we reach anny non-numerical value.
-        if (!allConstants.includes(tempWorkingArray[j])) {
-          break
+        // For bracketed expressions, brackets will be automatically closed already so we don't have to worry about them ending at the end of the expression.
+      } else {
+        // Is not a bracketed expression
+        console.log('The negative is not a bracketed expression') // TEST LOG
+        // Push initial minus sign, then start scanning after it.
+        subExpression.push(tempWorkingArray[i])
+        for (let j = negativeSignIndex + 1; j < tempWorkingArray.length; j++) {
+          if (allConstants.includes(tempWorkingArray[j])) {
+            subExpression.push(tempWorkingArray[j])
+            if (j === tempWorkingArray.length - 1) {
+              subExpressionValueBreakIndex = j
+              break
+            }
+          } else {
+            subExpressionValueBreakIndex = j - 1 // Ends on the last value that WAS part of the subExpression
+            break
+          }
         }
       }
-      // After the for loop, WE NEED TO CHECK FOR POSTFIX OPERATORS AND SCAN THROUGH THEM. THEY NEED TO BE INCLUDED WITHIN THE NEGATIVE EXPRESSION, AS THEY HAVE A HIGHER PRECEDENCE SO MUST BE GROUPED WITH THEIR PRECEDING EXPRESSIONS. SQUARED OPERATORS WILL BE INCLUDED HERE.
-      let secondScanIndex
-      for (let j = firstScanBreakIndex + 1; j < tempWorkingArray.length; j++) {
+      console.log(
+        'SubExpression excluding postfix operators ends at index = ',
+        subExpressionValueBreakIndex
+      ) // TEST LOG
+      console.log('current subExpression = ', subExpression) // TEST LOG
+      // INLUDE POSTFIX OPERATORS
+      // We now know where it ends, subExpressionValueBreakIndex is the position of the last item in the subexpression.
+      // We need to include postfix operators in the sub expression as they need to be evaluated first.
+      for (
+        let j = subExpressionValueBreakIndex + 1;
+        j < tempWorkingArray.length;
+        j++
+      ) {
         if (allPostfixOperators.includes(tempWorkingArray[j])) {
           subExpression.push(tempWorkingArray[j])
-          secondScanIndex = j
         } else {
           break
         }
       }
+      console.log(
+        'Inserted postfix operators into subExpression: ',
+        subExpression
+      ) // TEST LOG
+      // We now have a full subexpression array.
+      // We'll push it to the tempNegativeBracketInsertion Array, surrounded by brackets.
+      // We will then iterate i as needed so that we start after the subexpression in the next scan iteration.
+      tempNegativeBracketInsertion.push('bracketLeft', 'num0')
+      for (const token of subExpression) {
+        tempNegativeBracketInsertion.push(token)
+      }
+      tempNegativeBracketInsertion.push('bracketRight')
+      i += subExpression.length - 1 // Very Important that this is right. The -1 accounts for I being raised by 1 in the next iteration.
+
+      //
+      // !! NEED TO MAKE SURE THAT BRACKETED EXPRESSIONS DON'T CONTAIN NEGATIVES WITHIN THEMSELVES THAT ARE UNACCOUNTED FOR. WE CAN SOLVE THIS BY RECURSIVELY CALLING THE FUNCTION ON IT BEFORE PUSHING IT TO THE WORKING ARRAY.
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+
+      // Start scanning from the position of the negative sign
+      // Scan until the closing bracket is reached,
+      // Pushing values to the array.
+      // Update openBrackedCount only if a bracketed expression and the first bracket has been reached.
+
+      // Break when brackets are closed AFTER reaching the first bracket
+
+      // If not a bracketed expression, scan until a non numerical value is reached, we don't need to do anything more as we've already pushed the value to the subExpression array. The above conditionals only occur of it's a bracketed expression so won't affect this.
+      // We have to continue until we reach anny non-numerical value.
+
+      // After the for loop, WE NEED TO CHECK FOR POSTFIX OPERATORS AND SCAN THROUGH THEM. THEY NEED TO BE INCLUDED WITHIN THE NEGATIVE EXPRESSION, AS THEY HAVE A HIGHER PRECEDENCE SO MUST BE GROUPED WITH THEIR PRECEDING EXPRESSIONS. SQUARED OPERATORS WILL BE INCLUDED HERE.
+      //
+      //
+
+      // let secondScanIndex
+      // for (let j = firstScanBreakIndex + 1; j < tempWorkingArray.length; j++) {
+      //   if (allPostfixOperators.includes(tempWorkingArray[j])) {
+      //     subExpression.push(tempWorkingArray[j])
+      //     secondScanIndex = j
+      //   } else {
+      //     break
+      //   }
+      // }
 
       // CURRENTLY WORKING ON THIS SECTION
       //
@@ -293,6 +356,8 @@ function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
       tempNegativeBracketInsertion.push(tempWorkingArray[i])
     }
   }
+  // FINALLY, IN ALL CASES, RETURN tempNegativeBracketInsertion
+  return tempNegativeBracketInsertion
 }
 
 //
