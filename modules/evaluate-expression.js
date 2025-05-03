@@ -17,38 +17,29 @@
 // NOTE: None of this accounts for errors yet. That's something to add later.
 
 export function evaluateExpression(expression) {
-  console.log(
-    'Will evaluate expression. Function to be written. expression = ',
-    expression
-  ) // TEST LOG
-  //
-  //
-  //
-  //
-  //
+  console.log('Will evaluate expression ', expression) // TEST LOG
   // DECLARE A TEMPORARY VARIABLE TO MANIPULATE THROUGHOUT THIS FUNCTION
-  let tempExpression
+  let tempExpression = expression
   // CHECK IF BRACKET NESTING IS VALID
-  if (!bracketNestingIsValid(expression)) {
-    return undefined // CHANGE IN FUTURE WHEN HANDLING ERRORS - for now it's undefined as this is an important error to address while writing the code.
+  if (!bracketNestingIsValid(tempExpression)) {
+    console.log('Bracket Nesting is Invalid.') // TEST LOG
+    return // CHANGE IN FUTURE WHEN HANDLING ERRORS - for now it's undefined as this is an important error to address while writing the code.
   }
   // EVALUATE INNERMOST BRACKETS FIRST
-  while (hasBrackets(expression)) {
+  while (hasBrackets(tempExpression)) {
     // Has brackets, call the evaluateFirstSubExpression() function,
     // which will run this function on a smaller part of it, skipping the bracket logic. It returns the full expression with the innermost bracket evaluated.
     // Continue doing this until there are no brackets (at which point the function will move on to the evaluation logic that evaluateFirstSubExpression uses, for the main expression.)
-    console.log(
-      'expression ',
-      expression,
-      ' has brackets. Will evaluate first subexpression.'
-    ) // TEST LOG
-    tempExpression = evaluateFirstSubExpression(expression)
+    tempExpression = evaluateFirstSubExpression(tempExpression)
     //
     //
-    break // IMPORTANT NOTE: THIS IS TEMPORARY SO THAT MY COMPUTER DOESN'T CRASH WHILE TESTING BEFORE I FINISH THE FUNCTION. EVENTUALLY IT WILL BE REMOVED, BUT WITH POTENTIAL SAFETY NETS IN PLACE FOR SYNTAX ERRORS, ETC.
+    // break // IMPORTANT NOTE: THIS IS TEMPORARY SO THAT MY COMPUTER DOESN'T CRASH WHILE TESTING BEFORE I FINISH THE FUNCTION. EVENTUALLY IT WILL BE REMOVED, BUT WITH POTENTIAL SAFETY NETS IN PLACE FOR SYNTAX ERRORS, ETC.
     //
     //
   }
+  // EVALUATION LOGIC
+  tempExpression = processOperators(tempExpression)
+  return tempExpression
 }
 
 // -- SUB FUNCTIONS --  //
@@ -58,9 +49,11 @@ export function evaluateExpression(expression) {
 function hasBrackets(expression) {
   for (const token of expression) {
     if (token === 'bracketLeft' || token === 'bracketRight') {
+      console.log(expression, 'hasBrackets: ', true) // TEST LOG
       return true
     }
   }
+  console.log(expression, 'hasBrackets: ', false) // TEST LOG
   return false
 }
 
@@ -102,18 +95,52 @@ function evaluateFirstSubExpression(expression) {
     subExpression.push(expression[i])
   }
   // subExpression now equals the inner contents of the brackets.
-  const evaluatedSubExpression = evaluateExpression(subExpression)
+  // Evaluate the subexpression
+  // Before evaluating, run another check to confirm theres no brackets contained in it.
+  let evaluatedSubExpression
+  if (hasBrackets(subExpression)) {
+    return // ADD ERROR HANDLING LATER
+  } else {
+    evaluatedSubExpression = evaluateExpression(subExpression)
+  }
   // We now have the evaluated subexpression (we will, once evaluateExpression written)
   // need to insert this in the entire expression in place of the brackets.
   const updatedExpression = []
   for (let i = 0; i < leftBracketIndex; i++) {
     updatedExpression.push(expression[i])
   }
-  for (const token of updatedExpression) {
+  for (const token of evaluatedSubExpression) {
     updatedExpression.push(token)
   }
   for (let i = rightBracketIndex + 1; i < expression.length; i++) {
     updatedExpression.push(expression[i])
   }
+  console.log('evaluateFirstSubExpression: Result = ', updatedExpression) // TEST LOG
   return updatedExpression
+}
+
+import { allOperators } from './definitions.js'
+
+function processOperators(expression) {
+  if (hasBrackets(expression)) {
+    // Shouldn't as this function is called only on
+    return // HANDLE ERRORS IN FUTURE
+  }
+  let tempExpression = expression
+  // We evaluate everything until there are no longer any operators. Once there aren't any, it must be a single number value in the expression.
+  // When a single number, return it as the full expression.
+  // tempExpression = evaluateExponents()
+  // tempExpression = evaluatePostfix()
+  // tempExpression = evaluatePrefix()
+  // tempExpression = evaluateDivision()
+  // tempExpression = evaluateMultiplication()
+  // tempExpression = evaluateAddition()
+  // tempExpression = evaluateSubtraction()
+  return ['Placeholder for processed expression'] // REMOVE PLACEHOLDER
+  if (tempExpression.length === 1) {
+    // Is a single value
+    return tempExpression
+  } else {
+    // Deal with errors later.
+  }
 }

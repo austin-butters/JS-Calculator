@@ -497,3 +497,26 @@ export const allPostfixOperators = [
 ]
 
 export const allNonDigitConstants = ['numE', 'numPi', 'valueAns']
+
+export const allOperators = [
+  'operatorPlus',
+  'operatorMinus',
+  'operatorTimes',
+  'operatorDivide',
+  'operatorPercentOf',
+  'operatorSin',
+  'operatorSinInverse',
+  'operatorCos',
+  'operatorCosInverse',
+  'operatorTan',
+  'operatorTanInverse',
+  'operatorLog',
+  'operatorTimesTenToThe',
+  'operatorLogNatural',
+  'operatorTimesEToThe',
+  'operatorToThe',
+  'operatorThRootOf',
+  'operatorSqrt',
+  'operatorSquared',
+  'operatorFactorial',
+]
