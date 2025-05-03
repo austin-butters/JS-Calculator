@@ -385,7 +385,7 @@ export const inputDisplayValues = {
   operatorThRootOf: '√',
   operatorSqrt: '√',
   operatorSquared: '² ',
-  operatorFactorial: '!',
+  operatorFactorial: ' !',
   numE: 'e',
   numPi: 'π',
   valueAns: 'Ans',
