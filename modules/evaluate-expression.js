@@ -130,22 +130,69 @@ function processOperators(expression) {
   // We evaluate everything until there are no longer any operators. Once there aren't any, it must be a single number value in the expression.
   // When a single number, return it as the full expression.
   const operations = {
-    exponents: () => evaluateExponents(),
-    postfixOperators: () => evaluatePostfixOperators(),
-    prefixOperators: () => evaluatePrefixOperators(),
-    division: () => evaluateDivision(),
-    multiplication: () => evaluateMultiplication(),
-    addition: () => evaluateAddition(),
-    subtraction: () => evaluateSubtraction(),
+    exponents: evaluateExponents,
+    postfixOperators: evaluatePostfixOperators,
+    prefixOperators: evaluatePrefixOperators,
+    division: evaluateDivision,
+    multiplication: evaluateMultiplication,
+    addition: evaluateAddition,
+    subtraction: evaluateSubtraction,
   }
-  for (const operation of orderOfOperations) {
-    operations[operation]()
+  for (const currentOperation of orderOfOperations) {
+    tempExpression = operations[currentOperation](tempExpression)
   }
-  return ['Placeholder for processed expression'] // REMOVE PLACEHOLDER
   if (tempExpression.length === 1) {
-    // Is a single value
+    // Is a single value, meaning evaluation is now complete.
     return tempExpression
   } else {
-    // Deal with errors later.
+    // DEAL WITH ERRORS
   }
+  return ['Placeholder for processed expression'] // REMOVE PLACEHOLDER
+}
+
+// OPERATION EVALUATION FUNCTIONS //
+
+// Complete these functions, keeping in mind the order they must be applied (e.g. left to right, right to left, etc.)
+// Keep in mind that at this point, no brackets exist in whatever expression is passed into the functions. This means operators are generally applied only to numbers.
+
+function evaluateExponents(expression) {
+  console.log('evaluateExponents called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
+}
+
+function evaluatePostfixOperators(expression) {
+  console.log('evaluatePostfixOperators called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
+}
+
+function evaluatePrefixOperators(expression) {
+  console.log('evaluatePrefixOperators called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
+}
+
+function evaluateDivision(expression) {
+  console.log('evaluateDivision called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
+}
+
+function evaluateMultiplication(expression) {
+  console.log('evaluateMultiplication called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
+}
+
+function evaluateAddition(expression) {
+  console.log('evaluateAddition called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
+}
+
+function evaluateSubtraction(expression) {
+  console.log('evaluateSubtraction called with ', expression) // TEST LOG
+  const tempExpression = []
+  return tempExpression
 }
