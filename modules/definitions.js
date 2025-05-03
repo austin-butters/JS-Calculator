@@ -370,7 +370,7 @@ export const inputDisplayValues = {
   operatorDivide: ' ÷ ',
   bracketLeft: '(',
   bracketRight: ')',
-  operatorPercentOf: '%',
+  operatorPercentOf: '%', // CHANGE(D) TO PERCENT, I.E /100, FIX (IF NEEDED) AND RENAME LATER.
   operatorSin: ' sin',
   operatorSinInverse: ' sin⁻¹',
   operatorCos: ' cos',
@@ -403,6 +403,7 @@ export const bracketOpeners = [
   'operatorLogNatural',
   'operatorThRootOf',
   'operatorSqrt',
+  'operatorTimesEToThe', // Maybe not the most visually logical, but needed for now (as this list also serves as prefix operators) UPDATE THIS WITH SEPERATE LISTS LATER.
 ]
 
 // A LIST OF ALL INFIX OPERATORS //
@@ -494,3 +495,5 @@ export const allPostfixOperators = [
   'operatorFactorial',
   'operatorSquared',
 ]
+
+export const displayTimesBetween = [[], []]

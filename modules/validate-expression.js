@@ -3,6 +3,7 @@
 // Firstly, insert the full syntax, more thoroughly that what is displayed.
 //   Insert left brackets after operators that require it.
 //   Insert a 0 + at the start of the operation and at the start of every expression (after every left bracket.)
+//   Add how ever many closing brackets are needed.
 //   Account for negatives
 //      First, we have to find where the negatives (rather than subtractions) are.
 //         Negatives are anything that follow another operator (e.g. 4 + -5, 5 --5 (which would account for double negatives.))
@@ -12,9 +13,8 @@
 //      Scan the inputs and repl
 //      To account for negatives, must scan for every minus operator that fits the criteria above, and insert it inside brackets as it's own expression, brackets to be added (e.g. -5e becomes +(0-5e))
 //      This happens after the initial 0+ insertions so we can insert just a zero when putting negatives inside brackets, making it 0-.
+//
 //   Insert multiplication between all complete expressions without an existing infix operator between them.
-//   Substitue joint operators for their indivitual parts (e.g. operatorTimesTenToThe becomes operatorTimes, num1, num0, operatorToThe, )
-//   Add how ever many closing brackets are needed.
 //   It's possible that this isn't the correct order to do it in but I believe it is.
 // Return the validated expression.
 
@@ -45,9 +45,16 @@ export function validateExpression(expressionInputList) {
   // ACCOUNT FOR NEGATIVES
   tempWorkingArray = accountForNegatives(tempWorkingArray)
   console.log(
-    'validateExpression: Accounting for negatives = ',
+    'validateExpression: Accounted for negatives = ',
     tempWorkingArray
   ) // TEST LOG
+  tempWorkingArray = deconstructOperators(tempWorkingArray)
+  console.log(
+    'validateExpression: Joint operators deconstructed = ',
+    tempWorkingArray
+  ) // TEST LOG
+  tempWorkingArray = insertMultiplication(tempWorkingArray)
+  console.log('validateExpression: Insert Multiplications = ', tempWorkingArray) // TEST LOG
 }
 
 // -- SUB FUNCTIONS -- //
@@ -108,7 +115,8 @@ function accountForNegatives(tempWorkingArrayArg) {
   console.log(
     'Inserted brackets around remaining negative expressions: ',
     tempWorkingArray
-  )
+  ) // TEST LOG
+  return tempWorkingArray
 }
 
 // SUB FUNCTIONS FOR accountForNegatives() //
@@ -458,3 +466,83 @@ function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
 //
 //
 //
+
+function deconstructOperators(tempWorkingArray) {
+  const tempDeconstructOperators = []
+  for (const token of tempWorkingArray) {
+    switch (token) {
+      case 'operatorTimesTenToThe':
+        tempDeconstructOperators.push(
+          'operatorTimes',
+          'num1',
+          'num0',
+          'operatorToThe'
+        )
+        break
+      case 'operatorTimesEToThe':
+        tempDeconstructOperators.push('numE', 'operatorToThe') // NOTE THAT timesEToThe is an outdated name that needs to be fixed. It's just e^.
+        break
+      default:
+        tempDeconstructOperators.push(token)
+    }
+  }
+  return tempDeconstructOperators
+}
+
+function insertMultiplication(tempWorkingArray) {
+  // Insert multiplication between all complete expressions without an existing infix operator between them.
+  // Define all possible instances:
+  //   Between all non-number constants ('numE', 'numPi', 'valueAns') that are next to eachother
+  //   Between a number and following non-number constants
+  //   Between a ")" and "("
+  //   Before all left brackets that are preceded directly by the end of an expression (e.g. ')', a number, postfix operator)
+  //   After any postfix operator or bracketRight that isn't followed by an infix operator
+  // Scan through the whole array and insert as needed.
+  // Insert based on what came previously (checking if a multiplication should come before it, not worrying about what follows.)
+  const tempInsertMultiplication = []
+  for (let i = 0; i < tempWorkingArray.length; i++) {
+    const token = tempWorkingArray[i]
+    // PUSH IRRELEVANT VALUES
+    // push all right brackets
+    // Push all postfix operators
+    if (allPostfixOperators.includes(token) || token === 'bracketRight') {
+    }
+  }
+}
+
+//   num0: '0',
+//   num1: '1',
+//   num2: '2',
+//   num3: '3',
+//   num4: '4',
+//   num5: '5',
+//   num6: '6',
+//   num7: '7',
+//   num8: '8',
+//   num9: '9',
+//   point: '.',
+//   operatorPlus: ' + ',
+//   operatorMinus: ' - ',
+//   operatorTimes: ' × ',
+//   operatorDivide: ' ÷ ',
+//   bracketLeft: '(',
+//   bracketRight: ')',
+//   operatorPercentOf: '%',
+//   operatorSin: ' sin',
+//   operatorSinInverse: ' sin⁻¹',
+//   operatorCos: ' cos',
+//   operatorCosInverse: ' cos⁻¹',
+//   operatorTan: ' tan',
+//   operatorTanInverse: ' tan⁻¹',
+//   operatorLog: ' log',
+//   operatorTimesTenToThe: '×10^',
+//   operatorLogNatural: ' ln',
+//   operatorTimesEToThe: 'e^', // CHANGED TO eToThe, BUT NAME WILL BE CHANGED LATER. THIS IS VERY IMPORTANT TO ACCOUNT FOR. DO THIS BY SUBSTITUTING JOING OPERATORS FOR THEIR COMPONENTS
+//   operatorToThe: '^',
+//   operatorThRootOf: '√',
+//   operatorSqrt: '√',
+//   operatorSquared: '² ',
+//   operatorFactorial: '!',
+//   numE: 'e',
+//   numPi: 'π',
+//   valueAns: 'Ans',
