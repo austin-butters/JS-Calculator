@@ -534,3 +534,13 @@ export const trueDigitValuesAsStrings = {
   num9: '9',
   point: '.',
 }
+
+export const orderOfOperations = [
+  'exponents',
+  'postfixOperators',
+  'prefixOperators',
+  'division',
+  'multiplication',
+  'addition',
+  'subtraction',
+]

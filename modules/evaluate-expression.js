@@ -119,7 +119,7 @@ function evaluateFirstSubExpression(expression) {
   return updatedExpression
 }
 
-import { allOperators } from './definitions.js'
+import { orderOfOperations } from './definitions.js'
 
 function processOperators(expression) {
   if (hasBrackets(expression)) {
@@ -129,13 +129,18 @@ function processOperators(expression) {
   let tempExpression = expression
   // We evaluate everything until there are no longer any operators. Once there aren't any, it must be a single number value in the expression.
   // When a single number, return it as the full expression.
-  // tempExpression = evaluateExponents()
-  // tempExpression = evaluatePostfix()
-  // tempExpression = evaluatePrefix()
-  // tempExpression = evaluateDivision()
-  // tempExpression = evaluateMultiplication()
-  // tempExpression = evaluateAddition()
-  // tempExpression = evaluateSubtraction()
+  const operations = {
+    exponents: () => evaluateExponents(),
+    postfixOperators: () => evaluatePostfixOperators(),
+    prefixOperators: () => evaluatePrefixOperators(),
+    division: () => evaluateDivision(),
+    multiplication: () => evaluateMultiplication(),
+    addition: () => evaluateAddition(),
+    subtraction: () => evaluateSubtraction(),
+  }
+  for (const operation of orderOfOperations) {
+    operations[operation]()
+  }
   return ['Placeholder for processed expression'] // REMOVE PLACEHOLDER
   if (tempExpression.length === 1) {
     // Is a single value
