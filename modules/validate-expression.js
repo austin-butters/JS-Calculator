@@ -62,6 +62,8 @@ export function validateExpression(expressionInputList) {
   // INSERT IMPLIED MULTIPLICATION
   tempWorkingArray = insertMultiplication(tempWorkingArray)
   console.log('validateExpression: Insert Multiplications = ', tempWorkingArray) // TEST LOG
+  // RETURN TEMPORARY WORKING ARRAY
+  return tempWorkingArray
 }
 
 // -- SUB FUNCTIONS -- //
