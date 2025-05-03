@@ -496,4 +496,4 @@ export const allPostfixOperators = [
   'operatorSquared',
 ]
 
-export const displayTimesBetween = [[], []]
+export const allNonDigitConstants = ['numE', 'numPi', 'valueAns']

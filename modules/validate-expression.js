@@ -24,6 +24,7 @@ import {
   expressionEnders,
   allConstants,
   allPostfixOperators,
+  allNonDigitConstants,
 } from './definitions.js'
 
 export function validateExpression(expressionInputList) {
@@ -48,11 +49,17 @@ export function validateExpression(expressionInputList) {
     'validateExpression: Accounted for negatives = ',
     tempWorkingArray
   ) // TEST LOG
+  // DECONSTRUCT JOINT OPERATORS
   tempWorkingArray = deconstructOperators(tempWorkingArray)
   console.log(
     'validateExpression: Joint operators deconstructed = ',
     tempWorkingArray
   ) // TEST LOG
+  // To make inserting implied multiplication easier, we should first group expressions.
+  // GROUP LOW-LEVEL EXPRESSIONS
+  tempWorkingArray = groupExpressions(tempWorkingArray)
+  console.log('validateExpression: grouped Expressions = ', tempWorkingArray) // TEST LOG
+  // INSERT IMPLIED MULTIPLICATION
   tempWorkingArray = insertMultiplication(tempWorkingArray)
   console.log('validateExpression: Insert Multiplications = ', tempWorkingArray) // TEST LOG
 }
@@ -489,6 +496,76 @@ function deconstructOperators(tempWorkingArray) {
   return tempDeconstructOperators
 }
 
+function groupExpressions(tempWorkingArray) {
+  // We already have certain expressions grouped according with brackets, both from manual user input and syntax insertion
+  // To make things easier, we're also going to group all low-level expressions (i.e. constants) into brackets.
+  // e.g. 54.3AnsEPi would all be grouped together, with multiplications between the non digit values.
+  // In the above example, if it were immedialy followed by a digit number, that would be the start of a new low-level expression, which would later have multiplication inserted.
+  // The other thing we WOULD need to group is the e^ operator but we don't need to because it's now categorised as a bracket opening prefix operator and is also broken down into it's parts.
+  // After that, check which brackets have postfix operators and put them and the postfix operator inside another pair of brackets.
+  // This will make it far easier to insert insert implied multiplication afterwards because the only place it's needed is between bracketed expressions.
+  //
+  // Scan the whole array, pushing each value into the array with additional brackets, as needed.
+  const tempGroupExpressions = []
+  for (let i = 0; i < tempWorkingArray.length; i++) {
+    const token = tempWorkingArray[i]
+    const precedingToken = tempWorkingArray[i - 1]
+    let digitsReached = true
+    if (!allConstants.includes(token)) {
+      // Not a constant
+      // If not a constant, we need to still check if we've just gone passed a low level expression. If we have, push a closing bracket as well as the value, otherwise, just push the value.
+      if (allConstants.includes(precedingToken)) {
+        tempGroupExpressions.push('bracketRight', token)
+      } else {
+        tempGroupExpressions.push(token)
+      }
+    } else {
+      // Is a constant
+      // Check if it's the first constant in the expression
+      if (!allConstants.includes(precedingToken)) {
+        // Is the first constant in the array, not preceded by a constant - Push it's value preceded by an opening bracket.
+        tempGroupExpressions.push('bracketLeft', token)
+      } else {
+        // Is not the first constant, is preceded by one.
+        // Check if it's a digit or not
+        if (allNonDigitConstants.includes(token)) {
+          // Is not a digit, push it's value preceded by an operatorTimes
+          tempGroupExpressions.push('operatorTimes', token)
+        } else {
+          // Is a digit
+          // Check if it's preceded by a non digit constant (indicating the start of a new expression)
+          if (allNonDigitConstants.includes(precedingToken)) {
+            // Is a digit preceded by a non digit constant
+            // close and open a new expression (don't worry about the implied multiplication as this will be handled later), new expression starting with the token.
+            tempGroupExpressions.push('bracketRight', 'bracketLeft', token)
+          } else {
+            // Is a digit preceded by a digit (i.e. part of the same number)
+            // push it's value alone
+            tempGroupExpressions.push(token)
+          }
+        }
+      }
+    }
+    // Finally, for each iteration in the for loop we need to check if we're at the end of the tempWorkingArray and on a constant.
+    // If we are, (i.e. the array ends in a constant that isn't nested in any brackets)
+    // then we need to also push a closing bracket.
+    if (i === tempWorkingArray.length - 1 && allConstants.includes(token)) {
+      tempGroupExpressions.push('bracketRight')
+    }
+  }
+  return tempGroupExpressions
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 function insertMultiplication(tempWorkingArray) {
   // Insert multiplication between all complete expressions without an existing infix operator between them.
   // Define all possible instances:
@@ -502,10 +579,13 @@ function insertMultiplication(tempWorkingArray) {
   const tempInsertMultiplication = []
   for (let i = 0; i < tempWorkingArray.length; i++) {
     const token = tempWorkingArray[i]
-    // PUSH IRRELEVANT VALUES
-    // push all right brackets
-    // Push all postfix operators
     if (allPostfixOperators.includes(token) || token === 'bracketRight') {
+      // PUSH VALUES WHERE WHAT CAME PREVIOUSLY DOES NOT MATTER
+      // These are also values where it would be syntacticly incorrect to have a times before.
+      // push all right brackets
+      // Push all postfix operators
+      tempInsertMultiplication.push(token)
+    } else if (allNonDigitConstants.includes(token)) {
     }
   }
 }
@@ -526,8 +606,8 @@ function insertMultiplication(tempWorkingArray) {
 //   operatorTimes: ' × ',
 //   operatorDivide: ' ÷ ',
 //   bracketLeft: '(',
-//   bracketRight: ')',
-//   operatorPercentOf: '%',
+//   // bracketRight: ')',
+//   // operatorPercentOf: '%',
 //   operatorSin: ' sin',
 //   operatorSinInverse: ' sin⁻¹',
 //   operatorCos: ' cos',
@@ -541,8 +621,8 @@ function insertMultiplication(tempWorkingArray) {
 //   operatorToThe: '^',
 //   operatorThRootOf: '√',
 //   operatorSqrt: '√',
-//   operatorSquared: '² ',
-//   operatorFactorial: '!',
+//   // operatorSquared: '² ',
+//   // operatorFactorial: '!',
 //   numE: 'e',
 //   numPi: 'π',
 //   valueAns: 'Ans',
