@@ -567,62 +567,22 @@ function groupExpressions(tempWorkingArray) {
 //
 //
 function insertMultiplication(tempWorkingArray) {
-  // Insert multiplication between all complete expressions without an existing infix operator between them.
-  // Define all possible instances:
-  //   Between all non-number constants ('numE', 'numPi', 'valueAns') that are next to eachother
-  //   Between a number and following non-number constants
-  //   Between a ")" and "("
-  //   Before all left brackets that are preceded directly by the end of an expression (e.g. ')', a number, postfix operator)
-  //   After any postfix operator or bracketRight that isn't followed by an infix operator
-  // Scan through the whole array and insert as needed.
-  // Insert based on what came previously (checking if a multiplication should come before it, not worrying about what follows.)
+  // Insert the remaining implied multiplication operators
+  // At this point (after all other functions have run, and numbers are all contained in brackets), this is only nessicary:
+  // After a postfix operator or right bracket (expression ender) AND before a prefix operator or left bracket (expression starter)
   const tempInsertMultiplication = []
   for (let i = 0; i < tempWorkingArray.length; i++) {
     const token = tempWorkingArray[i]
-    if (allPostfixOperators.includes(token) || token === 'bracketRight') {
-      // PUSH VALUES WHERE WHAT CAME PREVIOUSLY DOES NOT MATTER
-      // These are also values where it would be syntacticly incorrect to have a times before.
-      // push all right brackets
-      // Push all postfix operators
+    const nextToken = tempWorkingArray[i + 1]
+    const isExpressionEnder =
+      allPostfixOperators.includes(token) || token === 'bracketRight'
+    const isFollowedByExpressionStarter =
+      bracketOpeners.includes(nextToken) || nextToken === 'bracketLeft'
+    if (isExpressionEnder && isFollowedByExpressionStarter) {
+      tempInsertMultiplication.push(token, 'operatortimes')
+    } else {
       tempInsertMultiplication.push(token)
-    } else if (allNonDigitConstants.includes(token)) {
     }
   }
+  return tempInsertMultiplication
 }
-
-//   num0: '0',
-//   num1: '1',
-//   num2: '2',
-//   num3: '3',
-//   num4: '4',
-//   num5: '5',
-//   num6: '6',
-//   num7: '7',
-//   num8: '8',
-//   num9: '9',
-//   point: '.',
-//   operatorPlus: ' + ',
-//   operatorMinus: ' - ',
-//   operatorTimes: ' × ',
-//   operatorDivide: ' ÷ ',
-//   bracketLeft: '(',
-//   // bracketRight: ')',
-//   // operatorPercentOf: '%',
-//   operatorSin: ' sin',
-//   operatorSinInverse: ' sin⁻¹',
-//   operatorCos: ' cos',
-//   operatorCosInverse: ' cos⁻¹',
-//   operatorTan: ' tan',
-//   operatorTanInverse: ' tan⁻¹',
-//   operatorLog: ' log',
-//   operatorTimesTenToThe: '×10^',
-//   operatorLogNatural: ' ln',
-//   operatorTimesEToThe: 'e^', // CHANGED TO eToThe, BUT NAME WILL BE CHANGED LATER. THIS IS VERY IMPORTANT TO ACCOUNT FOR. DO THIS BY SUBSTITUTING JOING OPERATORS FOR THEIR COMPONENTS
-//   operatorToThe: '^',
-//   operatorThRootOf: '√',
-//   operatorSqrt: '√',
-//   // operatorSquared: '² ',
-//   // operatorFactorial: '!',
-//   numE: 'e',
-//   numPi: 'π',
-//   valueAns: 'Ans',
