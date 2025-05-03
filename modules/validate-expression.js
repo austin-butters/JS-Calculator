@@ -207,7 +207,7 @@ function removePlusMinus(tempWorkingArray) {
 }
 
 function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
-  const tempNegativeBracketInsertion = []
+  let tempNegativeBracketInsertion = []
   // At this point, we have far fewer negatives. The definition remains unchanged:
   //    Negatives are anything that follow another infix operator (e.g. 4 + -5, 5 --5 (which would account for double negatives.))
   //       It would also be anything at the start of an expression (start or following a '('), but because we're inserting a 0+ this isn't nessicary to account for)
@@ -308,58 +308,76 @@ function insertBracketsAroundNegativeExpressions(tempWorkingArray) {
       }
       tempNegativeBracketInsertion.push('bracketRight')
       i += subExpression.length - 1 // Very Important that this is right. The -1 accounts for I being raised by 1 in the next iteration.
-
-      //
-      // !! NEED TO MAKE SURE THAT BRACKETED EXPRESSIONS DON'T CONTAIN NEGATIVES WITHIN THEMSELVES THAT ARE UNACCOUNTED FOR. WE CAN SOLVE THIS BY RECURSIVELY CALLING THE FUNCTION ON IT BEFORE PUSHING IT TO THE WORKING ARRAY.
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-      //
-
-      // Start scanning from the position of the negative sign
-      // Scan until the closing bracket is reached,
-      // Pushing values to the array.
-      // Update openBrackedCount only if a bracketed expression and the first bracket has been reached.
-
-      // Break when brackets are closed AFTER reaching the first bracket
-
-      // If not a bracketed expression, scan until a non numerical value is reached, we don't need to do anything more as we've already pushed the value to the subExpression array. The above conditionals only occur of it's a bracketed expression so won't affect this.
-      // We have to continue until we reach anny non-numerical value.
-
-      // After the for loop, WE NEED TO CHECK FOR POSTFIX OPERATORS AND SCAN THROUGH THEM. THEY NEED TO BE INCLUDED WITHIN THE NEGATIVE EXPRESSION, AS THEY HAVE A HIGHER PRECEDENCE SO MUST BE GROUPED WITH THEIR PRECEDING EXPRESSIONS. SQUARED OPERATORS WILL BE INCLUDED HERE.
-      //
-      //
-
-      // let secondScanIndex
-      // for (let j = firstScanBreakIndex + 1; j < tempWorkingArray.length; j++) {
-      //   if (allPostfixOperators.includes(tempWorkingArray[j])) {
-      //     subExpression.push(tempWorkingArray[j])
-      //     secondScanIndex = j
-      //   } else {
-      //     break
-      //   }
-      // }
-
-      // CURRENTLY WORKING ON THIS SECTION
-      //
-      //
-      //
-      // We now have the position of the start and end of the full expression. We need to insert it with brackets on either side, and move i to the correct position to continue scanning from the end of the expression without repeating.
     } else {
       // Is not an operatorMinus that qualifies as a negative, push the value to the array.
       tempNegativeBracketInsertion.push(tempWorkingArray[i])
     }
   }
+  // One last step. If negative bracketed expressions contain negatives nested negative expressions, these will have been skipped and wont be acounted for yet. But the outer negative expression now qualifies as a subtraction rather than a negative, so the nested negative expressions are now "exposed". We need to check if there are any, and if there are, recursively call this function again, with the tempNegativeBracketInsertion array as it's argument.
+  let needsAnotherPass
+  for (let i = 0; i < tempNegativeBracketInsertion.length; i++) {
+    if (
+      tempNegativeBracketInsertion[i] === 'operatorMinus' &&
+      allInfixOperators.includes(tempNegativeBracketInsertion[i - 1])
+    ) {
+      // Still Contains negative expressions:
+      needsAnotherPass = true
+      console.log('Insert brackets around negatives: Needs another pass.') // TEST LOG
+      break
+    }
+  }
+  if (needsAnotherPass) {
+    tempNegativeBracketInsertion = insertBracketsAroundNegativeExpressions(
+      tempNegativeBracketInsertion
+    )
+  }
+
   // FINALLY, IN ALL CASES, RETURN tempNegativeBracketInsertion
   return tempNegativeBracketInsertion
 }
 
+//
+// !! NEED TO MAKE SURE THAT BRACKETED EXPRESSIONS DON'T CONTAIN NEGATIVES WITHIN THEMSELVES THAT ARE UNACCOUNTED FOR. WE CAN SOLVE THIS BY RECURSIVELY CALLING THE FUNCTION ON IT BEFORE PUSHING IT TO THE WORKING ARRAY.
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// Start scanning from the position of the negative sign
+// Scan until the closing bracket is reached,
+// Pushing values to the array.
+// Update openBrackedCount only if a bracketed expression and the first bracket has been reached.
+
+// Break when brackets are closed AFTER reaching the first bracket
+
+// If not a bracketed expression, scan until a non numerical value is reached, we don't need to do anything more as we've already pushed the value to the subExpression array. The above conditionals only occur of it's a bracketed expression so won't affect this.
+// We have to continue until we reach anny non-numerical value.
+
+// After the for loop, WE NEED TO CHECK FOR POSTFIX OPERATORS AND SCAN THROUGH THEM. THEY NEED TO BE INCLUDED WITHIN THE NEGATIVE EXPRESSION, AS THEY HAVE A HIGHER PRECEDENCE SO MUST BE GROUPED WITH THEIR PRECEDING EXPRESSIONS. SQUARED OPERATORS WILL BE INCLUDED HERE.
+//
+//
+
+// let secondScanIndex
+// for (let j = firstScanBreakIndex + 1; j < tempWorkingArray.length; j++) {
+//   if (allPostfixOperators.includes(tempWorkingArray[j])) {
+//     subExpression.push(tempWorkingArray[j])
+//     secondScanIndex = j
+//   } else {
+//     break
+//   }
+// }
+
+// CURRENTLY WORKING ON THIS SECTION
+//
+//
+//
+// We now have the position of the start and end of the full expression. We need to insert it with brackets on either side, and move i to the correct position to continue scanning from the end of the expression without repeating.
 //
 //
 //
