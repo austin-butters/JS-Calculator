@@ -29,7 +29,7 @@ export function evaluateExpression(expression) {
   // DECLARE A TEMPORARY VARIABLE TO MANIPULATE THROUGHOUT THIS FUNCTION
   let tempExpression
   // CHECK IF BRACKET NESTING IS VALID
-  if (bracketNestingIsValid(expression)) {
+  if (!bracketNestingIsValid(expression)) {
     return undefined // CHANGE IN FUTURE WHEN HANDLING ERRORS - for now it's undefined as this is an important error to address while writing the code.
   }
   // EVALUATE INNERMOST BRACKETS FIRST
@@ -51,7 +51,9 @@ export function evaluateExpression(expression) {
   }
 }
 
-// SUB FUNCTIONS //
+// -- SUB FUNCTIONS --  //
+
+// CHECKS //
 
 function hasBrackets(expression) {
   for (const token of expression) {
@@ -78,6 +80,8 @@ function bracketNestingIsValid(expression) {
   return openBrackets === 0
 }
 
+// PROCESSES //
+
 function evaluateFirstSubExpression(expression) {
   let leftBracketIndex
   let rightBracketIndex
@@ -98,5 +102,18 @@ function evaluateFirstSubExpression(expression) {
     subExpression.push(expression[i])
   }
   // subExpression now equals the inner contents of the brackets.
-  return evaluateExpression(subExpression)
+  const evaluatedSubExpression = evaluateExpression(subExpression)
+  // We now have the evaluated subexpression (we will, once evaluateExpression written)
+  // need to insert this in the entire expression in place of the brackets.
+  const updatedExpression = []
+  for (let i = 0; i < leftBracketIndex; i++) {
+    updatedExpression.push(expression[i])
+  }
+  for (const token of updatedExpression) {
+    updatedExpression.push(token)
+  }
+  for (let i = rightBracketIndex + 1; i < expression.length; i++) {
+    updatedExpression.push(expression[i])
+  }
+  return updatedExpression
 }
