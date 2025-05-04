@@ -128,7 +128,7 @@ import {
 
 function processOperators(expression) {
   if (hasBrackets(expression)) {
-    // Shouldn't as this function is called only on
+    // Shouldn't as this function is called only on bottom level brackets.
     return // HANDLE ERRORS IN FUTURE
   }
   let tempExpression = expression
@@ -376,17 +376,53 @@ function evaluateDivision(expression) {
 function evaluateMultiplication(expression) {
   console.log('evaluateMultiplication called with ', expression) // TEST LOG
   const tempExpression = []
+  let leftOperand
+  let rightOperand
+  for (let i = 0; i < expression.length; i++) {
+    if (expression[i - 1] === 'operatorTimes') {
+      tempExpression.pop()
+      leftOperand = tempExpression.pop()
+      rightOperand = expression[i]
+      tempExpression.push(multiply(leftOperand, rightOperand))
+    } else {
+      tempExpression.push(expression[i])
+    }
+  }
   return tempExpression
 }
 
 function evaluateAddition(expression) {
   console.log('evaluateAddition called with ', expression) // TEST LOG
   const tempExpression = []
+  let leftOperand
+  let rightOperand
+  for (let i = 0; i < expression.length; i++) {
+    if (expression[i - 1] === 'operatorPlus') {
+      tempExpression.pop()
+      leftOperand = tempExpression.pop()
+      rightOperand = expression[i]
+      tempExpression.push(add(leftOperand, rightOperand))
+    } else {
+      tempExpression.push(expression[i])
+    }
+  }
   return tempExpression
 }
 
 function evaluateSubtraction(expression) {
   console.log('evaluateSubtraction called with ', expression) // TEST LOG
   const tempExpression = []
+  let leftOperand
+  let rightOperand
+  for (let i = 0; i < expression.length; i++) {
+    if (expression[i - 1] === 'operatorMinus') {
+      tempExpression.pop()
+      leftOperand = tempExpression.pop()
+      rightOperand = expression[i]
+      tempExpression.push(subtract(leftOperand, rightOperand))
+    } else {
+      tempExpression.push(expression[i])
+    }
+  }
   return tempExpression
 }
