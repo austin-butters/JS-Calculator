@@ -156,7 +156,7 @@ function processOperators(expression) {
   } else {
     // DEAL WITH ERRORS
   }
-  return ['Placeholder for processed bracketed expression'] // REMOVE PLACEHOLDER
+  return [1] // REMOVE PLACEHOLDER, FOR NOW I'M TREATING ALL BRACKETED EXPRESSIONS AS EVALUATING TO 1
 }
 
 // OPERATION EVALUATION FUNCTIONS //
@@ -274,7 +274,7 @@ function evaluateExponents(expression) {
   //   Evaluate exponents between numbers
   // At which point we still have potential exponents before prefix operators.
   // BUT all remaining exponents have lower precedence than the prefix operators that follow them. They still have higher precedence than the prefix operators that precede them.
-  // To deal with this, we will scan from left to right again:
+  // To deal with this, we will scan from right to left again:
   //   When we run into an exponent, find the expression to it's right
   //   Evaluate the expression to it's right and replace
   //   Exponent is now between two numbers (with the exception of syntax errors)
@@ -366,7 +366,51 @@ function evaluateExponents(expression) {
   ) // TEST LOG
 
   //
+  // At which point we still have potential exponents before prefix operators.
+  // BUT all remaining exponents have lower precedence than the prefix operators that follow them. They still have higher precedence than the prefix operators that precede them.
+  // To deal with this, we will scan from right to left again:
+  //   When we run into an exponent, find the expression to it's right
+  //   Evaluate the expression to it's right and replace
+  //   Exponent is now between two numbers (with the exception of syntax errors)
+  //   Evaluate the exponent
+  // This we we evaluate only the last exponent's following expression
+  // Repeat the second scan until there are no exponents remaining.
   //
+  // EVALUATE ALL OTHER EXPONENTS ---------------------------- THE BETTER WAY TO DO THIS IS TO ADD MORE EXPRESSION VALIDATION AROUND PREFIX OPERATORS.
+  // First, we need to evaluate the prefix operators that follow exponent operators.
+  // for (let i = tempReferenceExpression.length - 1; i >= 0; i--) {
+  //   console.log(
+  //     'Evaluating prefix operators that follow exponent operators. tempExpression = ',
+  //     tempExpression
+  //   ) // TEST LOG
+  //   const token = tempReferenceExpression[i]
+  //   const precedingToken = tempReferenceExpression[i - 1]
+  //   if (token === 'operatorToThe') {
+  //     // An exponent operator, which at this point can only be one that is preceded by a prefix operator.
+  //     // All brackets are now single numbers (for testing purposes this is 1), and there are no brackets left, so no nesting.
+  //     // So we know that the expression to evaluate is the two tokens following the exponent operator.
+  //     const subPrefixExpression = [
+  //       tempReferenceExpression[i + 1],
+  //       tempReferenceExpression[i + 2],
+  //     ]
+  //     const evaluatedSubExpression =
+  //       evaluatePrefixOperators(subPrefixExpression)
+  //     tempExpression.unshift(raiseTo(precedingToken, evaluatedSubExpression))
+  //   } else {
+  //     // Is not an exponent operator, but might be it's operand.
+  //     if (
+  //       tempReferenceExpression[i - 2] === 'operatorToThe' ||
+  //       tempReferenceExpression[i - 1] === 'operatorToThe'
+  //     ) {
+  //       // Is preceded by an exponent operator. In which case, don't push it's value, as it will be handled in latter iterations when we reach the operator.
+  //       continue
+  //     } else {
+  //       // Is not preceded by an exponent operator. Add it's value
+  //       tempExpression.unshift(token)
+  //     }
+  //   }
+  // }
+
   //
   //
   //
