@@ -26,6 +26,7 @@ import { applySetting, currentSettings } from './apply-setting.js'
 import { validateExpression } from './validate-expression.js'
 import { evaluateExpression } from './evaluate-expression.js'
 import { generateDisplayedInput } from './generate-displayed-text.js'
+import { inputMemory, ansMemory } from './memory-management.js'
 
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
@@ -44,11 +45,13 @@ export function clickButton(whichButton) {
   } else if (whichButton === 'functionClear') {
     expressionInputList.pop()
   } else if (whichButton === 'functionEvaluate') {
-    let evaluatedExpression = evaluateExpression(
-      validateExpression(expressionInputList)
+    inputMemory.push(expressionInputList)
+    expressionInputList = []
+    const evaluatedExpression = evaluateExpression(
+      validateExpression(inputMemory[inputMemory.length - 1])
     )
-    console.log('evaluatedExpression = ', evaluatedExpression)
-    // TO BE ADDED - SAVES THE VALUE IN AN ANS MODULE IF VALID, UPDATES expressionInputList to ANS, but displays the value of ans rather than the word ANS, which will be replaced when new values are typed. unless a basic operator. Display ANS somewhere.
+    ansMemory.push(evaluatedExpression)
+    console.log('evaluatedExpression = ', evaluatedExpression) // TEST LOG
   } else if (whichButton === 'operatorThRootOf') {
     alert(
       'This function is currently unavailable. Functionality will be added later'
@@ -57,8 +60,14 @@ export function clickButton(whichButton) {
     // else, it must now be a value to add to the expression.
     expressionInputList.push(whichButton)
   }
-  document.getElementById('displayed-text').innerHTML =
-    generateDisplayedInput(expressionInputList)
+  if (expressionInputList.length === 0) {
+    // Has been cleared so must have been evaluated
+    document.getElementById('displayed-text').innerHTML =
+      ansMemory[ansMemory.length - 1]
+  } else {
+    document.getElementById('displayed-text').innerHTML =
+      generateDisplayedInput(expressionInputList)
+  }
   //
   //
   displayUserInputInfo(expressionInputList) // FOR TESTING PURPOSES

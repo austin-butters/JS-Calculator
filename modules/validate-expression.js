@@ -773,6 +773,8 @@ function turnInputsIntoTrueNumbers(tempWorkingArray) {
   return tempTurnInputsIntoNumbers
 }
 
+import { ansMemory } from './memory-management.js'
+
 function addNonDigitConstants(tempWorkingArray) {
   const tempAddNonDigitConstants = []
   for (const token of tempWorkingArray) {
@@ -780,6 +782,8 @@ function addNonDigitConstants(tempWorkingArray) {
       tempAddNonDigitConstants.push(Math.E)
     } else if (token === 'numPi') {
       tempAddNonDigitConstants.push(Math.PI)
+    } else if (token === 'valueAns') {
+      tempAddNonDigitConstants.push(parseFloat(ansMemory[ansMemory.length - 1]))
     } else {
       tempAddNonDigitConstants.push(token)
       // ADD HANDLING FOR ANS BUTTON
