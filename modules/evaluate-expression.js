@@ -156,7 +156,7 @@ function processOperators(expression) {
   } else {
     // DEAL WITH ERRORS
   }
-  return [1] // REMOVE PLACEHOLDER, FOR NOW I'M TREATING ALL BRACKETED EXPRESSIONS AS EVALUATING TO 1
+  return ['resolvedBracketPlaceholder'] // REMOVE PLACEHOLDER, FOR NOW I'M TREATING ALL BRACKETED EXPRESSIONS AS EVALUATING TO 1
 }
 
 // OPERATION EVALUATION FUNCTIONS //
@@ -265,155 +265,48 @@ function evaluatePostfixOperators(expression) {
 }
 
 function evaluateExponents(expression) {
-  // At this point, we don't have to consider postfix operators as they're accounted for and won't be in the expression.
-  // At this point, exponents should only ever fall between numbers, (as bracketed expressions eventually evaluate to single numbers), or after numbers and before prefix operators.
-  // At this point postfix operators are also followed by a single number, so they can be evaluated first with their bracketed expression
-  // BUT if the exponent is followed by a prefix operator with a number that is also raised to a power, we have to evaluate the later power first, then the prefix operation, then the initial power.
-  // In all cases, exponents must be evaluated from right to left.
-  // We'll have to scan from right to left and:
-  //   Evaluate exponents between numbers
-  // At which point we still have potential exponents before prefix operators.
-  // BUT all remaining exponents have lower precedence than the prefix operators that follow them. They still have higher precedence than the prefix operators that precede them.
-  // To deal with this, we will scan from right to left again:
-  //   When we run into an exponent, find the expression to it's right
-  //   Evaluate the expression to it's right and replace
-  //   Exponent is now between two numbers (with the exception of syntax errors)
-  //   Evaluate the exponent
-  // This we we evaluate only the last exponent's following expression
-  // Repeat the second scan until there are no exponents remaining.
-  // Note - Arguably, a negative is a prefix operator but at this point all negatives have been accounted for and converted into subtractions, e.g. 6 + -4 has been converted into 6 + (0 - 4)
-
-  console.log('evaluateExponents called with ', expression) // TEST LOG
-  let tempReferenceExpression = expression // To change and reference throughout function, instead of the argument directly.
-  let tempExpression = []
-  // SCAN FOR AND EVALUATE EXPONENTS BETWEEN NUMBERS
-  while (tempReferenceExpression.includes('operatorToThe')) {
-    console.log(
-      'Scanning for exponent operators. tempReferenceExpression = ',
-      tempReferenceExpression
-    ) // TEST LOG
-    // DETERMINE IF ALL EXPONENT OPERATORS BETWEEN NUMBERS HAVE BEEN RESOLVED. IF SO, BREAK
-    let hasExponentsBetweenNumbers = false
-    for (let i = 0; i < tempReferenceExpression.length; i++) {
-      const token = tempReferenceExpression[i]
-      const precedingToken = tempReferenceExpression[i - 1]
-      const followingToken = tempReferenceExpression[i + 1]
-      if (
-        token === 'operatorToThe' &&
-        typeof precedingToken === 'number' &&
-        typeof followingToken === 'number'
-      ) {
-        hasExponentsBetweenNumbers = true
+  console.log('evaluateExponents called with expression', expression) // TEST LOG
+  // REPEAT EVERYTHING WHILE EXPRESSION HAS EXPONENTS
+  let tempExpression = expression
+  let tempHoldingArray = []
+  let hasExponents = true
+  while (hasExponents) {
+    // CHECK FOR EXPONENTS AND BREAK IF NONE
+    hasExponents = false
+    for (const token of tempExpression) {
+      if (token === 'operatorToThe') {
+        hasExponents = true
         break
       }
     }
-    if (!hasExponentsBetweenNumbers) {
+    if (!hasExponents) {
       break
     }
-    // SCAN AND EVALUATE EXPONENT OPERATORS BETWEEN NUMBERS
-    for (let i = tempReferenceExpression.length - 1; i >= 0; i--) {
-      console.log(
-        'evalueExponents: tempReferenceExpression = ',
-        tempReferenceExpression
-      ) // TEST LOG
-      const token = tempReferenceExpression[i]
-      const precedingToken = tempReferenceExpression[i - 1]
-      const followingToken = tempReferenceExpression[i + 1]
-      if (token !== 'operatorToThe') {
-        // Is not an exponent operator
-        if (
-          followingToken !== 'operatorToThe' &&
-          precedingToken !== 'operatorToThe'
-        ) {
-          // Is not an exponent operator and is not next to one, therefore is not part of a subexpression to operate on.
-          // Add it's value to array.
-          tempExpression.unshift(token)
-        } else {
-          // Is not an exponent operator, but is next to one.
-          // Simply continue, and the value will be handled when the iteration arrives at the exponent operator
-          continue
-        }
-      } else {
-        // Is an exponent operator
-        // Check if between two numbers, otherwise skip (will be covered in the second scan.)
-        if (
-          typeof followingToken === 'number' &&
-          typeof precedingToken === 'number'
-        ) {
-          // Is an exponent operator, between two numbers
-          // Evaluate exponent and push.
-          // We'll have to break the loop now (first adding the remainder of the expression), and call it again with tempExpression. Using a while conditional.
-          tempExpression.unshift(raiseTo(precedingToken, followingToken))
-          for (let j = i - 2; j >= 0; j--) {
-            // We're currently on the exponent operator, the i - 2 is to skip over the preceding Token which has been evaluated already.
-            tempExpression.unshift(tempReferenceExpression[j])
-          }
-          break
-        } else {
-          // Is an exponent operator, not between two numbers
-          // We'll handle this later, but for now we'll skip it.
-          break // FOR TESTING PURPOSES, REMOVE AFTER SECOND SCAN (FOR PREFIX OPERATORS) IS WRITTEN
-          continue
-        }
+    // FUNCTION HAS EXPONENTS, RESOLVE FIRST EXPONENT FROM RIGHT TO LEFT
+    let lastExponentIndex
+    for (let i = tempExpression.length; i >= 0; i--) {
+      if (tempExpression[i] === 'operatorToThe') {
+        lastExponentIndex = i
+        break
       }
     }
-    tempReferenceExpression = tempExpression
-    tempExpression = []
+    // We now have the lastExponentIndex
+    // PUSH NEW EXPRESSION WITH RESOLVED EXPONENT INTO tempHoldingArray
+    for (let i = 0; i <= lastExponentIndex - 2; i++) {
+      tempHoldingArray.push(tempExpression[i])
+    }
+    const leftOperand = tempExpression[lastExponentIndex - 1]
+    const rightOperand = tempExpression[lastExponentIndex + 1]
+    tempHoldingArray.push(raiseTo(leftOperand, rightOperand))
+    for (let i = lastExponentIndex + 2; i < tempExpression.length; i++) {
+      tempHoldingArray.push(tempExpression[i])
+    }
+    // We now have tempHoldingArray, the expression with theh last exponent resolved
+    // Reassign values as needed to restart the while loop
+    tempExpression = tempHoldingArray
+    tempHoldingArray = []
   }
-  console.log(
-    'Evaluated all exponent operators between numbers = ',
-    tempReferenceExpression
-  ) // TEST LOG
-
-  //
-  // At which point we still have potential exponents before prefix operators.
-  // BUT all remaining exponents have lower precedence than the prefix operators that follow them. They still have higher precedence than the prefix operators that precede them.
-  // To deal with this, we will scan from right to left again:
-  //   When we run into an exponent, find the expression to it's right
-  //   Evaluate the expression to it's right and replace
-  //   Exponent is now between two numbers (with the exception of syntax errors)
-  //   Evaluate the exponent
-  // This we we evaluate only the last exponent's following expression
-  // Repeat the second scan until there are no exponents remaining.
-  //
-  // EVALUATE ALL OTHER EXPONENTS ---------------------------- THE BETTER WAY TO DO THIS IS TO ADD MORE EXPRESSION VALIDATION AROUND PREFIX OPERATORS.
-  // First, we need to evaluate the prefix operators that follow exponent operators.
-  // for (let i = tempReferenceExpression.length - 1; i >= 0; i--) {
-  //   console.log(
-  //     'Evaluating prefix operators that follow exponent operators. tempExpression = ',
-  //     tempExpression
-  //   ) // TEST LOG
-  //   const token = tempReferenceExpression[i]
-  //   const precedingToken = tempReferenceExpression[i - 1]
-  //   if (token === 'operatorToThe') {
-  //     // An exponent operator, which at this point can only be one that is preceded by a prefix operator.
-  //     // All brackets are now single numbers (for testing purposes this is 1), and there are no brackets left, so no nesting.
-  //     // So we know that the expression to evaluate is the two tokens following the exponent operator.
-  //     const subPrefixExpression = [
-  //       tempReferenceExpression[i + 1],
-  //       tempReferenceExpression[i + 2],
-  //     ]
-  //     const evaluatedSubExpression =
-  //       evaluatePrefixOperators(subPrefixExpression)
-  //     tempExpression.unshift(raiseTo(precedingToken, evaluatedSubExpression))
-  //   } else {
-  //     // Is not an exponent operator, but might be it's operand.
-  //     if (
-  //       tempReferenceExpression[i - 2] === 'operatorToThe' ||
-  //       tempReferenceExpression[i - 1] === 'operatorToThe'
-  //     ) {
-  //       // Is preceded by an exponent operator. In which case, don't push it's value, as it will be handled in latter iterations when we reach the operator.
-  //       continue
-  //     } else {
-  //       // Is not preceded by an exponent operator. Add it's value
-  //       tempExpression.unshift(token)
-  //     }
-  //   }
-  // }
-
-  //
-  //
-  //
+  // After the while loop breaks, return tempExpression
   return tempExpression
 }
 
