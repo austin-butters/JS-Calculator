@@ -76,6 +76,9 @@ export function validateExpression(expressionInputList) {
     'validateExpression: turnInputsIntoTrueNumbers = ',
     tempWorkingArray
   ) // TEST LOG
+  // SUBSTITUTE IN NON DIGIT CONSTANTS
+  tempWorkingArray = addNonDigitConstants(tempWorkingArray)
+  console.log('validateExpression: addNonDigitConstants = ', tempWorkingArray) // TEST LOG
   // RETURN TEMPORARY WORKING ARRAY
   return tempWorkingArray
 }
@@ -768,6 +771,21 @@ function turnInputsIntoTrueNumbers(tempWorkingArray) {
     }
   }
   return tempTurnInputsIntoNumbers
+}
+
+function addNonDigitConstants(tempWorkingArray) {
+  const tempAddNonDigitConstants = []
+  for (const token of tempWorkingArray) {
+    if (token === 'numE') {
+      tempAddNonDigitConstants.push(Math.E)
+    } else if (token === 'numPi') {
+      tempAddNonDigitConstants.push(Math.PI)
+    } else {
+      tempAddNonDigitConstants.push(token)
+      // ADD HANDLING FOR ANS BUTTON
+    }
+  }
+  return tempAddNonDigitConstants
 }
 
 // UTIL //
