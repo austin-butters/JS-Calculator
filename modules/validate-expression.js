@@ -572,82 +572,72 @@ function groupExpressions(tempWorkingArray) {
   return tempGroupExpressions
 }
 
-// THIS FUNCTION IS USEFUL BUT BROKEN, FOR NOW IT'S BEEN SKIPPED AND FUNCTIONALITY WILL BE WRITTEN IN THE EVALUATION MODULE.
-function groupPrefixOperationsInBrackets(tempWorkingArray) {
-  // This means we won't need to define and evaluate them within other BEDMAS stages as they each have their own
-  // Prefix operations have operands that are already grouped by brackets, so we just need to group them with their operants inside brackets
-  let tempGroupPrefixOperations = []
-  for (let i = 0; i < tempWorkingArray.length; i++) {
-    if (bracketOpeners.includes(tempWorkingArray[i])) {
-      if (isExpressionAlreadyBracketed(tempWorkingArray, i)) {
-        // Is already bracketed. Move on to next i value.
-        continue
-      }
-      // INSERT THE NEW VALUE INSIDE BRACKETS
-      let expressionLength = 0
-      let openBrackets = 0
-      let firstBracketReached = false
-      tempGroupPrefixOperations.push('bracketLeft')
-      tempGroupPrefixOperations.push(tempWorkingArray[i])
-      for (let j = i + 1; j < tempWorkingArray.length; j++) {
-        expressionLength += 1
-        const token = tempWorkingArray[j]
-        if (token === 'bracketLeft') {
-          openBrackets++
-          firstBracketReached = true
-        } else if (token === 'bracketRight') {
-          openBrackets--
-        }
-        tempGroupPrefixOperations.push(token)
-        if (firstBracketReached && openBrackets === 0) {
-          break
-        }
-      }
-      tempGroupPrefixOperations.push('bracketRight')
-      i += expressionLength // THE - 1 ACCOUNTS FOR THE ITERATOR RAISING IN THE NEXT ITERATION, THE + 1 ACCOUNTS FOR THE OPERAND NOT BEING INCLUDED IN EXPRESSION LENGTH. THEY CANCEL OUT.
-    } else {
-      // Is not a prefix operator ('bracket opener'), and we are in an iteration that hasn't been skipped:
-      tempGroupPrefixOperations.push(tempWorkingArray[i])
-    }
-  }
-  console.log(
-    'First layer of prefix operators should now be grouped into brackets',
-    tempGroupPrefixOperations
-  ) // TEST LOG
+// // THIS FUNCTION IS USEFUL BUT BROKEN, FOR NOW IT'S BEEN SKIPPED AND FUNCTIONALITY WILL BE WRITTEN IN THE EVALUATION MODULE.
+// function groupPrefixOperationsInBrackets(tempWorkingArray) {
+//   // This means we won't need to define and evaluate them within other BEDMAS stages as they each have their own
+//   // Prefix operations have operands that are already grouped by brackets, so we just need to group them with their operants inside brackets
+//   let tempGroupPrefixOperations = []
+//   for (let i = 0; i < tempWorkingArray.length; i++) {
+//     if (bracketOpeners.includes(tempWorkingArray[i])) {
+//       if (isExpressionAlreadyBracketed(tempWorkingArray, i)) {
+//         // Is already bracketed. Move on to next i value.
+//         continue
+//       }
+//       // INSERT THE NEW VALUE INSIDE BRACKETS
+//       let expressionLength = 0
+//       let openBrackets = 0
+//       let firstBracketReached = false
+//       tempGroupPrefixOperations.push('bracketLeft')
+//       tempGroupPrefixOperations.push(tempWorkingArray[i])
+//       for (let j = i + 1; j < tempWorkingArray.length; j++) {
+//         expressionLength += 1
+//         const token = tempWorkingArray[j]
+//         if (token === 'bracketLeft') {
+//           openBrackets++
+//           firstBracketReached = true
+//         } else if (token === 'bracketRight') {
+//           openBrackets--
+//         }
+//         tempGroupPrefixOperations.push(token)
+//         if (firstBracketReached && openBrackets === 0) {
+//           break
+//         }
+//       }
+//       tempGroupPrefixOperations.push('bracketRight')
+//       i += expressionLength // THE - 1 ACCOUNTS FOR THE ITERATOR RAISING IN THE NEXT ITERATION, THE + 1 ACCOUNTS FOR THE OPERAND NOT BEING INCLUDED IN EXPRESSION LENGTH. THEY CANCEL OUT.
+//     } else {
+//       // Is not a prefix operator ('bracket opener'), and we are in an iteration that hasn't been skipped:
+//       tempGroupPrefixOperations.push(tempWorkingArray[i])
+//     }
+//   }
+//   console.log(
+//     'First layer of prefix operators should now be grouped into brackets',
+//     tempGroupPrefixOperations
+//   ) // TEST LOG
 
-  // We now need to run this function recursively to account for nested prefix operations that were skipped.
-  // Run it if there are any prefix operators that are prefeded by anything other than a bracketLeft
-  let hasNestedPrefixOperators = false
-  for (let i = 0; i < tempGroupPrefixOperations.length; i++) {
-    if (
-      bracketOpeners.includes(tempGroupPrefixOperations[i]) &&
-      tempGroupPrefixOperations[i - 1] !== 'bracketLeft'
-    ) {
-      hasNestedPrefixOperators = true
-    }
-  }
-  if (hasNestedPrefixOperators) {
-    tempGroupPrefixOperations = groupPrefixOperationsInBrackets(
-      tempGroupPrefixOperations
-    )
-  }
-  console.log(
-    'validateExpression: Grouped prefix operations = ',
-    tempGroupPrefixOperations
-  ) // TEST LOG
-  return tempGroupPrefixOperations
-}
+//   // We now need to run this function recursively to account for nested prefix operations that were skipped.
+//   // Run it if there are any prefix operators that are prefeded by anything other than a bracketLeft
+//   let hasNestedPrefixOperators = false
+//   for (let i = 0; i < tempGroupPrefixOperations.length; i++) {
+//     if (
+//       bracketOpeners.includes(tempGroupPrefixOperations[i]) &&
+//       tempGroupPrefixOperations[i - 1] !== 'bracketLeft'
+//     ) {
+//       hasNestedPrefixOperators = true
+//     }
+//   }
+//   if (hasNestedPrefixOperators) {
+//     tempGroupPrefixOperations = groupPrefixOperationsInBrackets(
+//       tempGroupPrefixOperations
+//     )
+//   }
+//   console.log(
+//     'validateExpression: Grouped prefix operations = ',
+//     tempGroupPrefixOperations
+//   ) // TEST LOG
+//   return tempGroupPrefixOperations
+// }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 function insertMultiplication(tempWorkingArray) {
   // Insert the remaining implied multiplication operators
   // At this point (after all other functions have run, and numbers are all contained in brackets), this is only nessicary:
@@ -781,44 +771,44 @@ function turnInputsIntoTrueNumbers(tempWorkingArray) {
 }
 
 // UTIL //
-function isExpressionAlreadyBracketed(array, startIndex) {
-  // Checks an array (the expression) from a specific index and determines if it's the start of a nested expression with one value
-  // Used to determine if a prefix operator, like log(someExpression) is already contained within brackets.
-  console.log(
-    'isExpressionAlreadyBracketed called with ',
-    array,
-    ' from index ',
-    startIndex
-  ) // TEST LOG
-  if (array[startIndex - 1] !== 'bracketLeft') {
-    console.log('expression is not already bracketed.') // TEST LOG
-    return false
-  }
+// function isExpressionAlreadyBracketed(array, startIndex) {
+//   // Checks an array (the expression) from a specific index and determines if it's the start of a nested expression with one value
+//   // Used to determine if a prefix operator, like log(someExpression) is already contained within brackets.
+//   console.log(
+//     'isExpressionAlreadyBracketed called with ',
+//     array,
+//     ' from index ',
+//     startIndex
+//   ) // TEST LOG
+//   if (array[startIndex - 1] !== 'bracketLeft') {
+//     console.log('expression is not already bracketed.') // TEST LOG
+//     return false
+//   }
 
-  let openBrackets = 0
-  let reachedStart = false
+//   let openBrackets = 0
+//   let reachedStart = false
 
-  for (let i = startIndex; i < array.length; i++) {
-    const token = array[i]
-    if (token === 'bracketLeft') {
-      openBrackets++
-      reachedStart = true
-    } else if (token === 'bracketRight') {
-      openBrackets--
-    }
+//   for (let i = startIndex; i < array.length; i++) {
+//     const token = array[i]
+//     if (token === 'bracketLeft') {
+//       openBrackets++
+//       reachedStart = true
+//     } else if (token === 'bracketRight') {
+//       openBrackets--
+//     }
 
-    // If we've matched all opened brackets
-    if (reachedStart && openBrackets === 0) {
-      // Check if the whole wrapped expression is itself closed off
-      if (array[i + 1] === 'bracketRight') {
-        console.log('expression is already bracketed.') // TEST LOG
-        return true
-      } else {
-        console.log('expression not is already bracketed.') // TEST LOG
-        return false
-      }
-    }
-  }
-  console.log('expression is not already bracketed.') // TEST LOG
-  return false
-}
+//     // If we've matched all opened brackets
+//     if (reachedStart && openBrackets === 0) {
+//       // Check if the whole wrapped expression is itself closed off
+//       if (array[i + 1] === 'bracketRight') {
+//         console.log('expression is already bracketed.') // TEST LOG
+//         return true
+//       } else {
+//         console.log('expression not is already bracketed.') // TEST LOG
+//         return false
+//       }
+//     }
+//   }
+//   console.log('expression is not already bracketed.') // TEST LOG
+//   return false
+// }
