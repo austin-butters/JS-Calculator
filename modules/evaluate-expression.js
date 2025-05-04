@@ -119,7 +119,11 @@ function evaluateFirstSubExpression(expression) {
   return updatedExpression
 }
 
-import { orderOfOperations } from './definitions.js'
+import {
+  allConstants,
+  allPostfixOperators,
+  orderOfOperations,
+} from './definitions.js'
 
 function processOperators(expression) {
   if (hasBrackets(expression)) {
@@ -129,6 +133,10 @@ function processOperators(expression) {
   let tempExpression = expression
   // We evaluate everything until there are no longer any operators. Once there aren't any, it must be a single number value in the expression.
   // When a single number, return it as the full expression.
+  if (tempExpression.length === 1) {
+    // Is a single value, meaning evaluation is now complete.
+    return tempExpression
+  } // WE CAN REMOVE THIS AS WE ONLY NEED TO CHECK ONCE, AFTER ALL OPERATIONS ARE EVALUATED. FOR TESTING PURPOSES, WE'LL KEEP IT HERE SO WE CAN SEE OPERATIONS CALLED ON NUMBERS (WHICH ARE CONTAINED IN THEIR OWN BRACKETS)
   const operations = {
     exponents: evaluateExponents,
     postfixOperators: evaluatePostfixOperators,
@@ -147,7 +155,7 @@ function processOperators(expression) {
   } else {
     // DEAL WITH ERRORS
   }
-  return ['Placeholder for processed expression'] // REMOVE PLACEHOLDER
+  return ['Placeholder for processed bracketed expression'] // REMOVE PLACEHOLDER
 }
 
 // OPERATION EVALUATION FUNCTIONS //
@@ -155,14 +163,108 @@ function processOperators(expression) {
 // Complete these functions, keeping in mind the order they must be applied (e.g. left to right, right to left, etc.)
 // Keep in mind that at this point, no brackets exist in whatever expression is passed into the functions. This means operators are generally applied only to numbers.
 
-function evaluateExponents(expression) {
-  console.log('evaluateExponents called with ', expression) // TEST LOG
-  const tempExpression = []
+// Import operators
+import {
+  add,
+  subtract,
+  multiply,
+  divide,
+  raiseTo,
+  thRootOf,
+  timesTenToThe, // MAY BECOME REDUNDANT
+  timesEToThe, // MAY BECOME REDUNDANT
+  convertToPercent,
+  factorialOf,
+  squared,
+  sinOf,
+  cosOf,
+  tanOf,
+  inverseSinOf,
+  inverseCosOf,
+  inverseTanOf,
+  logOf,
+  naturalLogOf,
+  sqrtOf,
+} from './operators.js'
+
+function evaluatePostfixOperators(expression) {
+  // The only valid scenario at this point is for operatorFactorial to follow a number value.
+  console.log('evaluatePostfixOperators called with ', expression) // TEST LOG
+  let tempExpression = []
+  for (let i = 0; i < expression.length; i++) {
+    const token = expression[i]
+    const previousToken = expression[i - 1]
+    const nextToken = expression[i + 1]
+    // Check what the current token is an push to tempExpression accordingly.
+    if (typeof token !== 'number' && !allPostfixOperators.includes(token)) {
+      // Is not a constant or postfix operator, so is definately not part of an expression containing a postfix operator
+      tempExpression.push(token)
+    } else if (
+      typeof token === 'number' &&
+      !allPostfixOperators.includes(nextToken)
+    ) {
+      // Is a constant not followed by a postfix operator, not part of an expression containing a postfix operator, simply push the constant alone.
+      tempExpression.push(token)
+    } else if (
+      typeof token === 'number' &&
+      allPostfixOperators.includes(nextToken)
+    ) {
+      // Is a constant followed by a postfix operator, skip this iteration and the constant will be dealt with in the next iteration.
+      continue
+    } else if (allPostfixOperators.includes(token)) {
+      // Current token is a post fix operator. Check if it follows a constant (which it should at the point of this function being called, as there are no brackets left.)
+      if (typeof previousToken === 'number') {
+        // Is a postfix operator preceded by a constant,
+        // The constant will not have been pushed yet.
+        // Push a single value, the constant with the operation applied
+        const postfixOperationActions = {
+          operatorPercentOf: () => convertToPercent(previousToken),
+          operatorFactorial: () => factorialOf(previousToken),
+          operatorSquared: () => squared(previousToken),
+        }
+        const operationToPerform = postfixOperationActions[token]
+        if (operationToPerform) {
+          // Is a valid postfix operator
+          tempExpression.push(operationToPerform())
+        } else {
+          // Is not included in postfixOperationActions, is an error
+          return // ADD ERROR HANDLING
+        }
+      } else {
+        // HANDLE postfix chains.
+        if (allPostfixOperators.includes(previousToken)) {
+          // is a postfix operator preceded by another one. At this point we've already evaluated the previous postfix operator, so we can't evaluate this one right away.
+          // Instead, simply push the postfix operator to the tempExpression, which will be reevaluated for postfix operators.
+          tempExpression.push(token)
+        } else {
+          // Is a postfix operator not preceded by a constant or another postfix operator - which is a syntax error
+          return // ADD ERROR HANDLING
+        }
+      }
+    }
+  }
+  // We've now scanned through the whole array, evaluating the FIRST postfix operator in each expression.
+  // Expression may still contain postfix operators, in which case we need to reevaluate it.
+  let expressionContainsPostfixOperators
+  for (const token of tempExpression) {
+    if (allPostfixOperators.includes(token)) {
+      expressionContainsPostfixOperators = true
+    }
+  }
+  // We now have an expressionContainsPostfixOperators variable, if true we need to reevaluate expression before returning it
+  // By calling this function recursively it will continuously reevaluate until there are no postfix operators left before returning the final tempExpression, with no postfix operators.
+  console.log(
+    'evalatePostFixOperators(): Before recursive function returns ',
+    tempExpression
+  )
+  if (expressionContainsPostfixOperators) {
+    tempExpression = evaluatePostfixOperators(tempExpression)
+  }
   return tempExpression
 }
 
-function evaluatePostfixOperators(expression) {
-  console.log('evaluatePostfixOperators called with ', expression) // TEST LOG
+function evaluateExponents(expression) {
+  console.log('evaluateExponents called with ', expression) // TEST LOG
   const tempExpression = []
   return tempExpression
 }

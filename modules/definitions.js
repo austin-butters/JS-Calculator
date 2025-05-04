@@ -536,8 +536,8 @@ export const trueDigitValuesAsStrings = {
 }
 
 export const orderOfOperations = [
-  'exponents',
   'postfixOperators',
+  'exponents',
   'prefixOperators',
   'division',
   'multiplication',

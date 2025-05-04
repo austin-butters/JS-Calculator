@@ -59,6 +59,8 @@ export function factorialOf(num) {
       }
       return temp
     }
+  } else {
+    return // ADD ERROR HANDLING
   }
 }
 
