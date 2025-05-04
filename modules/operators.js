@@ -73,6 +73,7 @@ export function squared(num) {
 import { currentSettings } from './apply-setting.js'
 
 export function sinOf(num) {
+  // THE DEG AND RAD SETTINGS ARE OFF.
   return currentSettings.isRadians
     ? Math.sin(num)
     : radToDeg(Math.sin(degToRad(num)))

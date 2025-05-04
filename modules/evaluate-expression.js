@@ -311,8 +311,41 @@ function evaluateExponents(expression) {
 }
 
 function evaluatePrefixOperators(expression) {
+  // As prefix operators all open a pair of brackets for their operands,
+  // And we've already written the code to solve brackets in order,
+  // There can be no nesting of prefix operators.
+  // All prefix operators will have a single operand, a number. They all have the same precedence, as they take a single number operand
+  // Scan from left to right, evaluating all prefix operators until none remain.
+  // Return the new array.
   console.log('evaluatePrefixOperators called with ', expression) // TEST LOG
   const tempExpression = []
+  let operator
+  let operand
+  const prefixOperations = {
+    operatorSin: () => sinOf(operand),
+    operatorSinInverse: () => inverseSinOf(operand),
+    operatorCos: () => cosOf(operand),
+    operatorCosInverse: () => inverseCosOf(operand),
+    operatorTan: () => tanOf(operand),
+    operatorTanInverse: () => inverseTanOf(operand),
+    operatorLog: () => logOf(operand),
+    operatorLogNatural: () => naturalLogOf(operand),
+    operatorThRootOf: () => thRootOf(operand),
+    operatorSqrt: () => sqrtOf(operand),
+  }
+  for (let i = 0; i < expression.length; i++) {
+    if (bracketOpeners.includes(expression[i - 1])) {
+      // We have just passed a prefix operator which is at the top of the tempExpression "Stack"
+      operand = expression[i]
+      operator = tempExpression.pop()
+      tempExpression.push(prefixOperations[operator]())
+    } else {
+      // We haven't just passed a prefix operator,
+      // We may be on the prefix operator or any unrelated value
+      tempExpression.push(expression[i])
+    }
+  }
+  console.log('evaluatePrefixOperators resulted in ', tempExpression) // TEST LOG
   return tempExpression
 }
 
