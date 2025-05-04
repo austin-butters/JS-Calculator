@@ -349,9 +349,27 @@ function evaluatePrefixOperators(expression) {
   return tempExpression
 }
 
+// The following four functions are for evaluating basic infix operators, and are called in the BEDMAS order.
+// They take two operands
+
 function evaluateDivision(expression) {
   console.log('evaluateDivision called with ', expression) // TEST LOG
+  // Create "stack"
   const tempExpression = []
+  let leftOperand
+  let rightOperand
+  // Use "stack"
+  for (let i = 0; i < expression.length; i++) {
+    if (expression[i - 1] === 'operatorDivide') {
+      // We've just passed a division operator
+      tempExpression.pop()
+      leftOperand = tempExpression.pop()
+      rightOperand = expression[i]
+      tempExpression.push(divide(leftOperand, rightOperand))
+    } else {
+      tempExpression.push(expression[i])
+    }
+  }
   return tempExpression
 }
 
