@@ -45,12 +45,12 @@ export function clickButton(whichButton) {
   } else if (whichButton === 'functionClear') {
     expressionInputList.pop()
   } else if (whichButton === 'functionEvaluate') {
-    inputMemory.push(expressionInputList)
-    expressionInputList = []
     const evaluatedExpression = evaluateExpression(
-      validateExpression(inputMemory[inputMemory.length - 1])
+      validateExpression(expressionInputList)
     )
     ansMemory.push(evaluatedExpression)
+    inputMemory.push(expressionInputList)
+    expressionInputList = evaluatedExpression
     console.log('evaluatedExpression = ', evaluatedExpression) // TEST LOG
   } else if (whichButton === 'operatorThRootOf') {
     alert(
@@ -60,13 +60,11 @@ export function clickButton(whichButton) {
     // else, it must now be a value to add to the expression.
     expressionInputList.push(whichButton)
   }
-  if (expressionInputList.length === 0) {
-    // Has been cleared so must have been evaluated
-    document.getElementById('displayed-text').innerHTML =
-      ansMemory[ansMemory.length - 1]
-  } else {
-    document.getElementById('displayed-text').innerHTML =
-      generateDisplayedInput(expressionInputList)
+  document.getElementById('displayed-text').innerHTML =
+    generateDisplayedInput(expressionInputList)
+  if (whichButton === 'functionEvaluate') {
+    document.getElementById('displayed-text').textContent =
+      ansMemory[ansMemory.length - 1][0]
   }
   //
   //

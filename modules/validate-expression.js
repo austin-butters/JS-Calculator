@@ -786,7 +786,6 @@ function addNonDigitConstants(tempWorkingArray) {
       tempAddNonDigitConstants.push(parseFloat(ansMemory[ansMemory.length - 1]))
     } else {
       tempAddNonDigitConstants.push(token)
-      // ADD HANDLING FOR ANS BUTTON
     }
   }
   return tempAddNonDigitConstants

@@ -154,9 +154,8 @@ function processOperators(expression) {
     // Is a single value, meaning evaluation is now complete.
     return tempExpression
   } else {
-    // DEAL WITH ERRORS
+    return // DEAL WITH ERRORS
   }
-  return ['resolvedBracketPlaceholder'] // REMOVE PLACEHOLDER, FOR NOW I'M TREATING ALL BRACKETED EXPRESSIONS AS EVALUATING TO 1
 }
 
 // OPERATION EVALUATION FUNCTIONS //
