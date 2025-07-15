@@ -370,7 +370,7 @@ export const inputDisplayValues = {
   operatorDivide: ' ÷ ',
   bracketLeft: '(',
   bracketRight: ')',
-  operatorPercentOf: '%',
+  operatorPercentOf: '%', // CHANGE(D) TO PERCENT, I.E /100, FIX (IF NEEDED) AND RENAME LATER.
   operatorSin: ' sin',
   operatorSinInverse: ' sin⁻¹',
   operatorCos: ' cos',
@@ -384,8 +384,8 @@ export const inputDisplayValues = {
   operatorToThe: '^',
   operatorThRootOf: '√',
   operatorSqrt: '√',
-  operatorSquared: '^2 ',
-  operatorFactorial: '!',
+  operatorSquared: '² ',
+  operatorFactorial: ' !',
   numE: 'e',
   numPi: 'π',
   valueAns: 'Ans',
@@ -403,13 +403,14 @@ export const bracketOpeners = [
   'operatorLogNatural',
   'operatorThRootOf',
   'operatorSqrt',
+  'operatorTimesEToThe', // Maybe not the most visually logical, but needed for now (as this list also serves as prefix operators) UPDATE THIS WITH SEPERATE LISTS LATER.
 ]
 
 // A LIST OF ALL INFIX OPERATORS //
 export const allInfixOperators = [
   // True Basic Operators
   'operatorPlus',
-  'ioperatorMinus',
+  'operatorMinus',
   'operatorTimes',
   'operatorDivide',
   // Effective Basic Operators
@@ -428,6 +429,7 @@ export const displaytTimesAfterWhenBeforeDigit = [
   'operatorPercentOf',
   'operatorFactorial',
   'valueAns',
+  'operatorSquared',
 ]
 
 // A LIST OF VALUES TO DISPLAY A MULTIPLICATION SYMBOL BEFORE IF FOLLOWING A VALUE FROM displayTimesAfterWhenBeforeDigit:
@@ -444,4 +446,101 @@ export const displayTimesBeforeIfNeeded = [
   'num9',
   'point', // This is a constant for this purpose
   'valueAns',
+]
+
+// A LIST OF VALID EXPRESSION ENDERS (WHICH CAN (BUT DONT ALWAYS) ACT AS A STARTING POINT FOR A NEW EXPRESSION THAT OPERATORS CAN BE APPLIED TO)
+// These can only be used when scanning backwards, not forwards.
+export const expressionEnders = [
+  // Numerical Constants
+  'num0',
+  'num2',
+  'num3',
+  'num4',
+  'num5',
+  'num6',
+  'num7',
+  'num8',
+  'num9',
+  'point', // Effective constant, Interpret a number ending in a decimal point as that number with no fractional part.
+  'numE',
+  'numPi',
+  'valueAns',
+  // Separators
+  'bracketRight',
+  // Postfix operators
+  'operatorPercentOf',
+  'operatorFactorial',
+  'operatorSquared',
+]
+
+export const allConstants = [
+  'num0',
+  'num1',
+  'num2',
+  'num3',
+  'num4',
+  'num5',
+  'num6',
+  'num7',
+  'num8',
+  'num9',
+  'point',
+  'numE',
+  'numPi',
+  'valueAns',
+]
+
+export const allPostfixOperators = [
+  'operatorPercentOf',
+  'operatorFactorial',
+  'operatorSquared',
+]
+
+export const allNonDigitConstants = ['numE', 'numPi', 'valueAns']
+
+export const allOperators = [
+  'operatorPlus',
+  'operatorMinus',
+  'operatorTimes',
+  'operatorDivide',
+  'operatorPercentOf',
+  'operatorSin',
+  'operatorSinInverse',
+  'operatorCos',
+  'operatorCosInverse',
+  'operatorTan',
+  'operatorTanInverse',
+  'operatorLog',
+  'operatorTimesTenToThe',
+  'operatorLogNatural',
+  'operatorTimesEToThe',
+  'operatorToThe',
+  'operatorThRootOf',
+  'operatorSqrt',
+  'operatorSquared',
+  'operatorFactorial',
+]
+
+export const trueDigitValuesAsStrings = {
+  num0: '0',
+  num1: '1',
+  num2: '2',
+  num3: '3',
+  num4: '4',
+  num5: '5',
+  num6: '6',
+  num7: '7',
+  num8: '8',
+  num9: '9',
+  point: '.',
+}
+
+export const orderOfOperations = [
+  'postfixOperators',
+  'exponents',
+  'prefixOperators',
+  'division',
+  'multiplication',
+  'addition',
+  'subtraction',
 ]

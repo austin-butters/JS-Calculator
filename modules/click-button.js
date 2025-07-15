@@ -26,6 +26,7 @@ import { applySetting, currentSettings } from './apply-setting.js'
 import { validateExpression } from './validate-expression.js'
 import { evaluateExpression } from './evaluate-expression.js'
 import { generateDisplayedInput } from './generate-displayed-text.js'
+import { inputMemory, ansMemory } from './memory-management.js'
 
 // CLICK BUTTON FUNCTION
 let expressionInputList = []
@@ -44,11 +45,13 @@ export function clickButton(whichButton) {
   } else if (whichButton === 'functionClear') {
     expressionInputList.pop()
   } else if (whichButton === 'functionEvaluate') {
-    let evaluatedExpression = evaluateExpression(
+    const evaluatedExpression = evaluateExpression(
       validateExpression(expressionInputList)
     )
-    console.log('evaluatedExpression = ', evaluatedExpression)
-    // TO BE ADDED - SAVES THE VALUE IN AN ANS MODULE IF VALID, UPDATES expressionInputList to ANS, but displays the value of ans rather than the word ANS, which will be replaced when new values are typed. unless a basic operator. Display ANS somewhere.
+    ansMemory.push(evaluatedExpression)
+    inputMemory.push(expressionInputList)
+    expressionInputList = evaluatedExpression
+    console.log('evaluatedExpression = ', evaluatedExpression) // TEST LOG
   } else if (whichButton === 'operatorThRootOf') {
     alert(
       'This function is currently unavailable. Functionality will be added later'
@@ -59,6 +62,10 @@ export function clickButton(whichButton) {
   }
   document.getElementById('displayed-text').innerHTML =
     generateDisplayedInput(expressionInputList)
+  if (whichButton === 'functionEvaluate') {
+    document.getElementById('displayed-text').textContent =
+      ansMemory[ansMemory.length - 1][0]
+  }
   //
   //
   displayUserInputInfo(expressionInputList) // FOR TESTING PURPOSES

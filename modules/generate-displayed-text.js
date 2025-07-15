@@ -14,10 +14,6 @@ import {
 } from './definitions.js'
 
 export function generateDisplayedInput(expressionInputList) {
-  console.log(
-    'Displayed Input will be generated. Function not yet written. expressionInputList = ',
-    expressionInputList
-  ) // TEST LOG
   // This function must return a value to be used.
   const displayedInput = []
   for (let i = 0; i < expressionInputList.length; i++) {
@@ -50,6 +46,14 @@ export function generateDisplayedInput(expressionInputList) {
     impliedBracketString =
       impliedBracketString + inputDisplayValues.bracketRight
   }
+  console.log(
+    'Displayed Input generated as ',
+    displayedInput.join('') +
+      '<span style="color: blue;">' +
+      // The styling here may be something to refactor so it's not hardcoded like it is now, in future.
+      impliedBracketString +
+      '<span>'
+  ) // TEST LOG
   return (
     displayedInput.join('') +
     '<span style="color: blue;">' +
